@@ -1,21 +1,19 @@
 package Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@MappedSuperclass
 @Table(name = "USER_TYPE")
-public class UserType {
+public abstract class UserType {
     @Id
     private String netId;
     private String firstName;
     private String lastName;
-    private Authorization authLevel;
 
     public UserType()
     {
-        
+
     }
 
     public String getNetId() {
@@ -42,11 +40,4 @@ public class UserType {
         this.lastName = lastName;
     }
 
-    public Authorization getAuthLevel() {
-        return authLevel;
-    }
-
-    public void setAuthLevel(Authorization authLevel) {
-        this.authLevel = authLevel;
-    }
 }
