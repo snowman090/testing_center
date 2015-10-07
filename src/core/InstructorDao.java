@@ -1,5 +1,4 @@
-package Model;
-
+package core;
 
 public interface InstructorDao {
 }
