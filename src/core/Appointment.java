@@ -1,7 +1,5 @@
-package appointments;
+package core;
 
-import users.*;
-import java.security.Timestamp;
 import java.util.Calendar;
 
 public class Appointment {

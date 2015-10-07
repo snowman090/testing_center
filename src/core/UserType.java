@@ -1,9 +1,8 @@
-package users;
+package core;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-@Table(name = "USER_TYPE")
 public abstract class UserType {
     @Id
     protected String netId;

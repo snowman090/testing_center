@@ -1,6 +1,5 @@
-package users;
+package core;
 
-import appointments.Appointment;
 import javax.persistence.Entity;
 import java.util.List;
 

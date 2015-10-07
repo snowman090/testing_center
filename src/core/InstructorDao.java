@@ -1,4 +1,4 @@
-package users;
+package core;
 
 public interface InstructorDao {
 }
