@@ -2,14 +2,13 @@ package Model;
 
 import javax.persistence.*;
 
-@Entity
 @MappedSuperclass
 @Table(name = "USER_TYPE")
 public abstract class UserType {
     @Id
-    private String netId;
-    private String firstName;
-    private String lastName;
+    protected String netId;
+    protected String firstName;
+    protected String lastName;
 
     public UserType()
     {
