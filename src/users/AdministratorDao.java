@@ -1,4 +1,4 @@
-package Model;
+package users;
 
 public interface AdministratorDao {
 }
