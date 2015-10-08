@@ -20,5 +20,13 @@ public class TestingCenterInfo {
     int gap;
     int reminderInterval;
 
+    //read information from file
+    private void getInformation(){
 
+    }
+
+    //save information in file
+    private void saveInformation(){
+
+    }
 }
