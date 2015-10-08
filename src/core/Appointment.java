@@ -7,18 +7,26 @@ import java.util.Calendar;
 @Entity
 @Table(name = "Appointment")
 public class Appointment {
+
     private UserType madeBy;
-    private LocalTime startDateTime;
-    private LocalTime endDateTime;
-    private String AppointmentID;
 
     @Id
+    private String AppointmentID;
+    @Temporal(TemporalType.TIME)
+    @Column(name="startTime")
+    private LocalTime startDateTime;
+    @Temporal(TemporalType.TIME)
+    @Column(name="endTime")
+    private LocalTime endDateTime;
+
     public String getAppointmentID() {
         return AppointmentID;
     }
 
-    @Temporal(TemporalType.TIME)
-    @Column(name="startTime")
+    public void setAppointmentID(String appointmentID) {
+        AppointmentID = appointmentID;
+    }
+
     public LocalTime getStartDateTime() {
         return startDateTime;
     }
@@ -27,8 +35,6 @@ public class Appointment {
         this.startDateTime = startDateTime;
     }
 
-    @Temporal(TemporalType.TIME)
-    @Column(name="endTime")
     public LocalTime getEndDateTime() {
         return endDateTime;
     }
