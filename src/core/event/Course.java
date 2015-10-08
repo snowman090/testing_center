@@ -10,9 +10,25 @@ import java.util.List;
 public class Course {
     @Id
     @Column(name = "COURSE_NAME")
-    private String courseId;
     @Basic(optional = false)
+    private String courseId;
+
+    @Basic(optional = false)
+    @Column(name = "SUBJECT")
+    private String subject;
+
+    @Basic(optional = false)
+    @Column(name = "CATALOG_NUMBER")
+    private int catalog;
+
+    @Basic(optional = false)
+    @Column(name = "SESSION")
+    private int session;
+
+    @Basic(optional = false)
+    @Column(name = "INSTRUCTOR")
     private Instructor instructor;
+
     @Basic(optional = false)
     @Column(name = "ENROLLED_STUDENTS")
     @OneToMany(mappedBy = "course")
