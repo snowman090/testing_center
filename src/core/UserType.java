@@ -1,12 +1,18 @@
 package core;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class UserType {
     @Id
     protected String netId;
+    @Basic(optional = false)
+    protected String password;
+    @Basic(optional = false)
     protected String firstName;
+    @Basic(optional = false)
     protected String lastName;
 
     public UserType()
@@ -36,6 +42,14 @@ public abstract class UserType {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
