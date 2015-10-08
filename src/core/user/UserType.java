@@ -1,4 +1,4 @@
-package core;
+package core.user;
 
 import javax.persistence.Basic;
 import javax.persistence.Id;

@@ -1,4 +1,4 @@
-package core;
+package core.event;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ public class TestingCenterInfo {
     LocalTime tcOpen;
     LocalTime tcClose;
     LocalDate tcCloseBeginDate;
-    LocalDate tcCloseEndDate;;
+    LocalDate tcCloseEndDate;
     LocalDateTime ETSExamBegin;
     LocalDateTime ETSExamEnd;
     int gap;

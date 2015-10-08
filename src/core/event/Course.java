@@ -1,4 +1,7 @@
-package core;
+package core.event;
+
+import core.user.Instructor;
+import core.user.Student;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,8 +15,12 @@ public class Course {
     private Instructor instructor;
     @Basic(optional = false)
     @Column(name = "ENROLLED_STUDENTS")
-    @OneToMany
+    @OneToMany(mappedBy = "course")
     private List<Student> enrolledStudents;
+
+    public Course() {
+
+    }
 
     public String getCourseId() {
         return courseId;

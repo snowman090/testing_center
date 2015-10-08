@@ -1,10 +1,12 @@
-package core;
+package core.user;
+
+import core.event.Appointment;
 
 import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
-public class Student extends UserType{
+public class Student extends UserType {
     public static final Authorization permission = Authorization.STUDENT;
 
     private List<Appointment> appointments;

@@ -1,6 +1,9 @@
-package core;
+package core.user;
 
 
+import core.event.Appointment;
+import core.event.Course;
+import core.event.Roster;
 
 public interface AdministratorDao {
 

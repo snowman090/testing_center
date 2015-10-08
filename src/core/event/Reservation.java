@@ -1,4 +1,4 @@
-package core;
+package core.event;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -7,7 +7,6 @@ import java.time.LocalTime;
 @Entity
 @Table(name="Reservation")
 public class Reservation {
-
     @Id
     private String ReservationID;
     @Temporal(TemporalType.TIME)
@@ -22,11 +21,10 @@ public class Reservation {
     @Temporal(TemporalType.DATE)
     @Column(name="endDate")
     private LocalDate endDate;
-    @Column(name="duration")
     private int duration;
     @Column(name="instructorName")
     private String instructorName;
-    @Column(name="attendence")
+    @Column(name="ATTENDANCE")
     private int attendence;
     //haven't initiated
     @Column(name="status")

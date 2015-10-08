@@ -1,4 +1,4 @@
-package core;
+package core.user;
 
 import java.util.List;
 

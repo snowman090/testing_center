@@ -1,19 +1,19 @@
-package core;
+package core.event;
+
+import core.user.UserType;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.Calendar;
 
 @Entity
 @Table(name = "Appointment")
 public class Appointment {
-
-    private UserType madeBy;
-
     @Id
     private String AppointmentID;
+    @Column(name = "MADE_BY")
+    private UserType madeBy;
     @Temporal(TemporalType.TIME)
-    @Column(name="startTime")
+    @Column(name="START_TIME")
     private LocalTime startDateTime;
     @Temporal(TemporalType.TIME)
     @Column(name="endTime")
