@@ -1,39 +1,34 @@
 package core;
 
 
-import org.w3c.dom.Document;
 
 public interface AdministratorDao {
 
-
-    // Import data.
-    public void importData();
-
     // Import User.csv
-    public boolean importUserCSV(Document userCSV);
+    // Add a USER row with fields: | FirstName | LastName | NetID | Email|
+     boolean addUser(UserType user);
 
     // Import Class.csv
-    public boolean importClassCSV(Document userCSV);
+    // Add a CLASS row with fields: | ClassID | Subject | CatalogNumber | Section | InstructorNetID |
+     boolean addClass(Course course);
 
     // Import Roster.csv
-    public boolean importRoster(Document userCSV);
+    // Add a ROSTER row with fields: | NetID | ClassID |
+     boolean addRoster(Roster roster);
 
-    // Display Utilization
-    public void displayUtilization();
 
     // Handle schedule request
-    public void handleScheduleRequest();
+    // Update request's status field accordingly.(approved/denied)
+     void updateRequestStatus(boolean isApproved);
 
     // Make appointment on behalf of a student
-    public void makeApptOnBehalfOfStudent();
+    // Add a row ot Appointment
+     void addAppointment(Appointment appointment);
 
     // View Appointment
-    public void viewAppointment();
+    // Method to list all the appointments detail
+     void listAppointment();
 
     // Check-in Student
-    public void checkInStudent();
-
-    // Generate Report
-    public void generateReport();
-
+     void updateStudent(int studentID);
 }
