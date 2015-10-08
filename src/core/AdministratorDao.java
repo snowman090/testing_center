@@ -1,6 +1,8 @@
 package core;
 
 
+import org.w3c.dom.Document;
+
 public interface AdministratorDao {
 
 
@@ -8,13 +10,13 @@ public interface AdministratorDao {
     public void importData();
 
     // Import User.csv
-    public boolean importUserCSV();
+    public boolean importUserCSV(Document userCSV);
 
     // Import Class.csv
-    public boolean importClassCSV();
+    public boolean importClassCSV(Document userCSV);
 
     // Import Roster.csv
-    public boolean importRoster();
+    public boolean importRoster(Document userCSV);
 
     // Display Utilization
     public void displayUtilization();
@@ -27,7 +29,11 @@ public interface AdministratorDao {
 
     // View Appointment
     public void viewAppointment();
+
+    // Check-in Student
     public void checkInStudent();
+
+    // Generate Report
     public void generateReport();
 
 }
