@@ -22,11 +22,9 @@ public class Course {
     private int catalog;
 
     @Basic(optional = false)
-    @Column(name = "SESSION")
     private int session;
 
     @Basic(optional = false)
-    @Column(name = "INSTRUCTOR")
     private Instructor instructor;
 
     @Basic(optional = false)
@@ -34,8 +32,43 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Student> enrolledStudents;
 
+    @Lob
+    private String description;
+
     public Course() {
 
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public int getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(int catalog) {
+        this.catalog = catalog;
+    }
+
+    public int getSession() {
+        return session;
+    }
+
+    public void setSession(int session) {
+        this.session = session;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCourseId() {
