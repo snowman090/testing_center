@@ -1,18 +1,24 @@
 package core.user;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class UserType {
     @Id
+    @Column(name = "NETID")
+    @Basic(optional = false)
     protected String netId;
     @Basic(optional = false)
+    @Column(name = "PASSWORD")
     protected String password;
     @Basic(optional = false)
+    @Column(name = "FIRST_NAME")
     protected String firstName;
     @Basic(optional = false)
+    @Column(name = "LAST_NAME")
     protected String lastName;
 
     public UserType()
