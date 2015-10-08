@@ -5,6 +5,8 @@ import java.util.List;
 
 @Entity
 public class Student extends UserType{
-    List<Appointment> appointments;
+    public static final Authorization permission = Authorization.STUDENT;
+
+    private List<Appointment> appointments;
 
 }
