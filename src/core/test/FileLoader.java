@@ -2,6 +2,7 @@ package core.test;
 
 import core.event.DataCollection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class FileLoader {
     }
 
     public static void main(String[] args) {
-        List<String[]> test = null;
+        ArrayList<String[]> test = null;
         String pathStudent = "./doc/user.csv";
         DataCollection data = new DataCollection();
         data.readFile(pathStudent,test);

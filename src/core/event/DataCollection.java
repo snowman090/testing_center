@@ -178,5 +178,43 @@ public class DataCollection {
         this.users = users;
     }
 
+    public List<String[]> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(List<String[]> courses) {
+        this.courses = courses;
+    }
+
+    public List<String[]> getRosters() {
+        return rosters;
+    }
+
+    public void setRosters(List<String[]> rosters) {
+        this.rosters = rosters;
+    }
+
+    public String getPath_usersCSV() {
+        return path_usersCSV;
+    }
+
+    public void setPath_usersCSV(String path_usersCSV) {
+        this.path_usersCSV = path_usersCSV;
+    }
+
+    public String getPath_coursesCSV() {
+        return path_coursesCSV;
+    }
+
+    public void setPath_coursesCSV(String path_coursesCSV) {
+        this.path_coursesCSV = path_coursesCSV;
+    }
+
+    public String getPath_rostersCSV() {
+        return path_rostersCSV;
+    }
+
+    public void setPath_rostersCSV(String path_rostersCSV) {
+        this.path_rostersCSV = path_rostersCSV;
+    }
 }
