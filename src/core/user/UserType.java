@@ -1,19 +1,28 @@
-package core;
+package core.user;
 
-import javax.persistence.Basic;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Table( name = "UserTypes")
 public abstract class UserType {
     @Id
+    @Column(name = "netId")
     protected String netId;
+
     @Basic(optional = false)
+    @Column(name = "password")
     protected String password;
+
     @Basic(optional = false)
+    @Column(name = "firstName")
     protected String firstName;
+
     @Basic(optional = false)
+    @Column(name = "lastName")
     protected String lastName;
+    @Basic(optional = false)
+    @Column(name = "EMAIL")
+    protected String email;
 
     public UserType()
     {
@@ -52,4 +61,11 @@ public abstract class UserType {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
