@@ -8,15 +8,17 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class UserType {
     @Id
-    @Column(name = "NETID")
-    @Basic(optional = false)
+    @Column(name = "USER_ID")
     protected String netId;
+
     @Basic(optional = false)
     @Column(name = "PASSWORD")
     protected String password;
+
     @Basic(optional = false)
     @Column(name = "FIRST_NAME")
     protected String firstName;
+
     @Basic(optional = false)
     @Column(name = "LAST_NAME")
     protected String lastName;
