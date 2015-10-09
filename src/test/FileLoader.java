@@ -1,9 +1,8 @@
-package core.test;
+package test;
 
 import core.event.DataCollection;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Acer on 10/9/2015.

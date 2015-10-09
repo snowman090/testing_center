@@ -28,7 +28,7 @@ public class Course {
     @Column(name = "instructor")
     private Instructor instructor;
     @Basic(optional = false)
-    @OneToMany(mappedBy = "CourseID")
+    @OneToMany(mappedBy = "courseID")
     private List<Student> enrolledStudents;
 
     // Empty Constructor For Hibernate

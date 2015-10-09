@@ -1,4 +1,4 @@
-package core.test;
+package test;
 //
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
@@ -15,18 +15,6 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.util.Iterator;
 import java.util.List;
-
-
-import core.user.Administrator;
-import java.util.Iterator;
-import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateTest {
     private static SessionFactory factory;

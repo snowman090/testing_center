@@ -1,7 +1,5 @@
 package core.user;
 
-import core.user.Authorization;
-import core.user.UserType;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -9,6 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Administrator")
 public class Administrator extends UserType {
+    @Basic(optional = false)
     public final static Authorization authLevel = Authorization.ADMINISTRATOR;
 
     // Empty Constructor for Hibernate
@@ -22,7 +21,9 @@ public class Administrator extends UserType {
         this.lastName = lastName;
     }
 
+    //static final authLevel is already initialized
+    /**
     static {
         authLevel = Authorization.ADMINISTRATOR;
-    }
+    }*/
 }

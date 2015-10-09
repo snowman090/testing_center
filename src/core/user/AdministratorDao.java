@@ -35,5 +35,5 @@ public interface AdministratorDao {
      void listAppointment();
 
     // Check-in Student
-     void updateStudent(int studentID);
+     void updateStudent(String studentNetID);
 }
