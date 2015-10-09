@@ -1,17 +1,29 @@
 package core.user;
 
 import core.event.Appointment;
-
-import javax.persistence.Basic;
+import core.user.Authorization;
+import core.user.UserType;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
-@Table(name = "Instructor")
+@Table( name = "UserType")
 public class Instructor extends UserType {
-    @Basic(optional = false)
-    public final static Authorization authLevel = Authorization.INSTRUCTOR;
-
+    public static final Authorization authLevel;
     private List<Appointment> reservations;
+
+    // Empty Constructor for Hibernate
+    public Instructor() { }
+
+    public Instructor(String netId, String pwd, String firstName, String lastName) {
+        this.netId = netId;
+        this.password = pwd;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    static {
+        authLevel = Authorization.INSTRUCTOR;
+    }
 }
