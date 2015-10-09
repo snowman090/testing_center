@@ -10,4 +10,5 @@ public class Administrator extends UserType {
     @Basic(optional = false)
     public final static Authorization authLevel = Authorization.ADMINISTRATOR;
 
+
 }
