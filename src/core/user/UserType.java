@@ -20,6 +20,9 @@ public abstract class UserType {
     @Basic(optional = false)
     @Column(name = "LAST_NAME")
     protected String lastName;
+    @Basic(optional = false)
+    @Column(name = "EMAIL")
+    protected String email;
 
     public UserType()
     {
@@ -58,4 +61,11 @@ public abstract class UserType {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
