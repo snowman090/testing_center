@@ -5,5 +5,4 @@ package core;
  */
 public class Report {
     boolean isWebBased;
-    int day
 }

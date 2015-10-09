@@ -9,6 +9,7 @@ public class Roster {
     @Basic(optional = false)
     @Column(name = "NETID")
     private String netID;
+
     @Id
     @Basic(optional = false)
     @Column(name = "COURSE_ID")
