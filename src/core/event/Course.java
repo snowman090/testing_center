@@ -2,28 +2,41 @@ package core.event;
 
 import core.user.Instructor;
 import core.user.Student;
-
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Course {
     @Id
-    @Column(name = "COURSE_NAME")
+    @Column(name = "courseId" )
+    @Basic(optional = false)
     private String courseId;
     @Basic(optional = false)
+    @Column(name = "subject" )
+    private String subject;
+    @Basic(optional = false)
+    @Column(name = "catalogNumber")
+    private int catalog;
+    @Basic(optional = false)
+    @Column(name = "session")
+    private int session;
+    @Basic(optional = false)
+    @Column(name = "instructor")
     private Instructor instructor;
     @Basic(optional = false)
-    @Column(name = "ENROLLED_STUDENTS")
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "CourseID")
     private List<Student> enrolledStudents;
 
+    // Empty Constructor For Hibernate
     public Course() {
-
     }
 
     public String getCourseId() {
-        return courseId;
+        return this.courseId;
     }
 
     public void setCourseId(String courseId) {
@@ -31,7 +44,7 @@ public class Course {
     }
 
     public Instructor getInstructor() {
-        return instructor;
+        return this.instructor;
     }
 
     public void setInstructor(Instructor instructor) {
@@ -39,7 +52,7 @@ public class Course {
     }
 
     public List<Student> getEnrolledStudents() {
-        return enrolledStudents;
+        return this.enrolledStudents;
     }
 
     public void setEnrolledStudents(List<Student> enrolledStudents) {
