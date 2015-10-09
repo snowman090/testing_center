@@ -58,6 +58,7 @@ public class DataCollection {
             }
         }
     }
+    public String toString(){}
 
     public List<String[]> getUsers() {
         return users;
