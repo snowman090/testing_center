@@ -1,11 +1,8 @@
 package core.user;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
 public abstract class UserType {
     @Id
     @Column(name = "USER_ID")
