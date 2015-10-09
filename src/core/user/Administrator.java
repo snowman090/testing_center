@@ -9,7 +9,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Administrator")
 public class Administrator extends UserType {
-    @Basic(optional = false)
     public final static Authorization authLevel = Authorization.ADMINISTRATOR;
 
     // Empty Constructor for Hibernate

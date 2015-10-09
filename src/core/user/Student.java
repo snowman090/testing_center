@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "UserType")
+@Table(name = "Student")
 public class Student extends UserType {
     public static final Authorization permission;
     private List<Appointment> appointments;

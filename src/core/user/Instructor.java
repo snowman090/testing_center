@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "UserType")
+@Table( name = "Instructor")
 public class Instructor extends UserType {
     public static final Authorization authLevel;
     private List<Appointment> reservations;

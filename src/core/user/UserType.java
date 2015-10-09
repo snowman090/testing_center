@@ -3,21 +3,22 @@ package core.user;
 import javax.persistence.*;
 
 @Entity
+@Table( name = "UserTypes")
 public abstract class UserType {
     @Id
-    @Column(name = "USER_ID")
+    @Column(name = "netId")
     protected String netId;
 
     @Basic(optional = false)
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     protected String password;
 
     @Basic(optional = false)
-    @Column(name = "FIRST_NAME")
+    @Column(name = "firstName")
     protected String firstName;
 
     @Basic(optional = false)
-    @Column(name = "LAST_NAME")
+    @Column(name = "lastName")
     protected String lastName;
     @Basic(optional = false)
     @Column(name = "EMAIL")
