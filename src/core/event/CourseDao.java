@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CourseDao {
 
-    List<Course> findByCourseId();
+    List<Course> findByCourseId(String courseId);
 
     boolean addCourse(Course course);
 
