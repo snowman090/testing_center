@@ -7,22 +7,26 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "Appointment")
-public class Appointment {
+public abstract class Appointment {
     @Id
     @Column(name = "APPOINTMENT_ID")
     @Basic(optional = false)
     private String AppointmentID;
+
     @Column(name = "MADE_BY")
     @Basic(optional = false)
     private UserType madeBy;
-    @Temporal(TemporalType.TIME)
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="START_TIME")
     @Basic(optional = false)
     private LocalTime startDateTime;
-    @Temporal(TemporalType.TIME)
+
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="END_TIME")
     @Basic(optional = false)
     private LocalTime endDateTime;
+
     @Column(name="STUDENT_NAME")
     @Basic(optional = false)
     private String StudentName;
