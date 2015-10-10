@@ -5,10 +5,12 @@ import core.event.Appointment;
 import core.event.Course;
 import core.event.Roster;
 
+import java.util.List;
+
 public interface AdministratorDao {
 
      Authorization getPermission ();
-
+     List<Administrator> findByNetID(String AdministratorID);
     // Import User.csv
     // Add a USER row with fields: | FirstName | LastName | NetID | Email|
      boolean addUser(UserType user);
