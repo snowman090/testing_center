@@ -12,7 +12,11 @@ public class Reservation {
     @Id
     @Column(name = "RESERVATION_ID")
     @Basic(optional = false)
+<<<<<<< Updated upstream
     private String reservationID;
+=======
+    private String ReservationID;
+>>>>>>> Stashed changes
 
     @Temporal(TemporalType.TIME)
     @Column(name="START_TIME")
@@ -38,11 +42,20 @@ public class Reservation {
 
     @Column(name="INSTRUCTOR_NAME")
     @Basic(optional = false)
+<<<<<<< Updated upstream
     private Instructor instructor;
 
     @Column(name="ATTENDANCE")
     private int attendance;
 
+=======
+    private String instructorName;
+
+    @Column(name="ATTENDANCE")
+    private int attendence;
+
+    //haven't initiated
+>>>>>>> Stashed changes
     @Basic(optional = false)
     @Column(name="STATUS")
     private Status status;
