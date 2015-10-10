@@ -10,7 +10,7 @@ import java.util.List;
 public interface AdministratorDao {
 
      Authorization getPermission ();
-     List<Administrator> findByNetID(String AdministratorID);
+     List<Administrator> findByNetID(String administratorId);
     // Import User.csv
     // Add a USER row with fields: | FirstName | LastName | NetID | Email|
      boolean addUser(UserType user);

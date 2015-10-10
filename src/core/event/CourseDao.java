@@ -1,22 +1,15 @@
 package core.event;
 
-import core.user.Authorization;
-import core.user.Instructor;
-
 import java.util.List;
 
 public interface CourseDao {
 
     List<Course> findByCourseId();
 
-    List<Course> findByNetID(String InstructorID);
+    boolean addCourse(Course course);
 
-    Authorization getPermission();
+    boolean updateCourse(Course course, String id);
 
-    boolean insertCourse(Course course);
-
-    boolean updateCourse(Course course);
-
-    boolean deleteCourse(Course course);
+    boolean deleteCourse(String course);
 
 }

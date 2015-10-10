@@ -1,5 +1,7 @@
 package core.event;
 
+import core.user.Instructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,32 +10,39 @@ import java.time.LocalTime;
 @Table(name="Reservation")
 public class Reservation {
     @Id
-    @Column(name = "RESERVATIONID")
+    @Column(name = "RESERVATION_ID")
     @Basic(optional = false)
-    private String ReservationID;
+    private String reservationID;
+
     @Temporal(TemporalType.TIME)
     @Column(name="START_TIME")
     @Basic(optional = false)
     private LocalTime startTime;
+
     @Temporal(TemporalType.TIME)
     @Column(name="END_TIME")
     @Basic(optional = false)
     private LocalTime endTime;
+
     @Temporal(TemporalType.DATE)
     @Column(name="START_DATE")
     @Basic(optional = false)
     private LocalDate startDate;
+
     @Temporal(TemporalType.DATE)
     @Column(name="END_DATE")
     @Basic(optional = false)
     private LocalDate endDate;
+
     private int duration;
+
     @Column(name="INSTRUCTOR_NAME")
     @Basic(optional = false)
-    private String instructorName;
+    private Instructor instructor;
+
     @Column(name="ATTENDANCE")
-    private int attendence;
-    //haven't initiated
+    private int attendance;
+
     @Basic(optional = false)
     @Column(name="STATUS")
     private Status status;
@@ -74,31 +83,35 @@ public class Reservation {
         return duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public int getAttendence() {
-        return attendence;
-    }
-
-    public void setAttendence(int attendence) {
-        this.attendence = attendence;
-    }
-
     public Status getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getReservationID() {
+        return reservationID;
+    }
+
+    public void setReservationID(String reservationID) {
+        this.reservationID = reservationID;
+    }
+
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 }

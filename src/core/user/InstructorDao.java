@@ -4,10 +4,9 @@ import java.util.List;
 
 public interface InstructorDao {
     List<Instructor> findAll();
-    List<Instructor> findByNetID(String InstructorID);
-    Authorization getPermission ();
+    List<Instructor> findByNetID(String id);
 
-    boolean insertInstructor(Instructor instructor);
-    boolean updateInstructor(Instructor instructor);
+    boolean addInstructor(Instructor instructor);
+    boolean updateInstructor(Instructor instructor, String id);
     boolean deleteInstructor(Instructor instructor);
 }

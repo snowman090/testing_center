@@ -15,20 +15,25 @@ public class Course {
     @Column(name = "courseId" )
     @Basic(optional = false)
     private String courseId;
+
     @Basic(optional = false)
     @Column(name = "subject" )
     private String subject;
+
     @Basic(optional = false)
     @Column(name = "catalogNumber")
     private int catalog;
+
     @Basic(optional = false)
     @Column(name = "session")
     private int session;
+
     @Basic(optional = false)
     @Column(name = "instructor")
     private Instructor instructor;
+
     @Basic(optional = false)
-    @OneToMany(mappedBy = "courseID")
+    @OneToMany(mappedBy = "courseId")
     private List<Student> enrolledStudents;
 
     // Empty Constructor For Hibernate
@@ -57,5 +62,29 @@ public class Course {
 
     public void setEnrolledStudents(List<Student> enrolledStudents) {
         this.enrolledStudents = enrolledStudents;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public int getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(int catalog) {
+        this.catalog = catalog;
+    }
+
+    public int getSession() {
+        return session;
+    }
+
+    public void setSession(int session) {
+        this.session = session;
     }
 }
