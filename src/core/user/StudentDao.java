@@ -7,6 +7,7 @@ public interface StudentDao {
     List<Student> getStudentsByName (String firstName, String lastName);
     Student getStudentById (String Id);
     Authorization getPermission ();
-    void updateInfo (Student student);
-    void delete (Student student);
+    boolean updateInfo (Student student);
+    boolean delete (Student student);
+    boolean addStudent (Student student);
 }
