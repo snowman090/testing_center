@@ -7,7 +7,8 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "Appointment")
-public abstract class Appointment {
+public class Appointment {
+    public Appointment(){}
     @Id
     @Column(name = "APPOINTMENT_ID")
     @Basic(optional = false)
@@ -70,4 +71,6 @@ public abstract class Appointment {
     public void setMadeBy(UserType madeBy) {
         this.madeBy = madeBy;
     }
+
+
 }
