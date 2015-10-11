@@ -8,7 +8,7 @@ public class TestingCenterInfo {
     private int numSeats;
     private int numSetAsideSeats;
     private LocalTime tcOpen;
-    private LocalTime tcClose;
+    private LocalTime tcClose;//
     private LocalDate tcCloseBeginDate;
     private LocalDate tcCloseEndDate;
     private LocalDateTime ETSExamBegin;
@@ -16,7 +16,6 @@ public class TestingCenterInfo {
     private int gap;
     private int reminderInterval;
 
-    public TestingCenterInfo(){}
 
     public int getNumSeats() {
         return numSeats;

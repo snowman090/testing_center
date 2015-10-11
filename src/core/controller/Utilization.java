@@ -3,6 +3,8 @@ package core.controller;
 
 import core.event.TestingCenterInfo;
 
+import java.time.temporal.ChronoUnit;
+
 public class Utilization {
 
     private int utilzExpection;
@@ -14,14 +16,13 @@ public class Utilization {
     private int day;
     private String exam;
     private int numSeat;
-    private TestingCenterInfo info;
 
-    public void setInfo(TestingCenterInfo info){
-        this.info = info;
+    TestingCenterInfo center = new TestingCenterInfo();
+
+    public double countUtilization(){
+
+        long Hours = ChronoUnit.HOURS.between(center.getTcOpen() , center.getTcClose());
     }
-
-
-
     public int getUtilzExpection() {
         return utilzExpection;
     }
