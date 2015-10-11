@@ -1,22 +1,56 @@
 package core.event;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class TestingCenterInfo {
+    static final private String PATH = "./doc/TesingCenterInfo.json";
+
     private int numSeats;
     private int numSetAsideSeats;
-    private LocalTime tcOpen;
-    private LocalTime tcClose;
-    private LocalDate tcCloseBeginDate;
-    private LocalDate tcCloseEndDate;
-    private LocalDateTime ETSExamBegin;
-    private LocalDateTime ETSExamEnd;
+    private LocalTime open;
+    private LocalTime close;
+    private List<LocalDate[]> closeDateRanges;
+    private List<LocalDateTime[]> reserveRanges;
     private int gap;
     private int reminderInterval;
 
-    public TestingCenterInfo(){}
+    public TestingCenterInfo(){
+
+    }
+
+    public static TestingCenterInfo deserialize(){
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(PATH)));
+            Gson gson = new Gson();
+            TestingCenterInfo info = gson.fromJson(json, TestingCenterInfo.class);
+            return info;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void serialize(){
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        String json = gson.toJson(this);
+        System.out.println(json);
+
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(PATH)))) {
+            writer.write(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int getNumSeats() {
         return numSeats;
@@ -34,48 +68,36 @@ public class TestingCenterInfo {
         this.numSetAsideSeats = numSetAsideSeats;
     }
 
-    public LocalTime getTcOpen() {
-        return tcOpen;
+    public LocalTime getOpen() {
+        return open;
     }
 
-    public void setTcOpen(LocalTime tcOpen) {this.tcOpen = tcOpen;}
-
-    public LocalTime getTcClose() {return tcClose;}
-
-    public void setTcClose(LocalTime tcClose) {
-        this.tcClose = tcClose;
+    public void setOpen(LocalTime open) {
+        this.open = open;
     }
 
-    public LocalDate getTcCloseBeginDate() {
-        return tcCloseBeginDate;
+    public LocalTime getClose() {
+        return close;
     }
 
-    public void setTcCloseBeginDate(LocalDate tcCloseBeginDate) {
-        this.tcCloseBeginDate = tcCloseBeginDate;
+    public void setClose(LocalTime close) {
+        this.close = close;
     }
 
-    public LocalDate getTcCloseEndDate() {
-        return tcCloseEndDate;
+    public List<LocalDate[]> getCloseDateRanges() {
+        return closeDateRanges;
     }
 
-    public void setTcCloseEndDate(LocalDate tcCloseEndDate) {
-        this.tcCloseEndDate = tcCloseEndDate;
+    public void setCloseDateRanges(List<LocalDate[]> closeDateRanges) {
+        this.closeDateRanges = closeDateRanges;
     }
 
-    public LocalDateTime getETSExamBegin() {
-        return ETSExamBegin;
+    public List<LocalDateTime[]> getReserveRanges() {
+        return reserveRanges;
     }
 
-    public void setETSExamBegin(LocalDateTime ETSExamBegin) {
-        this.ETSExamBegin = ETSExamBegin;
-    }
-
-    public LocalDateTime getETSExamEnd() {
-        return ETSExamEnd;
-    }
-
-    public void setETSExamEnd(LocalDateTime ETSExamEnd) {
-        this.ETSExamEnd = ETSExamEnd;
+    public void setReserveRanges(List<LocalDateTime[]> reserveRanges) {
+        this.reserveRanges = reserveRanges;
     }
 
     public int getGap() {
@@ -93,6 +115,4 @@ public class TestingCenterInfo {
     public void setReminderInterval(int reminderInterval) {
         this.reminderInterval = reminderInterval;
     }
-
-
 }
