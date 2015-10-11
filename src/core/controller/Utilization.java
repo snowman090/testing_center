@@ -16,7 +16,7 @@ public class Utilization {
     private int day;
     private String exam;
     private int numSeat;
-
+///
     TestingCenterInfo center = new TestingCenterInfo();
 
     public double countUtilization(){
