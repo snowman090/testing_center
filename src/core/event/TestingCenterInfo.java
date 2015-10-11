@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class TestingCenterInfo {
+
     static final private String PATH = "./doc/TesingCenterInfo.json";
 
     private int numSeats;
