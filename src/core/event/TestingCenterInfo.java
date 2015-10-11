@@ -16,6 +16,8 @@ public class TestingCenterInfo {
     private int gap;
     private int reminderInterval;
 
+    public TestingCenterInfo(){}
+
     public int getNumSeats() {
         return numSeats;
     }
@@ -36,13 +38,9 @@ public class TestingCenterInfo {
         return tcOpen;
     }
 
-    public void setTcOpen(LocalTime tcOpen) {
-        this.tcOpen = tcOpen;
-    }
+    public void setTcOpen(LocalTime tcOpen) {this.tcOpen = tcOpen;}
 
-    public LocalTime getTcClose() {
-        return tcClose;
-    }
+    public LocalTime getTcClose() {return tcClose;}
 
     public void setTcClose(LocalTime tcClose) {
         this.tcClose = tcClose;
@@ -95,4 +93,6 @@ public class TestingCenterInfo {
     public void setReminderInterval(int reminderInterval) {
         this.reminderInterval = reminderInterval;
     }
+
+
 }
