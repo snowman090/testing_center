@@ -5,9 +5,9 @@ import java.util.List;
 public interface StudentDao {
     List<Student> getAllStudents ();
     List<Student> getStudentsByName (String firstName, String lastName);
-    Student getStudentById (String Id);
+    Student getStudentById (int Id);
     Authorization getPermission ();
     boolean updateInfo (Student student);
-    boolean delete (Student student);
+    boolean deleteStudent(Student student);
     boolean addStudent (Student student);
 }

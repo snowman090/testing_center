@@ -1,14 +1,18 @@
 package core.controller;
 
 
+import core.event.Appointment;
+import core.event.AppointmentDao;
+import core.event.AppointmentDaoImpl;
 import core.event.TestingCenterInfo;
 
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public class Utilization {
 
-    private int utilzExpection;
-    private int utilzActual;
+    private long utilzExpection;
+    private long utilzActual;
     private int numApprove;
     private int numStudent;
     private int numDay;
@@ -18,12 +22,28 @@ public class Utilization {
     private int numSeat;
 ///
     TestingCenterInfo center = new TestingCenterInfo();
+    AppointmentDao appointmentDao = (AppointmentDao) new AppointmentDaoImpl();
 
-    public double countUtilization(){
 
-        long Hours = ChronoUnit.HOURS.between(center.getTcOpen() , center.getTcClose());////
 
+    public long countUtilzActual(){
+        long TotalDuration = 0;
+        long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
+        for (Appointment appointment : appointmentDao.findAllAppointment()) {
+            TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime())
+        }
+        utilzActual = TotalDuration / (numSeat * Hours);
     }
+
+    public long countUtilzExpection(){
+        long TotalDuration = 0;
+        long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
+        for (Appointment appointment : appointmentDao.findAllAppointment()) {
+            TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime())
+        }
+        utilzActual = TotalDuration / (numSeat * Hours);
+    }
+
     public int getUtilzExpection() {
         return utilzExpection;
     }

@@ -17,6 +17,9 @@ public class Student extends UserType {
     public static final Authorization permission = Authorization.STUDENT;
     private List<Appointment> appointments;
 
+    private String name;
+    private int student_Id;
+
     // Empty Constructor for Hibernate
     public Student() {
     }
@@ -28,6 +31,21 @@ public class Student extends UserType {
         this.lastName = lastName;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getStudent_Id() {
+        return student_Id;
+    }
+
+    public void setStudent_Id(int student_Id) {
+        this.student_Id = student_Id;
+    }
     public List<Appointment> getAppointments(){
         return appointments;
     }
