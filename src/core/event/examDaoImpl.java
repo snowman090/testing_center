@@ -18,6 +18,11 @@ public class examDaoImpl implements examDao{
     }
 
     @Override
+    public List<exam> getAllExams() {
+        return null;
+    }
+
+    @Override
     public List<exam> findByexamId(String examId) {
         return null;
     }

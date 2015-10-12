@@ -19,6 +19,19 @@ public class Utilization {
     private int numSeat;
 ///
     TestingCenterInfo center = new TestingCenterInfo();
+
+    public TestingCenterInfo getCenter() {
+        return center;
+    }
+
+    public AppointmentDao getAppointmentDao() {
+        return appointmentDao;
+    }
+
+    public core.event.examDao getExamDao() {
+        return examDao;
+    }
+
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
     examDao examDao = new examDaoImpl();
 

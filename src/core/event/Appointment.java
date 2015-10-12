@@ -71,6 +71,4 @@ public class Appointment {
     public void setMadeBy(UserType madeBy) {
         this.madeBy = madeBy;
     }
-
-
 }
