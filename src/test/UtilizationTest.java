@@ -15,7 +15,7 @@ public class UtilizationTest {
         util.getCenter().setClose(LocalTime.of(17, 0));
 
         Appointment appointment1 = new Appointment();
-        Appointment appointment2 = new Appointment();
+        Appointment appointment2 = new Appointment();//
         appointment1.setStartDateTime(LocalTime.of(10, 30));
         appointment1.setEndDateTime(LocalTime.of(12, 30));
 
