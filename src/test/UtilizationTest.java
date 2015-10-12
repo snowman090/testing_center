@@ -33,5 +33,10 @@ public class UtilizationTest {
         util.setNumSeat(60);
 
         System.out.println(util.countUtilzActual());
+
+        // then it's testing utilzation expection
+
+        util.setGap(0.25);
+
     }
 }

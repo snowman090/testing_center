@@ -9,7 +9,7 @@ public class Utilization {
     private int numApprove;
     private int numStudent;
     private int numDay;
-    private int gap;
+    private double gap;
     private int day;
     private String exam;
     private int numSeat;
@@ -83,11 +83,11 @@ public class Utilization {
         this.numDay = numDay;
     }
 
-    public int getGap() {
+    public double getGap() {
         return gap;
     }
 
-    public void setGap(int gap) {
+    public void setGap(double gap) {
         this.gap = gap;
     }
 
