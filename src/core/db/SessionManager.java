@@ -8,17 +8,14 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.sql.Connection;
 
-/**
- * Created by Zeqli on 10/11/2015.
- */
 public class SessionManager {
     private static SessionManager instance;
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
 
-    public SessionManager() {    }
+    public SessionManager() {}
 
-    public static SessionManager getInstance(){
+    public static SessionManager getInstance() {
         if (instance==null){
             instance = new SessionManager();
             sessionFactory = createSessionFactory();

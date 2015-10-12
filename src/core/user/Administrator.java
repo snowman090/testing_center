@@ -163,9 +163,9 @@ public class Administrator extends UserType {
     }
 
     /**
-     * Check­in a student for an appointment.
+     * Checkï¿½in a student for an appointment.
      * The system records that the student kept the appointment and
-     * displays the student’s seat assignment. (Ideally, students would check in
+     * displays the studentï¿½s seat assignment. (Ideally, students would check in
      * by swiping their ID card, but that is beyond the scope of this course project.)
      * @param netId
      */

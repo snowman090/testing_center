@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface AppointmentDao {
     List<Appointment> findAllAppointment();
-    List<Appointment> findByAppointmentID(String AppointmentID);
+    boolean findByAppointmentID(String AppointmentID);
 
     boolean addAppointment(Appointment appointment);
 

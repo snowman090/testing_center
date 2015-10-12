@@ -3,7 +3,10 @@ package core.event;
 import core.user.UserType;
 
 import javax.persistence.*;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
+
+
 
 @Entity
 @Table(name = "Appointment")
@@ -21,12 +24,12 @@ public class Appointment {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="START_TIME")
     @Basic(optional = false)
-    private LocalTime startDateTime;
+    private LocalDateTime startDateTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="END_TIME")
     @Basic(optional = false)
-    private LocalTime endDateTime;
+    private LocalDateTime endDateTime;
 
     @Column(name="STUDENT_NAME")
     @Basic(optional = false)
@@ -40,19 +43,19 @@ public class Appointment {
         AppointmentID = appointmentID;
     }
 
-    public LocalTime getStartDateTime() {
+    public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(LocalTime startDateTime) {
+    public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public LocalTime getEndDateTime() {
+    public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(LocalTime endDateTime) {
+    public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
 

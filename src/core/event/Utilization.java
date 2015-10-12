@@ -1,10 +1,6 @@
-package core.controller;
-
-
-import core.event.*;
+package core.event;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 public class Utilization {
 
@@ -13,35 +9,28 @@ public class Utilization {
     private int numApprove;
     private int numStudent;
     private int numDay;
-    private int gap;
+    private double gap;
     private int day;
     private String exam;
     private int numSeat;
-///
-    TestingCenterInfo center = new TestingCenterInfo();
 
-    public TestingCenterInfo getCenter() {
-        return center;
-    }
+    private TestingCenterInfo center = new TestingCenterInfo();
 
-    public AppointmentDao getAppointmentDao() {
-        return appointmentDao;
-    }
 
-    public core.event.examDao getExamDao() {
-        return examDao;
-    }
 
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
     examDao examDao = new examDaoImpl();
 
-    public long countUtilzActual(){
+    public Double countUtilzActual(){
         long TotalDuration = 0;
         long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
+
         for (Appointment appointment : appointmentDao.findAllAppointment()) {
+            System.out.println(appointment.getAppointmentID());
             TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime());
         }
-        return (TotalDuration / (numSeat * Hours));
+
+        return ((double)TotalDuration / (double)(numSeat * Hours));
     }
 
     public long countUtilzExpection(){
@@ -52,6 +41,7 @@ public class Utilization {
         }
         return  (utilzActual + TotalExamDuration);
     }
+
 
     public long getUtilzExpection() {
         return utilzExpection;
@@ -93,11 +83,11 @@ public class Utilization {
         this.numDay = numDay;
     }
 
-    public int getGap() {
+    public double getGap() {
         return gap;
     }
 
-    public void setGap(int gap) {
+    public void setGap(double gap) {
         this.gap = gap;
     }
 
@@ -124,4 +114,17 @@ public class Utilization {
     public void setExam(String exam) {
         this.exam = exam;
     }
+
+    public TestingCenterInfo getCenter() {
+        return center;
+    }
+
+    public AppointmentDao getAppointmentDao() {
+        return appointmentDao;
+    }
+
+    public core.event.examDao getExamDao() {
+        return examDao;
+    }
+
 }

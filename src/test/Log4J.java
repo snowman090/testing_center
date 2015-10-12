@@ -2,9 +2,6 @@ package test;
 
 import org.apache.log4j.Logger;
 
-/**
- * Created by zeqing on 10/11/2015.
- */
 public class Log4J {
 
     public static final Logger log = Logger.getLogger(Log4J.class);
