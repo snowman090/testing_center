@@ -12,7 +12,7 @@ public class Log4J {
         log.info("Test Message");
         log.error("Error");
         log.debug("Debug");
-        log.trace("Trace");
+        //log.trace("Trace");
         log.warn("Warn");
         log.fatal("Fatal");
     }

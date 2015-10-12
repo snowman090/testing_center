@@ -13,17 +13,24 @@ public class Utilization {
     private int day;
     private String exam;
     private int numSeat;
+
     private TestingCenterInfo center = new TestingCenterInfo();
+
+
+
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
     examDao examDao = new examDaoImpl();
 
-    public long countUtilzActual(){
+    public Double countUtilzActual(){
         long TotalDuration = 0;
         long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
+
         for (Appointment appointment : appointmentDao.findAllAppointment()) {
+            System.out.println(appointment.getAppointmentID());
             TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime());
         }
-        return (TotalDuration / (numSeat * Hours));
+
+        return ((double)TotalDuration / (double)(numSeat * Hours));
     }
 
     public long countUtilzExpection(){
@@ -34,6 +41,7 @@ public class Utilization {
         }
         return  (utilzActual + TotalExamDuration);
     }
+
 
     public long getUtilzExpection() {
         return utilzExpection;

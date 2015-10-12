@@ -1,8 +1,6 @@
 package core.event;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,55 +10,44 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     public AppointmentDaoImpl() {
         appointments = new ArrayList<Appointment>();
-        Appointment appointment1 = new Appointment();
-        Appointment appointment2 = new Appointment();
-        appointments.add(appointment1);
-        appointments.add(appointment2);
     }
-
-    public List<Appointment> getAllAppointments() {
+    @Override
+    public List<Appointment> findAllAppointment() {
         return appointments;
     }
 
-
-    public Appointment getAppointment(int id) {
-        return appointments.get(id);
-    }
-
-
+    @Override
     public boolean deleteAppointment(Appointment appointment) {
         appointments.remove(appointment.getAppointmentID());
         return true;
-
     }
 
-    public boolean updateAppointmentTime(Appointment appointment, LocalDateTime startTime, LocalDateTime endTime){
+    @Override
+    public boolean updateAppointmentTime(Appointment appointment, LocalDateTime StartTime, LocalDateTime EndTime){
+
         Appointment App = appointments.get(Integer.parseInt(appointment.getAppointmentID()));
-        App.setStartDateTime(startTime);
-        App.setEndDateTime(endTime);
+        App.setStartDateTime(StartTime);
+        App.setEndDateTime(EndTime);
 
         return true;
     }
-
+    @Override
     public boolean updateAppointmentName(Appointment appointment, String name){
         Appointment App = appointments.get(Integer.parseInt(appointment.getAppointmentID()));
         App.setStudentName(name);
         return true;
     }
-
+    @Override
     public boolean addAppointment(Appointment appointment) {
         appointments.add(appointment);
         return true;
     }
 
     @Override
-    public List<Appointment> findAllAppointment() {
-        return null;
-    }
+    public boolean findByAppointmentID(String AppointmentID) {
+        appointments.get(Integer.parseInt(AppointmentID));
 
-    @Override
-    public List<Appointment> findByAppointmentID(String AppointmentID) {
-        return null;
+        return true;
     }
 
 

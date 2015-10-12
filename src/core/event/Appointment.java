@@ -3,9 +3,10 @@ package core.event;
 import core.user.UserType;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+
+
 
 @Entity
 @Table(name = "Appointment")
