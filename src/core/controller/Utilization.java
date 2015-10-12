@@ -1,10 +1,7 @@
 package core.controller;
 
 
-import core.event.Appointment;
-import core.event.AppointmentDao;
-import core.event.AppointmentDaoImpl;
-import core.event.TestingCenterInfo;
+import core.event.*;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -22,29 +19,28 @@ public class Utilization {
     private int numSeat;
 ///
     TestingCenterInfo center = new TestingCenterInfo();
-    AppointmentDao appointmentDao = (AppointmentDao) new AppointmentDaoImpl();
-
-
+    AppointmentDao appointmentDao = new AppointmentDaoImpl();
+    examDao examDao = new examDaoImpl();
 
     public long countUtilzActual(){
         long TotalDuration = 0;
         long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
         for (Appointment appointment : appointmentDao.findAllAppointment()) {
-            TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime())
+            TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime());
         }
-        utilzActual = TotalDuration / (numSeat * Hours);
+        return (TotalDuration / (numSeat * Hours));
     }
 
     public long countUtilzExpection(){
-        long TotalDuration = 0;
+        long TotalExamDuration = 0;
         long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
-        for (Appointment appointment : appointmentDao.findAllAppointment()) {
-            TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime())
+        for (exam exam: examDao.getAllExams()) {
+            TotalExamDuration += (exam.getDuration()+ gap) * (exam.getNum_Student_need() - exam.getNum_Student_appointment()/day) ;
         }
-        utilzActual = TotalDuration / (numSeat * Hours);
+        return  (utilzActual + TotalExamDuration);
     }
 
-    public int getUtilzExpection() {
+    public long getUtilzExpection() {
         return utilzExpection;
     }
 
@@ -52,7 +48,7 @@ public class Utilization {
         this.utilzExpection = utilzExpection;
     }
 
-    public int getUtilzActual() {
+    public long getUtilzActual() {
         return utilzActual;
     }
 
