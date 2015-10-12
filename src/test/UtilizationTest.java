@@ -1,6 +1,6 @@
 package test;
 
-import core.controller.Utilization;
+import core.event.Utilization;
 import core.event.Appointment;
 
 import java.time.LocalTime;

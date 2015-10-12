@@ -1,10 +1,6 @@
-package core.controller;
-
-
-import core.event.*;
+package core.event;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 public class Utilization {
 
@@ -17,21 +13,7 @@ public class Utilization {
     private int day;
     private String exam;
     private int numSeat;
-///
-    TestingCenterInfo center = new TestingCenterInfo();
-
-    public TestingCenterInfo getCenter() {
-        return center;
-    }
-
-    public AppointmentDao getAppointmentDao() {
-        return appointmentDao;
-    }
-
-    public core.event.examDao getExamDao() {
-        return examDao;
-    }
-
+    private TestingCenterInfo center = new TestingCenterInfo();
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
     examDao examDao = new examDaoImpl();
 
@@ -124,4 +106,17 @@ public class Utilization {
     public void setExam(String exam) {
         this.exam = exam;
     }
+
+    public TestingCenterInfo getCenter() {
+        return center;
+    }
+
+    public AppointmentDao getAppointmentDao() {
+        return appointmentDao;
+    }
+
+    public core.event.examDao getExamDao() {
+        return examDao;
+    }
+
 }

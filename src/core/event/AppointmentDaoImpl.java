@@ -6,9 +6,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eson_wang on 10/12/15.
- */
 public class AppointmentDaoImpl implements AppointmentDao {
 
     List<Appointment> appointments;
@@ -37,10 +34,10 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     }
 
-    public boolean updateAppointmentTime(Appointment appointment, LocalDateTime StartTime, LocalDateTime EndTime){
+    public boolean updateAppointmentTime(Appointment appointment, LocalDateTime startTime, LocalDateTime endTime){
         Appointment App = appointments.get(Integer.parseInt(appointment.getAppointmentID()));
-        App.setStartDateTime(StartTime);
-        App.setEndDateTime(EndTime);
+        App.setStartDateTime(startTime);
+        App.setEndDateTime(endTime);
 
         return true;
     }
