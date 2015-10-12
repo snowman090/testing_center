@@ -116,4 +116,14 @@ public class TestingCenterInfo {
     public void setReminderInterval(int reminderInterval) {
         this.reminderInterval = reminderInterval;
     }
+
+    // Added By Robert
+    // Used by Administrator
+    public int getAvailableSeatCount(LocalDateTime time){
+        int available = 0;
+
+        // Calculate the available seat at a specific time.
+
+        return available;
+    }
 }

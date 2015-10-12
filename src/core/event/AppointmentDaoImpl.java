@@ -1,5 +1,7 @@
 package core.event;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     }
 
-    public boolean updateAppointmentTime(Appointment appointment, LocalTime StartTime, LocalTime EndTime){
+    public boolean updateAppointmentTime(Appointment appointment, LocalDateTime StartTime, LocalDateTime EndTime){
         Appointment App = appointments.get(Integer.parseInt(appointment.getAppointmentID()));
         App.setStartDateTime(StartTime);
         App.setEndDateTime(EndTime);

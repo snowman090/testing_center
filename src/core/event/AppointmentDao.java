@@ -1,5 +1,7 @@
 package core.event;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public interface AppointmentDao {
 
     boolean addAppointment(Appointment appointment);
 
-    boolean updateAppointmentTime(Appointment appointment, LocalTime StartTime, LocalTime EndTime);
+    boolean updateAppointmentTime(Appointment appointment, LocalDateTime StartTime, LocalDateTime EndTime);
 
     boolean updateAppointmentName(Appointment appointment, String name);
 
