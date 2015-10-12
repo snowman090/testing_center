@@ -12,8 +12,8 @@ public class UtilizationTest {
         Utilization util = new Utilization();
 
 
-        util.getCenter().setOpen(LocalTime.of(9, 30));
-        util.getCenter().setClose(LocalTime.of(17, 0));
+        util.getCenter().setOpen(LocalDateTime.of(2015,6,20,9, 30));
+        util.getCenter().setClose(LocalDateTime.of(2015,6,20,17, 0));
 
         Appointment appointment1 = new Appointment();
         Appointment appointment2 = new Appointment();//

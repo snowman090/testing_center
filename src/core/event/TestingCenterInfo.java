@@ -17,8 +17,8 @@ public class TestingCenterInfo {
 
     private int numSeats;
     private int numSetAsideSeats;
-    private LocalTime open;
-    private LocalTime close;
+    private LocalDateTime open;
+    private LocalDateTime close;
     private List<LocalDate[]> closeDateRanges;
     private List<LocalDateTime[]> reserveRanges;
     private int gap;
@@ -69,19 +69,19 @@ public class TestingCenterInfo {
         this.numSetAsideSeats = numSetAsideSeats;
     }
 
-    public LocalTime getOpen() {
+    public LocalDateTime getOpen() {
         return open;
     }
 
-    public void setOpen(LocalTime open) {
+    public void setOpen(LocalDateTime open) {
         this.open = open;
     }
 
-    public LocalTime getClose() {
+    public LocalDateTime getClose() {
         return close;
     }
 
-    public void setClose(LocalTime close) {
+    public void setClose(LocalDateTime close) {
         this.close = close;
     }
 
