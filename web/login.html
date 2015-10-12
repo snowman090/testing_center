@@ -18,8 +18,8 @@
 <div>
     <form action="#" class="login-box" th:action="@{/login}" th:object="${login}" method="post">
         <h3 class="login-heading">Sign in</h3>
-        <input type="text" class="login-text" placeholder="NetID">
-        <input type="password" class="login-text" placeholder="Password">
+        <input type="text" class="login-text" placeholder="NetID" th:field="*{netId}">
+        <input type="password" class="login-text" placeholder="Password" th:field="*{password}">
         <input type="submit" value="Login" class="submit-button"/>
     </form>
 </div>
