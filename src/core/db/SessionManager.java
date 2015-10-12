@@ -13,9 +13,9 @@ public class SessionManager {
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
 
-    public SessionManager() {    }
+    public SessionManager() {}
 
-    public static SessionManager getInstance(){
+    public static SessionManager getInstance() {
         if (instance==null){
             instance = new SessionManager();
             sessionFactory = createSessionFactory();
