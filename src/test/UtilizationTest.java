@@ -6,9 +6,7 @@ import core.event.Appointment;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-/**
- * Created by eson_wang on 10/12/15.
- */
+
 public class UtilizationTest {
     public static void main(String[] args){
         Utilization util = new Utilization();
