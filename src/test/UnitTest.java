@@ -205,7 +205,7 @@ public class UnitTest {
             log.info("|  -End Date Time" + exam.getEndDateTime());
             log.info("|  -Duration: " + exam.getDuration());
             log.info("|  -Number of Students who has appointments: " + exam.getNumStudentAppointment());
-            log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());////
+            log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());
 
             tx.commit();
             session.close();
