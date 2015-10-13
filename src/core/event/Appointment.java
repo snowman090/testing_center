@@ -4,8 +4,10 @@ import core.user.UserType;
 
 import javax.persistence.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-
+import java.time.ZoneId;
+import java.util.Date;
 
 
 @Entity
@@ -15,7 +17,7 @@ public class Appointment {
     @Id
     @Column(name = "APPOINTMENT_ID")
     @Basic(optional = false)
-    private String AppointmentID;
+    private String appointmentID;
 
     @Column(name = "MADE_BY")
     @Basic(optional = false)
@@ -24,47 +26,58 @@ public class Appointment {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="START_TIME")
     @Basic(optional = false)
-    private LocalDateTime startDateTime;
+    private Date startDateTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="END_TIME")
     @Basic(optional = false)
-    private LocalDateTime endDateTime;
+    private Date endDateTime;
 
     @Column(name="STUDENT_NAME")
     @Basic(optional = false)
-    private String StudentName;
+    private String studentName;
 
     public String getAppointmentID() {
-        return AppointmentID;
+        return appointmentID;
     }
 
     public void setAppointmentID(String appointmentID) {
-        AppointmentID = appointmentID;
+        this.appointmentID = appointmentID;
     }
 
-    public LocalDateTime getStartDateTime() {
-        return startDateTime;
+    public LocalDateTime getStartDateTime() {// date to
+        Instant instant = Instant.ofEpochMilli(startDateTime.getTime());
+        LocalDateTime res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+        return res;
     }
 
     public void setStartDateTime(LocalDateTime startDateTime) {
-        this.startDateTime = startDateTime;
+        Instant instant = startDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.startDateTime = Date.from(instant);
     }
 
+
+
     public LocalDateTime getEndDateTime() {
-        return endDateTime;
+        Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
+        LocalDateTime res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+        return res;
     }
 
     public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
+        Instant instant = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.endDateTime = Date.from(instant);
     }
 
+
     public String getStudentName() {
-        return StudentName;
+        return studentName;
     }
 
     public void setStudentName(String studentName) {
-        StudentName = studentName;
+        this.studentName = studentName;
     }
 
     public UserType getMadeBy() {

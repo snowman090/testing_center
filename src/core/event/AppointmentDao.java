@@ -14,7 +14,7 @@ public interface AppointmentDao {
 
     boolean addAppointment(Appointment appointment);
 
-    boolean updateAppointmentTime(Appointment appointment, LocalDateTime StartTime, LocalDateTime EndTime);
+    boolean updateAppointmentTime(Appointment appointment, LocalDateTime startTime, LocalDateTime endTime);
 
     boolean updateAppointmentName(Appointment appointment, String name);
 

@@ -3,9 +3,9 @@ package core.event;
 import core.user.Instructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  * Created by eson_wang on 10/11/15.
@@ -18,56 +18,30 @@ public class exam {
 
     @Basic(optional = false)
     @Column(name = "exam_name" )
-    private String exam_Name;//course or adhoc
+    private String examName;//course or adhoc
 
     @Basic(optional = false)
     @Column(name = "type" )
     private String type;//course or adhoc
 
     @Basic(optional = false)
-    @Column(name = "Num_Student_need" )
-    private int Num_Student_need;//
-
-
-    public int getNum_Student_appointment() {
-        return Num_Student_appointment;
-    }
-
-    public void setNum_Student_appointment(int num_Student_appointment) {
-        Num_Student_appointment = num_Student_appointment;
-    }
-
-    public int getNum_Student_need() {
-        return Num_Student_need;
-    }
-
-    public void setNum_Student_need(int num_Student_need) {
-        Num_Student_need = num_Student_need;
-    }
+    @Column(name = "Num_Student_Need" )
+    private int numStudentNeed;//
 
     @Basic(optional = false)
     @Column(name = "Num_Student_appointment" )
-    private int Num_Student_appointment;//
+    private int numStudentAppointment;//
 
-    @Temporal(TemporalType.TIME)
-    @Column(name="START_TIME")// start time of an exam
-    @Basic(optional = false)
-    private LocalTime startTime;
 
-    @Temporal(TemporalType.TIME)
-    @Column(name="END_TIME")// end time of an exam
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="START_DATE_TIME")// start time of an exam
     @Basic(optional = false)
-    private LocalTime endTime;
+    private Date startDateTime;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="START_DATE")// start date of an exam
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="END_DATE_TIME")// end time of an exam
     @Basic(optional = false)
-    private LocalDate startDate;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name="END_DATE")// end date of an exam
-    @Basic(optional = false)
-    private LocalDate endDate;
+    private Date endDateTime;
 
     private int duration;// lasting time
 
@@ -79,63 +53,62 @@ public class exam {
         this.examId = examId;
     }
 
-    public String getExam_Name() {
-        return exam_Name;
+    public int getNumStudentAppointment() {
+        return numStudentAppointment;
     }
 
-    public void setExam_Name(String exam_Name) {
-        this.exam_Name = exam_Name;
+    public void setNumStudentAppointment(int numStudentAppointment) {
+        this.numStudentAppointment = numStudentAppointment;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
+    public int getNumStudentNeed() {
+        return numStudentNeed;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setNumStudentNeed(int numStudentNeed) {
+        this.numStudentNeed= numStudentNeed;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public LocalDateTime getStartDateTime() {// date to
+        Instant instant = Instant.ofEpochMilli(startDateTime.getTime());
+        LocalDateTime res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+        return res;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        Instant instant = startDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.startDateTime = Date.from(instant);
+    }
+
+
+
+    public LocalDateTime getEndDateTime() {
+        Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
+        LocalDateTime res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+
+        return res;
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        Instant instant = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.endDateTime = Date.from(instant);
     }
 
     public String getType() {
         return type;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+    public void setType(String type) {this.type = type;}
 
     public long getDuration() {
-        return ChronoUnit.HOURS.between(startTime, endTime);
+        return ChronoUnit.HOURS.between(getStartDateTime(), getEndDateTime());
     }
-
-
-
-
-
-
-
-
 }

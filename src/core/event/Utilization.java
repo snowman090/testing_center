@@ -37,7 +37,7 @@ public class Utilization {
         long TotalExamDuration = 0;
         long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
         for (exam exam: examDao.getAllExams()) {
-            TotalExamDuration += (exam.getDuration()+ gap) * (exam.getNum_Student_need() - exam.getNum_Student_appointment()/day) ;
+            TotalExamDuration += (exam.getDuration()+ gap) * (exam.getNumStudentNeed() - exam.getNumStudentAppointment()/day) ;
         }
         return  (utilzActual + TotalExamDuration);
     }
