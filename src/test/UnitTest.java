@@ -2,20 +2,16 @@ package test;
 
 import core.db.SessionManager;
 import core.event.Appointment;
-import core.event.DataCollection;
-import core.event.TestingCenterInfo;
+import core.event.Utilization;
+import core.event.exam;
 import core.user.Administrator;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,20 +35,18 @@ public class UnitTest {
         ut.addAdmin(admin3);
         ut.listAdmins();
 
-        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,10,30),LocalDateTime.of(2015,6,20,15,0), 4.5,50,80);
-        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,18,40), 2.5,50,80);
+        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
+        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
         ut.addExam(exam1);
         ut.addExam(exam2);
-
         ut.listExams();
 
         //Actual utilization part
         Utilization util = new Utilization();
 
 
-
-        util.getCenter().setOpen(LocalDateTime.of(2015,6,20,9, 30));
-        util.getCenter().setClose(LocalDateTime.of(2015,6,20,17, 0));
+        util.getCenter().setOpen(LocalTime.of(9, 30));
+        util.getCenter().setClose(LocalTime.of(17, 0));
 
         Appointment appointment1 = new Appointment();
         Appointment appointment2 = new Appointment();//
@@ -67,26 +61,20 @@ public class UnitTest {
         util.getAppointmentDao().addAppointment(appointment1);
         util.getAppointmentDao().addAppointment(appointment2);
 
-
-
         util.setNumSeat(60);
         ut.viewActualUtilization(util);
         //
-        util.setGap(0.25);
-        util.setDay(2);
+
         util.getExamDao().addExam(exam1);
         util.getExamDao().addExam(exam2);
-        ut.viewCountUtilzExpection(util);
+        util.setGap(0.25);
+        util.setDay(2);
+        ut.viewExpectedUtilization(util);
+
 
         admin1.setEmail("zeqing.li@stonybrook.edu");
         ut.updateAdmin(admin1);
 
-        TestingCenterInfo info = new TestingCenterInfo();
-        info = ut.viewTestingCenterInfo(info);
-        ut.saveTestingCenterInfo(info);
-
-        DataCollection data = new DataCollection();
-        ut.importDate("./doc/testcases/user.csv");
     }
 
     public void addAdmin(Administrator admin){
@@ -111,27 +99,6 @@ public class UnitTest {
             }
     }
 
-    public TestingCenterInfo viewTestingCenterInfo(TestingCenterInfo info){
-        info = TestingCenterInfo.deserialize();
-        log.info("---------- viewTestingCenterInformation ----------");
-        log.info("|  -Number of Seat: " + info.getNumSeats());
-        log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
-        log.info("|  -Open Hour: " + info.getOpen());
-        log.info("|  -Close Hour: " + info.getClose());
-        Iterator<LocalDateTime[]> it = (info.getCloseDateRanges().iterator());
-        while(it.hasNext()){
-            LocalDateTime[] item = it.next();
-            log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
-        }
-        Iterator<LocalDateTime[]> it2 = (info.getReserveRanges().iterator());
-        while(it2.hasNext()){
-            LocalDateTime[] item = it2.next();
-            log.info("|  -Reserve Date Time Range: " + item[0] + " " + item[1]);
-        }
-        log.info("|  -Gap Time: " + info.getGap());
-        log.info("|  -Reminder Interval: " + info.getReminderInterval());
-        return info;
-    }
     // SQL VIEW
     public void listAdmins() {
         Session session = sessionManager.getInstance().getOpenSession();
@@ -206,51 +173,8 @@ public class UnitTest {
             var8.printStackTrace();
         } finally {
             session.close();
-        }}
+        }
 
-    public void saveTestingCenterInfo(TestingCenterInfo info){
-        System.out.println(info.getClose());
-        info.update(info);
-        log.info("---------- updateviewtestingCenterInformation ----------");
-        log.info("|  -Number of Seat: " + info.getNumSeats());
-        log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
-        log.info("|  -Open Hour: " + info.getOpen());
-        log.info("|  -Close Hour: " + info.getClose());
-        Iterator<LocalDateTime[]> it = (info.getCloseDateRanges().iterator());
-        while(it.hasNext()){
-            LocalDateTime[] item = it.next();
-            log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
-        }
-        Iterator<LocalDateTime[]> it2 = (info.getReserveRanges().iterator());
-        while(it2.hasNext()){
-            LocalDateTime[] item = it2.next();
-            log.info("|  -Reserve Date Time Range: " + item[0] + " " + item[1]);
-        }
-        log.info("|  -Gap Time: " + info.getGap());
-        log.info("|  -Reminder Interval: " + info.getReminderInterval());
-        info = TestingCenterInfo.deserialize();
-        log.info("---------- saveTestingCenterInformation ----------");
-        log.info("|  -Number of Seat: " + info.getNumSeats());
-        log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
-        log.info("|  -Open Hour: " + info.getOpen());
-        log.info("|  -Close Hour: " + info.getClose());
-        Iterator<LocalDateTime[]> it3 = (info.getCloseDateRanges().iterator());
-        while(it.hasNext()){
-            LocalDateTime[] item = it3.next();
-            log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
-        }
-        Iterator<LocalDateTime[]> it4 = (info.getReserveRanges().iterator());
-        while(it2.hasNext()){
-            LocalDateTime[] item = it4.next();
-            log.info("|  -Reserve Date Time Range: " + item[0] + " " + item[1]);
-        }
-        log.info("|  -Gap Time: " + info.getGap());
-        log.info("|  -Reminder Interval: " + info.getReminderInterval());
-    }
-
-    public void importDate(String path){
-        DataCollection data = new DataCollection();
-        data.readFile(path);
     }
 
     public void adminMakeApptForStudentTestCase(){
@@ -277,7 +201,6 @@ public class UnitTest {
     public void addExam(exam exam){
         Session session = sessionManager.getInstance().getOpenSession();
         Transaction tx = null;
-
         try {
             tx = session.beginTransaction();
             session.save(exam);
@@ -332,16 +255,21 @@ public class UnitTest {
         } finally {
             session.close();
         }
-    }
-    public void viewActualUtilization(Utilization util){
-        log.info("---------- View Actual Utilization----------");
-        log.info("|  -Actual Utilization-: " + util.countUtilzActual()+"%");
-        log.info("---------- View Actual Utilization----------");
+
     }
 
-    public void viewCountUtilzExpection(Utilization util){
+    public void viewActualUtilization(Utilization util){
+
+            log.info("---------- View Actual Utilization----------");
+            log.info("|  -Actual Utilization-: " + util.countUtilzActual()+"%");
+        log.info("---------- View Actual Utilization----------");
+                //util.setGap(0.25);
+    }
+    public void viewExpectedUtilization(Utilization util){
+
         log.info("---------- View Expected Utilization----------");
-        log.info("|  -Expected Utilization-: " + util.countUtilzExpection()+"%");
+        log.info("|  -Actual Utilization-: " + util.countUtilzExpection()+"%");
         log.info("---------- View Expected Utilization----------");
+        //util.setGap(0.25);
     }
 }

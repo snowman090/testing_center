@@ -29,8 +29,8 @@ public class Utilization {
             //System.out.println(appointment.getAppointmentID());
             TotalDuration += (double)ChronoUnit.MINUTES.between(appointment.getStartDateTime(), appointment.getEndDateTime())/60;
         }
-
-        return (TotalDuration / (double)(numSeat * Hours))*100;
+        utilzActual = (TotalDuration / (double)(numSeat * Hours))*100;
+        return utilzActual;
     }
 
     public double countUtilzExpection(){
@@ -40,12 +40,15 @@ public class Utilization {
 //        System.out.println(examDao.find);
 
         for (exam exam: examDao.getAllExams()) {
-         //   System.out.println(exam.getDuration()+gap);
-
+//            System.out.println(exam.getDuration()+gap);
+//            System.out.println((double)exam.getNumStudentNeed());
+//            System.out.println((double)exam.getNumStudentAppointment()/(double)(day*24));
+//            System.out.println((double)exam.getNumStudentAppointment());
+//            System.out.println((double)day);
             TotalExamDuration += (exam.getDuration()+ gap) * (((double)exam.getNumStudentNeed() - (double)exam.getNumStudentAppointment())/(double)(day*24)) ;
         }
 
-        return  (utilzActual + TotalExamDuration)*100;
+        return  utilzActual + (TotalExamDuration)*100;
     }
 
 
