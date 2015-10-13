@@ -46,7 +46,7 @@ public class exam {
     private Date endDateTime;
 
     private double duration;// lasting time
-
+    public exam(){}
     public exam(String Id, String name, String type, LocalDateTime start, LocalDateTime end, double duration, int numApp, int numNeed){
         examId = Id;
         examName = name;
@@ -129,10 +129,8 @@ public class exam {
     }
     public void setType(String type) {this.type = type;}
 
-    public long getDuration()
+    public double getDuration()
     {
-        getEndDateTime())
-        getStartDateTime().minus(getEndDateTime()));
-        return ChronoUnit.HOURS.between(;
+        return (double)ChronoUnit.MINUTES.between(getStartDateTime(), getEndDateTime())/60;
     }
 }
