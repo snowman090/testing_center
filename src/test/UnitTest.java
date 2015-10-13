@@ -2,6 +2,7 @@ package test;
 
 import core.db.SessionManager;
 import core.event.Appointment;
+import core.event.Utilization;
 import core.event.exam;
 import core.user.Administrator;
 import org.apache.log4j.Logger;
@@ -37,7 +38,31 @@ public class UnitTest {
         exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
         ut.addExam(exam1);
         ut.addExam(exam2);
+        ut.listExams();
 
+        //Actual utilization part
+        Utilization util = new Utilization();
+
+
+        util.getCenter().setOpen(LocalDateTime.of(2015,6,20,9, 30));
+        util.getCenter().setClose(LocalDateTime.of(2015,6,20,17, 0));
+
+        Appointment appointment1 = new Appointment();
+        Appointment appointment2 = new Appointment();//
+        appointment1.setStartDateTime(LocalDateTime.of(2015,6,20,10,30));
+        appointment1.setEndDateTime(LocalDateTime.of(2015, 6, 20, 12, 30));
+        appointment1.setAppointmentID("1");
+
+        appointment2.setStartDateTime(LocalDateTime.of(2015, 6, 20, 13, 30));
+        appointment2.setEndDateTime(LocalDateTime.of(2015, 6, 20, 15, 30));
+        appointment2.setAppointmentID("2");
+
+        util.getAppointmentDao().addAppointment(appointment1);
+        util.getAppointmentDao().addAppointment(appointment2);
+
+        util.setNumSeat(60);
+        ut.viewActualUtilization(util);
+        //
 
 
         admin1.setEmail("zeqing.li@stonybrook.edu");
@@ -182,8 +207,6 @@ public class UnitTest {
             log.info("|  -Number of Students who has appointments: " + exam.getNumStudentAppointment());
             log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());
 
-
-
             tx.commit();
             session.close();
         }catch (HibernateException he){
@@ -203,13 +226,16 @@ public class UnitTest {
             Iterator iterator = e.iterator();
 
             while(iterator.hasNext()) {
-                Administrator admin = (Administrator)iterator.next();
-                log.info("---------- listAdmins()----------");
-                log.info("|  -Administrator Id: " + admin.getNetId());
-                log.info("|  -Password: " + admin.getPassword());
-                log.info("|  -First Name: " + admin.getFirstName());
-                log.info("|  -Last Name" + admin.getLastName());
-                log.info("|  -Email" + admin.getEmail());
+                exam exam = (exam)iterator.next();
+                log.info("---------- View Exams()----------");
+                log.info("|  -Exam Id: " + exam.getExamId());
+                log.info("|  -Exam Name: " + exam.getExamName());
+                log.info("|  -Type: " + exam.getType());
+                log.info("|  -Start Date Time: " + exam.getStartDateTime());
+                log.info("|  -End Date Time" + exam.getEndDateTime());
+                log.info("|  -Duration: " + exam.getDuration());
+                log.info("|  -Number of Students who has appointments: " + exam.getNumStudentAppointment());
+                log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());
             }
 
             tx.commit();
@@ -225,4 +251,10 @@ public class UnitTest {
 
     }
 
+    public void viewActualUtilization(Utilization util){
+
+            log.info("---------- View Actual Utilization----------");
+            log.info("|  -Actual Utilization-: " + util.countUtilzActual()+"%");
+                //util.setGap(0.25);
+    }
 }

@@ -22,22 +22,22 @@ public class Utilization {
     examDao examDao = new examDaoImpl();
 
     public Double countUtilzActual(){
-        long TotalDuration = 0;
-        long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
+        double TotalDuration = 0;
+        double Hours = (double)ChronoUnit.MINUTES.between(center.getOpen(), center.getClose())/60;////
 
         for (Appointment appointment : appointmentDao.findAllAppointment()) {
-            System.out.println(appointment.getAppointmentID());
-            TotalDuration += ChronoUnit.HOURS.between(appointment.getStartDateTime(), appointment.getEndDateTime());
+            //System.out.println(appointment.getAppointmentID());
+            TotalDuration += (double)ChronoUnit.MINUTES.between(appointment.getStartDateTime(), appointment.getEndDateTime())/60;
         }
 
-        return ((double)TotalDuration / (double)(numSeat * Hours));
+        return (TotalDuration / (double)(numSeat * Hours))*100;
     }
 
     public long countUtilzExpection(){
         long TotalExamDuration = 0;
-        long Hours = ChronoUnit.HOURS.between(center.getOpen(), center.getClose());////
+        double Hours = (double)ChronoUnit.MINUTES.between(center.getOpen(), center.getClose())/60;////
         for (exam exam: examDao.getAllExams()) {
-            TotalExamDuration += (exam.getDuration()+ gap) * (exam.getNumStudentNeed() - exam.getNumStudentAppointment()/day) ;
+            TotalExamDuration += (exam.getDuration()+ gap) * ((double)exam.getNumStudentNeed() - (double)exam.getNumStudentAppointment()/(double)day) ;
         }
         return  (utilzActual + TotalExamDuration);
     }
