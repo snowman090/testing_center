@@ -23,7 +23,7 @@ public class StudentDaoImpl implements StudentDao{
     }
     @Override
     public boolean deleteStudent(Student student) {// return should have different cases
-        students.remove(student.getStudent_Id());
+//        students.remove(student.getStudent_Id());
         return true;
     }
 
@@ -50,8 +50,9 @@ public class StudentDaoImpl implements StudentDao{
 
     @Override
     public boolean updateInfo(Student student) {// return should have different cases
-        students.get(student.getStudent_Id()).setName(student.getName());
-        return true;
+//        students.get(student.getStudent_Id()).setName(student.getName());
+//        return true;
+        return false;
     }
 
 

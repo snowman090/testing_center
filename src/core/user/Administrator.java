@@ -52,7 +52,7 @@ public class Administrator extends UserType {
 
             // USE SQL script
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String sql = "select * from appointment where '" + ldt.format(formatter) + "' > startDateTime AND '" + ldt.format(formatter) + "' < endDateTime ";
+            String sql = "select * from appointment where '" + ldt.format(formatter) + "' > START_TIME AND '" + ldt.format(formatter) + "' < END_TIME ";
             log.info("---------- listAllAppointments()----------");
             log.info("- SQL script = " + sql);
             SQLQuery query = session.createSQLQuery(sql);
@@ -62,11 +62,15 @@ public class Administrator extends UserType {
             Iterator it = appointments.iterator();
             while(it.hasNext()){
                 Appointment appointment = (Appointment) it.next();
-                log.info("| Appointment: ");
-                log.info("|  -Appointment Id: " + appointment.getAppointmentID());
-                log.info("|  -Start Time: " + appointment.getStartDateTime());
-                log.info("|  -End Time: " + appointment.getEndDateTime());
-                log.info("|  -Student Name" + appointment.getStudentName());
+                log.info("---------- listAllAppointments(LocalDateTime ldt) ----------");
+                log.info("|  -AppointmentID: " + appointment.getAppointmentID());
+                log.info("|  -EmailId: " + appointment.getExamId());
+                log.info("|  -MadeBy: " + appointment.getMadeBy() );
+                log.info("|  -StartDateTime: " + appointment.getStartDateTime());
+                log.info("|  -EndDateTime: " + appointment.getEndDateTime());
+                log.info("|  -StudentId: " + appointment.getStudentId());
+                log.info("|  -Seat: " + appointment.getSeat());
+                log.info("|  -IsAttended: " + appointment.isAttend());
             }
 
             tx.commit();
@@ -93,11 +97,11 @@ public class Administrator extends UserType {
 
 
             log.info("---------- CancelAppointment(String apptId)----------");
-            log.info("| Appointment: ");
+            log.info("|  Appointment: ");
             log.info("|  -Appointment Id: " + appt.getAppointmentID());
             log.info("|  -Start Time: " + appt.getStartDateTime());
             log.info("|  -End Time: " + appt.getEndDateTime());
-            log.info("|  -Student Name" + appt.getStudentName());
+            log.info("|  -Student Name" + appt.getStudentId());
 
             session.delete(appt);
             tx.commit();
@@ -125,7 +129,7 @@ public class Administrator extends UserType {
             log.info("|  -Appointment Id: " + appt.getAppointmentID());
             log.info("|  -Start Time: " + appt.getStartDateTime());
             log.info("|  -End Time: " + appt.getEndDateTime());
-            log.info("|  -Student Name" + appt.getStudentName());
+            log.info("|  -Student Name" + appt.getStudentId());
 
             tx.commit();
             session.close();
@@ -150,7 +154,7 @@ public class Administrator extends UserType {
             log.info("|  -Appointment Id: " + appt.getAppointmentID());
             log.info("|  -Start Time: " + appt.getStartDateTime());
             log.info("|  -End Time: " + appt.getEndDateTime());
-            log.info("|  -Student Name" + appt.getStudentName());
+            log.info("|  -Student Name" + appt.getStudentId());
 
             tx.commit();
             session.close();
@@ -163,33 +167,43 @@ public class Administrator extends UserType {
     }
 
     /**
-     * Check�in a student for an appointment.
+     * Checkin a student for an appointment.
      * The system records that the student kept the appointment and
-     * displays the student�s seat assignment. (Ideally, students would check in
+     * displays the student seat assignment. (Ideally, students would check in
      * by swiping their ID card, but that is beyond the scope of this course project.)
      * @param netId
      */
-    public String checkInStudent(String netId){
+    public String checkInStudent(String examId, String netId){
         Session session = sessionManager.getInstance().getOpenSession();
         Transaction tx = null;
-
-        Student student = null;
-        String assignedSeat = "";
+        String assignedSeat = "N/A";
+        Appointment appt = new Appointment();
         try {
             tx = session.beginTransaction();
 
-            student  = (Student) session.get(Student.class, netId);
+            String sql = "from Appointment A where A.examId  = '" + examId +
+                    "' and A.studentId = '" + netId + "'";
 
-            // Mark student as Checked in
-            // student.checkedIn()
-            // assignedSeat = student.getAssignedSeat();
-
-            System.out.println("---------Check-in Student--------");
-
+            Query query = session.createQuery(sql);
+            List result = query.list();
+            if(result!=null){
+                appt = (Appointment)result.get(0);
+                assignedSeat = appt.getSeat();
+                appt.setIsAttend(true);
+                session.save(appt);
+                log.info("********** Checkin Student Success!!! **********");
+                log.info("| -Student NetId: " + netId);
+                log.info("| -Assigned Seat: " + assignedSeat);
+                log.info("********** Checkin Student Success!!! **********");
+            }
+            else {
+                log.info("********** Checkin Student Failed **********");
+            }
 
             tx.commit();
             session.close();
         }catch (HibernateException he){
+            log.error("Checkin Student Fail");
             he.printStackTrace();
             if(tx != null){
                 tx.rollback();

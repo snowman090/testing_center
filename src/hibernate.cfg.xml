@@ -15,5 +15,9 @@
       <mapping class="core.user.Administrator"></mapping>
       <mapping class="core.event.exam"></mapping>
       <mapping class="core.event.Utilization"></mapping>
+      <mapping class="core.event.Appointment"></mapping>
+      <mapping class="core.user.UserType"></mapping>
+      <mapping class="core.user.Student"></mapping>
+      
   </session-factory>
 </hibernate-configuration>

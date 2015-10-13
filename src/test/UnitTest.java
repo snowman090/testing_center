@@ -3,6 +3,8 @@ package test;
 import core.db.SessionManager;
 import core.event.*;
 import core.user.Administrator;
+import core.user.Student;
+import core.user.UserType;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,6 +12,9 @@ import org.hibernate.Transaction;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,9 +27,10 @@ public class UnitTest {
     public static final Logger log = Logger.getLogger(Log4J.class);
 
     public static void main(String[] args) {
-
-
         UnitTest ut = new UnitTest();
+
+        // Basic SQL transaction for Administrator.
+        Administrator admin =  new Administrator("admin", "admin", "Admin", "Admin", "Admin@gamil");
         Administrator admin1 = new Administrator("zeqli", "abc","zeq", "li", "gmail");
         Administrator admin2 = new Administrator("yiminz", "abc","yimin", "zhu", "gmail");
         Administrator admin3 = new Administrator("walt", "abc","walt", "wu", "gmail");
@@ -32,6 +38,8 @@ public class UnitTest {
         ut.addAdmin(admin2);
         ut.addAdmin(admin3);
         ut.listAdmins();
+        admin1.setEmail("zeqing.li@stonybrook.edu");
+        ut.updateAdmin(admin1);
 
         exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
         exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
@@ -70,8 +78,16 @@ public class UnitTest {
         ut.viewExpectedUtilization(util);
 
 
-        admin1.setEmail("zeqing.li@stonybrook.edu");
-        ut.updateAdmin(admin1);
+        // This Section is for check-in Student with Appointment
+        Appointment appt1 = new Appointment("cse308examZeqli", "cse_308", "admin", LocalDateTime.of(2015,10,29,1,0),
+                LocalDateTime.of(2015,10,29,2,20),"zeqli", "5R11", false);
+        Student student = new Student("Robert", "abc", "robert", "li", "l.caecar@gmail.com");
+        student.setAppointments(new ArrayList<>());
+        student.getAppointments().add(appt1);
+        ut.addAppointment(appt1);
+        ut.addStudent(student);
+        // TODO Make a dummy student and make it owner of appointments.
+        admin.checkInStudent("cse_308", "zeqli");
 
         TestingCenterInfo info = new TestingCenterInfo();
         info = ut.viewTestingCenterInfo(info);
@@ -79,8 +95,63 @@ public class UnitTest {
 
         DataCollection data = new DataCollection();
         ut.importDate("./doc/testcases/user.csv");
+        // This Section for view a list of appointment at a specific time
+        /**
+         * This section will test the view appointments functionality.
+         * In database there should be 3 appointments in the Appointment table.
+         * respectively cse308examZeqli and cse308examlWal from 1pm to 2:20pm on Oct. 29
+         * and cse308examYim from 1pm to 2:20pm on Oct. 30
+         * By specifying the time at 1:15pm on Oct. 29. the last line of this section will retrieve
+         * only two appointments that occur at that time.
+         */
+        Appointment walApp = new Appointment("cse308examWal", "cse_308", "wal", LocalDateTime.of(2015,10,29,1,0),
+                LocalDateTime.of(2015,10,29,2,20),"wal", "5R13", false);
+        Student wal = new Student("wal", "aaa", "wal", "wu", "walt.wu@gmail.com");
+
+        Appointment yimApp = new Appointment("cse308examYim", "cse_308", "yim", LocalDateTime.of(2015,10,30,1,0),
+                LocalDateTime.of(2015,10,30,2,20),"yim", "5R15", false);
+        Student yim = new Student("yim", "aaa", "yim", "zhu", "yimin.zhu@gmail.com");
+        ut.addStudent(wal);
+        ut.addStudent(yim);
+        ut.addAppointment(walApp);
+        ut.addAppointment(yimApp);
+        admin.listAllAppointments(LocalDateTime.of(2015, 10, 29, 1,15));
+
+        // This Section for cancel appointment.
+
+        // This Section for edit appointment.
+
+
     }
 
+    // This method will call Administrator.listAllAppointments()
+    public void listAdmin(LocalDateTime ldt){
+
+    }
+
+    public void addStudent(Student student){
+        Session session = sessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(student);
+            log.info("---------- addStudent(Student student) ----------");
+            log.info("|  -Student Id: " + student.getNetId());
+            log.info("|  -Password: " + student.getPassword());
+            log.info("|  -First Name: " + student.getFirstName());
+            log.info("|  -Last Name" + student.getLastName());
+            log.info("|  -Email" + student.getEmail());
+            tx.commit();
+            session.close();
+        }catch (HibernateException he){
+            he.printStackTrace();
+            if(tx != null){
+                tx.rollback();
+            }
+        }
+    }
+
+    // Insert a row into Administrator Table
     public void addAdmin(Administrator admin){
             Session session = sessionManager.getInstance().getOpenSession();
             Transaction tx = null;
@@ -179,6 +250,34 @@ public class UnitTest {
             session.close();
         }
 
+    }
+
+    // Insert a row into Administrator Table
+    public void addAppointment(Appointment appt){
+        Session session = sessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            session.save(appt);
+            log.info("---------- addAppointment(Appointment appt) ----------");
+            log.info("|  -AppointmentID" + appt.getAppointmentID());
+            log.info("|  -EmailId" + appt.getExamId());
+            log.info("|  -MadeBy" + appt.getMadeBy() );
+            log.info("|  -StartDateTime" + appt.getStartDateTime());
+            log.info("|  -EndDateTime" + appt.getEndDateTime());
+            log.info("|  -StudentId" + appt.getStudentId());
+            log.info("|  -Seat" + appt.getSeat());
+            log.info("|  -IsAttended" + appt.isAttend());
+
+            tx.commit();
+            session.close();
+        }catch (HibernateException he){
+            he.printStackTrace();
+            if(tx != null){
+                tx.rollback();
+            }
+        }
     }
 
     public void adminMakeApptForStudentTestCase(){
