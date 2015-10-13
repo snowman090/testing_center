@@ -1,5 +1,6 @@
 package core.event;
 
+import core.user.Student;
 import core.user.UserType;
 
 import javax.persistence.*;
@@ -13,15 +14,18 @@ import java.util.Date;
 @Entity
 @Table(name = "Appointment")
 public class Appointment {
-    public Appointment(){}
+
     @Id
-    @Column(name = "APPOINTMENT_ID")
-    @Basic(optional = false)
+    @Column(name = "appointmentID")
     private String appointmentID;
+
+    @Column(name = "EXAM_ID")
+    @Basic(optional = false)
+    private String examId;
 
     @Column(name = "MADE_BY")
     @Basic(optional = false)
-    private UserType madeBy;
+    private String madeBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="START_TIME")
@@ -33,9 +37,37 @@ public class Appointment {
     @Basic(optional = false)
     private Date endDateTime;
 
-    @Column(name="STUDENT_NAME")
+    @Column(name="student_Id")
     @Basic(optional = false)
-    private String studentName;
+    private String studentId;
+
+    @Column(name="seat")
+    @Basic(optional = false)
+    private String seat;
+
+    @Column(name="isAdded")
+    @Basic(optional = false)
+    private boolean isAttend;
+
+    @ManyToOne
+    @JoinColumn(name="studentId")
+    private Student student;
+
+    public Appointment(){}
+
+    public Appointment(String appointmentID, String examId, String madeBy, LocalDateTime startDateTime,
+                       LocalDateTime endDateTime, String netId, String seat, boolean isAttend){
+        this.appointmentID = appointmentID;
+        this.examId = examId;
+        this.madeBy = madeBy;
+        Instant instant1 = startDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.startDateTime = Date.from(instant1);
+        Instant instant2 = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.endDateTime = Date.from(instant2);
+        this.studentId = netId;
+        this.seat = seat;
+        this.isAttend = isAttend;    }
+
 
     public String getAppointmentID() {
         return appointmentID;
@@ -43,6 +75,14 @@ public class Appointment {
 
     public void setAppointmentID(String appointmentID) {
         this.appointmentID = appointmentID;
+    }
+
+    public String getExamId() {
+        return examId;
+    }
+
+    public void setExamId(String examId) {
+        this.examId = examId;
     }
 
     public LocalDateTime getStartDateTime() {// date to
@@ -72,21 +112,55 @@ public class Appointment {
     }
 
 
-    public String getStudentName() {
-        return studentName;
+
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public UserType getMadeBy() {
+    public String getMadeBy() {
         return madeBy;
     }
 
-    public void setMadeBy(UserType madeBy) {
+    public void setMadeBy(String madeBy) {
         this.madeBy = madeBy;
     }
 
+    public String getSeat() {
+        return seat;
+    }
+
+    public void setSeat(String seat) {
+        this.seat = seat;
+    }
+
+    public boolean isAttend() {
+        return isAttend;
+    }
+
+    public void setIsAttend(boolean isAttend) {
+        this.isAttend = isAttend;
+    }
+
+    // TODO SOME FIELD SHOULD NOT BE CHANGED
+    public boolean update(Appointment appt){
+        if(this.getAppointmentID() != appt.getAppointmentID()){
+            return false;
+        }
+        else{
+            this.setMadeBy(appt.getMadeBy());
+            this.setExamId(appt.getExamId());
+            this.setStartDateTime(appt.getStartDateTime());
+            this.setEndDateTime(appt.getEndDateTime());
+            this.setStudentId(appt.getStudentId());
+            this.setSeat(appt.getSeat());
+            this.setIsAttend(appt.isAttend());
+            return true;
+        }
+
+    }
 
 }

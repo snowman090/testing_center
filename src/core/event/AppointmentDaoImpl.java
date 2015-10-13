@@ -34,7 +34,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
     @Override
     public boolean updateAppointmentName(Appointment appointment, String name){
         Appointment App = appointments.get(Integer.parseInt(appointment.getAppointmentID()));
-        App.setStudentName(name);
+        App.setStudentId(name);
         return true;
     }
     @Override
