@@ -13,5 +13,6 @@
       <property name="show_sql">true</property>
       <!-- Mapping -->
       <mapping class="core.user.Administrator"></mapping>
+      <mapping class="core.event.exam"></mapping>
   </session-factory>
 </hibernate-configuration>

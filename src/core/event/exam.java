@@ -10,6 +10,8 @@ import java.util.Date;
 /**
  * Created by eson_wang on 10/11/15.
  */
+@Entity
+@Table(name = "Exam")
 public class exam {
     @Id
     @Column(name = "examId")
@@ -43,7 +45,26 @@ public class exam {
     @Basic(optional = false)
     private Date endDateTime;
 
-    private int duration;// lasting time
+    private double duration;// lasting time
+
+    public exam(String Id, String name, String type, LocalDateTime start, LocalDateTime end, double duration, int numApp, int numNeed){
+        examId = Id;
+        examName = name;
+        this.type = type;
+
+        Instant instant1 = start.atZone(ZoneId.systemDefault()).toInstant();
+        startDateTime = Date.from(instant1);
+
+        Instant instant2 = end.atZone(ZoneId.systemDefault()).toInstant();
+        endDateTime = Date.from(instant2);
+
+        this.duration = duration;
+
+        numStudentAppointment = numApp;
+        numStudentNeed = numNeed;
+
+    }
+
 
     public String getExamId() {
         return examId;
@@ -108,7 +129,10 @@ public class exam {
     }
     public void setType(String type) {this.type = type;}
 
-    public long getDuration() {
-        return ChronoUnit.HOURS.between(getStartDateTime(), getEndDateTime());
+    public long getDuration()
+    {
+        getEndDateTime())
+        getStartDateTime().minus(getEndDateTime()));
+        return ChronoUnit.HOURS.between(;
     }
 }

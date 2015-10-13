@@ -2,12 +2,14 @@ package test;
 
 import core.db.SessionManager;
 import core.event.Appointment;
+import core.event.exam;
 import core.user.Administrator;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,6 +32,14 @@ public class UnitTest {
         ut.addAdmin(admin2);
         ut.addAdmin(admin3);
         ut.listAdmins();
+
+        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
+        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
+        ut.addExam(exam1);
+        ut.addExam(exam2);
+
+
+
         admin1.setEmail("zeqing.li@stonybrook.edu");
         ut.updateAdmin(admin1);
 
@@ -153,6 +163,65 @@ public class UnitTest {
     }
 
     public void checkinStudentTestCase(){
+
+    }
+
+    public void addExam(exam exam){
+        Session session = sessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.save(exam);
+            log.info("---------- add Exam info----------");
+            log.info("|  -Exam Id: " + exam.getExamId());
+            log.info("|  -Exam Name: " + exam.getExamName());
+            log.info("|  -Type: " + exam.getType());
+            log.info("|  -Start Date Time: " + exam.getStartDateTime());
+            log.info("|  -End Date Time" + exam.getEndDateTime());
+            log.info("|  -Duration: " + exam.getDuration());
+            log.info("|  -Number of Students who has appointments: " + exam.getNumStudentAppointment());
+            log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());
+
+
+
+            tx.commit();
+            session.close();
+        }catch (HibernateException he){
+            he.printStackTrace();
+            if(tx != null){
+                tx.rollback();
+            }
+        }
+    }
+    public void listExams() {
+        Session session = sessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            List e = session.createQuery("FROM exam").list();
+            Iterator iterator = e.iterator();
+
+            while(iterator.hasNext()) {
+                Administrator admin = (Administrator)iterator.next();
+                log.info("---------- listAdmins()----------");
+                log.info("|  -Administrator Id: " + admin.getNetId());
+                log.info("|  -Password: " + admin.getPassword());
+                log.info("|  -First Name: " + admin.getFirstName());
+                log.info("|  -Last Name" + admin.getLastName());
+                log.info("|  -Email" + admin.getEmail());
+            }
+
+            tx.commit();
+        } catch (HibernateException var9) {
+            if(tx != null) {
+                tx.rollback();
+            }
+
+            var9.printStackTrace();
+        } finally {
+            session.close();
+        }
 
     }
 

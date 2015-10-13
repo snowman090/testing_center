@@ -11,10 +11,7 @@ public class examDaoImpl implements examDao{
     public examDaoImpl(){
 
         exams = new ArrayList<exam>();
-        exam exam1 = new exam();
-        exam exam2 = new exam();
-        exams.add(exam1);
-        exams.add(exam2);
+
     }
 
     @Override
