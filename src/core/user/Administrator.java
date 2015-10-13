@@ -30,20 +30,21 @@ public class Administrator extends UserType {
     public Administrator() {
     }
 
-    public Administrator(String netId, String pwd, String firstName, String lastName) {
+    public Administrator(String netId, String pwd, String firstName, String lastName, String email) {
         this.netId = netId;
         this.password = pwd;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
 
     }
-
 
 
     // The system displays all appointments and the number of available
     // seats at the current time or a specified other time.
 
     public List listAllAppointments(LocalDateTime ldt){
+
         Session session = sessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         List appointments = null;
@@ -198,6 +199,8 @@ public class Administrator extends UserType {
         return assignedSeat;
 
     }
+
+
 
 
     //static final authLevel is already initialized
