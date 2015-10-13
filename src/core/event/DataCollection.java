@@ -1,6 +1,8 @@
 package core.event;
 
 import core.user.UserType;
+import org.apache.log4j.Logger;
+import test.Log4J;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class DataCollection {
+    public static final Logger log = Logger.getLogger(Log4J.class);
+
     static final private String PATH = "/course_registration_data/";
     static final private String fileExt = ".csv";
 
@@ -21,17 +25,38 @@ public class DataCollection {
     private String path_rostersCSV;
 
     //import ata from CSV file
-    public boolean readFile(String path, List<String[]> list){
+    //0: fail; 1: user; 2: class; 3: rooster
+    public boolean readFile(String path){
+        List<String[]> list = new ArrayList<String[]>();
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
-        list = new ArrayList<String[]>();
         try {
             br = new BufferedReader(new FileReader(path));
+            log.info("---------- readFile(String path) ----------");
             while ((line = br.readLine()) != null) {
                 String[] listItem = line.split(cvsSplitBy);
                 list.add(listItem);
             }
+            if(path.contains("user.csv")){
+                setUsers(list);
+                log.info("|  Import User Information: ");
+            }
+            else if(path.contains("class.csv")){
+                setCourses(list);
+                log.info("|  Import Class Information: ");
+            }
+            else if(path.contains("roster.csv")){
+                setRosters(list);
+                log.info("|  Import Roster Information: ");
+            }
+            for(int i = 0; i < list.size(); i++){
+                String[] items = list.get(i);
+                for( int j = 0; j < items.length; j++){
+                    log.info("|  " + items[j]);
+                }
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

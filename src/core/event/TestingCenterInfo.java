@@ -17,18 +17,18 @@ public class TestingCenterInfo {
 
     private int numSeats;
     private int numSetAsideSeats;
-    private LocalDateTime open;
-    private LocalDateTime close;
-    private List<LocalDate[]> closeDateRanges;
+    private LocalTime open;
+    private LocalTime close;
+    private List<LocalDateTime[]> closeDateRanges;
     private List<LocalDateTime[]> reserveRanges;
     private int gap;
     private int reminderInterval;
 
-    public TestingCenterInfo(){
+    public TestingCenterInfo() {
 
     }
 
-    public static TestingCenterInfo deserialize(){
+    public static TestingCenterInfo deserialize() {
         try {
             String json = new String(Files.readAllBytes(Paths.get(PATH)));
             Gson gson = new Gson();
@@ -40,7 +40,7 @@ public class TestingCenterInfo {
         return null;
     }
 
-    public void serialize(){
+    public void serialize() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         String json = gson.toJson(this);
@@ -50,6 +50,22 @@ public class TestingCenterInfo {
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean update(TestingCenterInfo info) {
+        if (this != null) {
+            return false;
+        } else {
+            this.setNumSeats(info.getNumSeats());
+            this.setNumSetAsideSeats(info.getNumSetAsideSeats());
+            this.setOpen(info.getOpen());
+            this.setClose(info.getClose());
+            this.setCloseDateRanges(info.getCloseDateRanges());
+            this.setReserveRanges(info.getReserveRanges());
+            this.setGap(info.getGap());
+            this.setReminderInterval(info.getReminderInterval());
+            return true;
         }
     }
 
@@ -69,27 +85,27 @@ public class TestingCenterInfo {
         this.numSetAsideSeats = numSetAsideSeats;
     }
 
-    public LocalDateTime getOpen() {
+    public LocalTime getOpen() {
         return open;
     }
 
-    public void setOpen(LocalDateTime open) {
+    public void setOpen(LocalTime open) {
         this.open = open;
     }
 
-    public LocalDateTime getClose() {
+    public LocalTime getClose() {
         return close;
     }
 
-    public void setClose(LocalDateTime close) {
+    public void setClose(LocalTime close) {
         this.close = close;
     }
 
-    public List<LocalDate[]> getCloseDateRanges() {
+    public List<LocalDateTime[]> getCloseDateRanges() {
         return closeDateRanges;
     }
 
-    public void setCloseDateRanges(List<LocalDate[]> closeDateRanges) {
+    public void setCloseDateRanges(List<LocalDateTime[]> closeDateRanges) {
         this.closeDateRanges = closeDateRanges;
     }
 
@@ -115,15 +131,5 @@ public class TestingCenterInfo {
 
     public void setReminderInterval(int reminderInterval) {
         this.reminderInterval = reminderInterval;
-    }
-
-    // Added By Robert
-    // Used by Administrator
-    public int getAvailableSeatCount(LocalDateTime time){
-        int available = 0;
-
-        // Calculate the available seat at a specific time.
-
-        return available;
     }
 }
