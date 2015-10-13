@@ -2,14 +2,20 @@ package test;
 
 import core.db.SessionManager;
 import core.event.Appointment;
-import core.event.exam;
+import core.event.DataCollection;
+import core.event.TestingCenterInfo;
 import core.user.Administrator;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,17 +38,15 @@ public class UnitTest {
         ut.addAdmin(admin2);
         ut.addAdmin(admin3);
         ut.listAdmins();
-
-        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
-        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
-        ut.addExam(exam1);
-        ut.addExam(exam2);
-
-
-
         admin1.setEmail("zeqing.li@stonybrook.edu");
-        ut.updateAdmin(admin1);
+//        ut.updateAdmin(admin1);
 
+        TestingCenterInfo info = new TestingCenterInfo();
+        info = ut.viewTestingCenterInfo(info);
+        ut.saveTestingCenterInfo(info);
+
+        DataCollection data = new DataCollection();
+        ut.importDate("./doc/testcases/user.csv");
     }
 
     public void addAdmin(Administrator admin){
@@ -67,6 +71,27 @@ public class UnitTest {
             }
     }
 
+    public TestingCenterInfo viewTestingCenterInfo(TestingCenterInfo info){
+        info = TestingCenterInfo.deserialize();
+        log.info("---------- viewTestingCenterInformation ----------");
+        log.info("|  -Number of Seat: " + info.getNumSeats());
+        log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
+        log.info("|  -Open Hour: " + info.getOpen());
+        log.info("|  -Close Hour: " + info.getClose());
+        Iterator<LocalDateTime[]> it = (info.getCloseDateRanges().iterator());
+        while(it.hasNext()){
+            LocalDateTime[] item = it.next();
+            log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
+        }
+        Iterator<LocalDateTime[]> it2 = (info.getReserveRanges().iterator());
+        while(it2.hasNext()){
+            LocalDateTime[] item = it2.next();
+            log.info("|  -Reserve Date Time Range: " + item[0] + " " + item[1]);
+        }
+        log.info("|  -Gap Time: " + info.getGap());
+        log.info("|  -Reminder Interval: " + info.getReminderInterval());
+        return info;
+    }
     // SQL VIEW
     public void listAdmins() {
         Session session = sessionManager.getInstance().getOpenSession();
@@ -141,8 +166,51 @@ public class UnitTest {
             var8.printStackTrace();
         } finally {
             session.close();
-        }
+        }}
 
+    public void saveTestingCenterInfo(TestingCenterInfo info){
+        System.out.println(info.getClose());
+        info.update(info);
+        log.info("---------- updateviewtestingCenterInformation ----------");
+        log.info("|  -Number of Seat: " + info.getNumSeats());
+        log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
+        log.info("|  -Open Hour: " + info.getOpen());
+        log.info("|  -Close Hour: " + info.getClose());
+        Iterator<LocalDateTime[]> it = (info.getCloseDateRanges().iterator());
+        while(it.hasNext()){
+            LocalDateTime[] item = it.next();
+            log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
+        }
+        Iterator<LocalDateTime[]> it2 = (info.getReserveRanges().iterator());
+        while(it2.hasNext()){
+            LocalDateTime[] item = it2.next();
+            log.info("|  -Reserve Date Time Range: " + item[0] + " " + item[1]);
+        }
+        log.info("|  -Gap Time: " + info.getGap());
+        log.info("|  -Reminder Interval: " + info.getReminderInterval());
+        info = TestingCenterInfo.deserialize();
+        log.info("---------- saveTestingCenterInformation ----------");
+        log.info("|  -Number of Seat: " + info.getNumSeats());
+        log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
+        log.info("|  -Open Hour: " + info.getOpen());
+        log.info("|  -Close Hour: " + info.getClose());
+        Iterator<LocalDateTime[]> it3 = (info.getCloseDateRanges().iterator());
+        while(it.hasNext()){
+            LocalDateTime[] item = it3.next();
+            log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
+        }
+        Iterator<LocalDateTime[]> it4 = (info.getReserveRanges().iterator());
+        while(it2.hasNext()){
+            LocalDateTime[] item = it4.next();
+            log.info("|  -Reserve Date Time Range: " + item[0] + " " + item[1]);
+        }
+        log.info("|  -Gap Time: " + info.getGap());
+        log.info("|  -Reminder Interval: " + info.getReminderInterval());
+    }
+
+    public void importDate(String path){
+        DataCollection data = new DataCollection();
+        data.readFile(path);
     }
 
     public void adminMakeApptForStudentTestCase(){
@@ -163,65 +231,6 @@ public class UnitTest {
     }
 
     public void checkinStudentTestCase(){
-
-    }
-
-    public void addExam(exam exam){
-        Session session = sessionManager.getInstance().getOpenSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.save(exam);
-            log.info("---------- add Exam info----------");
-            log.info("|  -Exam Id: " + exam.getExamId());
-            log.info("|  -Exam Name: " + exam.getExamName());
-            log.info("|  -Type: " + exam.getType());
-            log.info("|  -Start Date Time: " + exam.getStartDateTime());
-            log.info("|  -End Date Time" + exam.getEndDateTime());
-            log.info("|  -Duration: " + exam.getDuration());
-            log.info("|  -Number of Students who has appointments: " + exam.getNumStudentAppointment());
-            log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());
-
-
-
-            tx.commit();
-            session.close();
-        }catch (HibernateException he){
-            he.printStackTrace();
-            if(tx != null){
-                tx.rollback();
-            }
-        }
-    }
-    public void listExams() {
-        Session session = sessionManager.getInstance().getOpenSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            List e = session.createQuery("FROM exam").list();
-            Iterator iterator = e.iterator();
-
-            while(iterator.hasNext()) {
-                Administrator admin = (Administrator)iterator.next();
-                log.info("---------- listAdmins()----------");
-                log.info("|  -Administrator Id: " + admin.getNetId());
-                log.info("|  -Password: " + admin.getPassword());
-                log.info("|  -First Name: " + admin.getFirstName());
-                log.info("|  -Last Name" + admin.getLastName());
-                log.info("|  -Email" + admin.getEmail());
-            }
-
-            tx.commit();
-        } catch (HibernateException var9) {
-            if(tx != null) {
-                tx.rollback();
-            }
-
-            var9.printStackTrace();
-        } finally {
-            session.close();
-        }
 
     }
 
