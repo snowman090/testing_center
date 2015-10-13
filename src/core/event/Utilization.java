@@ -22,7 +22,7 @@ public class Utilization {
     examDao examDao = new examDaoImpl();
 
     public Double countUtilzActual(){
-        double TotalDuration = 0;
+        double TotalDuration = 0;//
         double Hours = (double)ChronoUnit.MINUTES.between(center.getOpen(), center.getClose())/60;////
 
         for (Appointment appointment : appointmentDao.findAllAppointment()) {
