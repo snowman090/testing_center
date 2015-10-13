@@ -89,12 +89,9 @@ public class UnitTest {
         // TODO Make a dummy student and make it owner of appointments.
         admin.checkInStudent("cse_308", "zeqli");
 
-        TestingCenterInfo info = new TestingCenterInfo();
-        info = ut.viewTestingCenterInfo(info);
-        ut.saveTestingCenterInfo(info);
 
-        DataCollection data = new DataCollection();
-        ut.importDate("./doc/testcases/user.csv");
+
+
         // This Section for view a list of appointment at a specific time
         /**
          * This section will test the view appointments functionality.
@@ -115,11 +112,34 @@ public class UnitTest {
         ut.addStudent(yim);
         ut.addAppointment(walApp);
         ut.addAppointment(yimApp);
-        admin.listAllAppointments(LocalDateTime.of(2015, 10, 29, 1,15));
+        admin.listAllAppointments(LocalDateTime.of(2015, 10, 29, 1, 15));
 
         // This Section for cancel appointment.
 
+        admin.cancelAppointment(walApp.getAppointmentID());
+        admin.listAllAppointments(LocalDateTime.of(2015, 10, 29, 1,15));
+
         // This Section for edit appointment.
+        /**
+         *  Let's simulate a case that Administrator have changed a seat in an appointment.
+         *  Then the function Adminstrator.updateAppointment(Appointment) is called to update the appointment
+         *  in the database.
+         */
+        yimApp.setSeat("6R1");
+        admin.updateAppointment(yimApp);
+        admin.listAllAppointments();
+
+
+        // This Section is for test Edit TestingCenterInfo use case
+        TestingCenterInfo info = new TestingCenterInfo();
+        info = ut.viewTestingCenterInfo(info);
+        ut.saveTestingCenterInfo(info);
+
+        DataCollection data = new DataCollection();
+        ut.importDate("./doc/testcases/user.csv");
+
+
+
 
 
     }

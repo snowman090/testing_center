@@ -53,7 +53,7 @@ public class Administrator extends UserType {
             // USE SQL script
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String sql = "select * from appointment where '" + ldt.format(formatter) + "' > START_TIME AND '" + ldt.format(formatter) + "' < END_TIME ";
-            log.info("---------- listAllAppointments()----------");
+            log.info("---------- listAllAppointments(LocalDateTime ldt) ----------");
             log.info("- SQL script = " + sql);
             SQLQuery query = session.createSQLQuery(sql);
             query.addEntity(Appointment.class);
@@ -84,11 +84,51 @@ public class Administrator extends UserType {
         return appointments;
     }
 
+    public List listAllAppointments(){
+        Session session = sessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        List appointments = null;
+        try {
+            tx = session.beginTransaction();
+
+            // USE SQL script
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String sql = "select * from appointment";
+            log.info("---------- listAllAppointments() ----------");
+            log.info("- SQL script = " + sql);
+            SQLQuery query = session.createSQLQuery(sql);
+            query.addEntity(Appointment.class);
+            appointments = query.list();
+
+            Iterator it = appointments.iterator();
+            while(it.hasNext()){
+                Appointment appointment = (Appointment) it.next();
+                log.info("---------- listAllAppointments() ----------");
+                log.info("|  -AppointmentID: " + appointment.getAppointmentID());
+                log.info("|  -EmailId: " + appointment.getExamId());
+                log.info("|  -MadeBy: " + appointment.getMadeBy() );
+                log.info("|  -StartDateTime: " + appointment.getStartDateTime());
+                log.info("|  -EndDateTime: " + appointment.getEndDateTime());
+                log.info("|  -StudentId: " + appointment.getStudentId());
+                log.info("|  -Seat: " + appointment.getSeat());
+                log.info("|  -IsAttended: " + appointment.isAttend());
+            }
+
+            tx.commit();
+            session.close();
+        }catch (HibernateException he){
+            he.printStackTrace();
+            if(tx != null){
+                tx.rollback();
+            }
+        }
+        return appointments;
+    }
 
 
     // 1. Delete Appointment
     // 2. Release Seats
-    public void CancelAppointment(String apptId){
+    public void cancelAppointment(String apptId){
         Session session = sessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
@@ -97,11 +137,14 @@ public class Administrator extends UserType {
 
 
             log.info("---------- CancelAppointment(String apptId)----------");
-            log.info("|  Appointment: ");
-            log.info("|  -Appointment Id: " + appt.getAppointmentID());
-            log.info("|  -Start Time: " + appt.getStartDateTime());
-            log.info("|  -End Time: " + appt.getEndDateTime());
-            log.info("|  -Student Name" + appt.getStudentId());
+            log.info("|  -AppointmentID: " + appt.getAppointmentID());
+            log.info("|  -EmailId: " + appt.getExamId());
+            log.info("|  -MadeBy: " + appt.getMadeBy() );
+            log.info("|  -StartDateTime: " + appt.getStartDateTime());
+            log.info("|  -EndDateTime: " + appt.getEndDateTime());
+            log.info("|  -StudentId: " + appt.getStudentId());
+            log.info("|  -Seat: " + appt.getSeat());
+            log.info("|  -IsAttended: " + appt.isAttend());
 
             session.delete(appt);
             tx.commit();
@@ -151,10 +194,14 @@ public class Administrator extends UserType {
             session.update(appt);
 
             log.info("---------- updateAppointment(Appointment apptId)----------");
-            log.info("|  -Appointment Id: " + appt.getAppointmentID());
-            log.info("|  -Start Time: " + appt.getStartDateTime());
-            log.info("|  -End Time: " + appt.getEndDateTime());
-            log.info("|  -Student Name" + appt.getStudentId());
+            log.info("|  -AppointmentID: " + appt.getAppointmentID());
+            log.info("|  -EmailId: " + appt.getExamId());
+            log.info("|  -MadeBy: " + appt.getMadeBy());
+            log.info("|  -StartDateTime: " + appt.getStartDateTime());
+            log.info("|  -EndDateTime: " + appt.getEndDateTime());
+            log.info("|  -StudentId: " + appt.getStudentId());
+            log.info("|  -Seat: " + appt.getSeat());
+            log.info("|  -IsAttended: " + appt.isAttend());
 
             tx.commit();
             session.close();
