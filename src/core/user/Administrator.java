@@ -36,7 +36,6 @@ public class Administrator extends UserType {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-
     }
 
 
@@ -197,6 +196,20 @@ public class Administrator extends UserType {
             }
         }
         return assignedSeat;
+
+    }
+
+    public boolean update(Administrator admin){
+        if(this.netId != admin.getNetId()){
+            return false;
+        }
+        else{
+            this.setFirstName(admin.getFirstName());
+            this.setLastName(admin.getLastName());
+            this.setPassword(admin.getPassword());
+            this.setEmail(admin.getEmail());
+            return true;
+        }
 
     }
 

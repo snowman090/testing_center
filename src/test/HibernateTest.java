@@ -41,9 +41,9 @@ public class HibernateTest {
         }
 
         HibernateTest HT = new HibernateTest();
-        HT.addAdmin("zeqli", "abc", "Zeqing", "Li");
-        HT.addAdmin("ww", "abc", "Walt", "Wu");
-        HT.addAdmin("yz", "abc", "Yimin", "Zhu");
+        HT.addAdmin("zeqli", "abc", "Zeqing", "Li","gmail");
+        HT.addAdmin("ww", "abc", "Walt", "Wu","gmail");
+        HT.addAdmin("yz", "abc", "Yimin", "Zhu","gmail");
         HT.listAdmins();
         HT.updateEmployee("zeqli", "xxxx");
         HT.deleteAdministrator("ww");
@@ -51,14 +51,14 @@ public class HibernateTest {
     }
 
     // SQL ADD
-    public void addAdmin(String netId, String pwd, String fname, String lname) {
+    public void addAdmin(String netId, String pwd, String fname, String lname, String email) {
         Session session = factory.openSession();
         Transaction tx = null;
         Object employeeID = null;
 
         try {
             tx = session.beginTransaction();
-            Administrator e = new Administrator(netId, pwd, fname, lname);
+            Administrator e = new Administrator(netId, pwd, fname, lname, email);
             session.save(e);
             tx.commit();
         } catch (HibernateException var12) {
@@ -80,7 +80,7 @@ public class HibernateTest {
 
         try {
             tx = session.beginTransaction();
-            List e = session.createQuery("FROM U").list();
+            List e = session.createQuery("FROM Administrator").list();
             Iterator iterator = e.iterator();
 
             while(iterator.hasNext()) {
