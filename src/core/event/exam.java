@@ -62,7 +62,6 @@ public class exam {
 
         numStudentAppointment = numApp;
         numStudentNeed = numNeed;
-
     }
 
 

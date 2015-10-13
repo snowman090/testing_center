@@ -34,14 +34,16 @@ public class UnitTest {
         ut.addAdmin(admin3);
         ut.listAdmins();
 
-        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
-        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
+        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,10,30),LocalDateTime.of(2015,6,20,15,0), 4.5,50,80);
+        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,18,40), 2.5,50,80);
         ut.addExam(exam1);
         ut.addExam(exam2);
+
         ut.listExams();
 
         //Actual utilization part
         Utilization util = new Utilization();
+
 
 
         util.getCenter().setOpen(LocalDateTime.of(2015,6,20,9, 30));
@@ -49,7 +51,7 @@ public class UnitTest {
 
         Appointment appointment1 = new Appointment();
         Appointment appointment2 = new Appointment();//
-        appointment1.setStartDateTime(LocalDateTime.of(2015,6,20,10,30));
+        appointment1.setStartDateTime(LocalDateTime.of(2015, 6, 20, 10, 30));
         appointment1.setEndDateTime(LocalDateTime.of(2015, 6, 20, 12, 30));
         appointment1.setAppointmentID("1");
 
@@ -60,10 +62,16 @@ public class UnitTest {
         util.getAppointmentDao().addAppointment(appointment1);
         util.getAppointmentDao().addAppointment(appointment2);
 
+
+
         util.setNumSeat(60);
         ut.viewActualUtilization(util);
         //
-
+        util.setGap(0.25);
+        util.setDay(2);
+        util.getExamDao().addExam(exam1);
+        util.getExamDao().addExam(exam2);
+        ut.viewCountUtilzExpection(util);
 
         admin1.setEmail("zeqing.li@stonybrook.edu");
         ut.updateAdmin(admin1);
@@ -194,6 +202,7 @@ public class UnitTest {
     public void addExam(exam exam){
         Session session = sessionManager.getInstance().getOpenSession();
         Transaction tx = null;
+
         try {
             tx = session.beginTransaction();
             session.save(exam);
@@ -248,13 +257,16 @@ public class UnitTest {
         } finally {
             session.close();
         }
-
+    }
+    public void viewActualUtilization(Utilization util){
+        log.info("---------- View Actual Utilization----------");
+        log.info("|  -Actual Utilization-: " + util.countUtilzActual()+"%");
+        log.info("---------- View Actual Utilization----------");
     }
 
-    public void viewActualUtilization(Utilization util){
-
-            log.info("---------- View Actual Utilization----------");
-            log.info("|  -Actual Utilization-: " + util.countUtilzActual()+"%");
-                //util.setGap(0.25);
+    public void viewCountUtilzExpection(Utilization util){
+        log.info("---------- View Expected Utilization----------");
+        log.info("|  -Expected Utilization-: " + util.countUtilzExpection()+"%");
+        log.info("---------- View Expected Utilization----------");
     }
 }

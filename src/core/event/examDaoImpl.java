@@ -16,7 +16,7 @@ public class examDaoImpl implements examDao{
 
     @Override
     public List<exam> getAllExams() {
-        return null;
+       return exams;
     }
 
     @Override

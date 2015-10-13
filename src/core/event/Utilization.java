@@ -4,8 +4,8 @@ import java.time.temporal.ChronoUnit;
 
 public class Utilization {
 
-    private long utilzExpection;
-    private long utilzActual;
+    private double utilzExpection;
+    private double utilzActual;
     private int numApprove;
     private int numStudent;
     private int numDay;
@@ -21,7 +21,7 @@ public class Utilization {
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
     examDao examDao = new examDaoImpl();
 
-    public Double countUtilzActual(){
+    public double countUtilzActual(){
         double TotalDuration = 0;//
         double Hours = (double)ChronoUnit.MINUTES.between(center.getOpen(), center.getClose())/60;////
 
@@ -33,29 +33,35 @@ public class Utilization {
         return (TotalDuration / (double)(numSeat * Hours))*100;
     }
 
-    public long countUtilzExpection(){
-        long TotalExamDuration = 0;
+    public double countUtilzExpection(){
+        double TotalExamDuration = 0;
         double Hours = (double)ChronoUnit.MINUTES.between(center.getOpen(), center.getClose())/60;////
+
+//        System.out.println(examDao.find);
+
         for (exam exam: examDao.getAllExams()) {
-            TotalExamDuration += (exam.getDuration()+ gap) * ((double)exam.getNumStudentNeed() - (double)exam.getNumStudentAppointment()/(double)day) ;
+         //   System.out.println(exam.getDuration()+gap);
+
+            TotalExamDuration += (exam.getDuration()+ gap) * (((double)exam.getNumStudentNeed() - (double)exam.getNumStudentAppointment())/(double)(day*24)) ;
         }
-        return  (utilzActual + TotalExamDuration);
+
+        return  (utilzActual + TotalExamDuration)*100;
     }
 
 
-    public long getUtilzExpection() {
+    public double getUtilzExpection() {
         return utilzExpection;
     }
 
-    public void setUtilzExpection(int utilzExpection) {
+    public void setUtilzExpection(double utilzExpection) {
         this.utilzExpection = utilzExpection;
     }
 
-    public long getUtilzActual() {
+    public double getUtilzActual() {
         return utilzActual;
     }
 
-    public void setUtilzActual(int utilzActual) {
+    public void setUtilzActual(double utilzActual) {
         this.utilzActual = utilzActual;
     }
 
