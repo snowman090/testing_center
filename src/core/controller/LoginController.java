@@ -17,7 +17,7 @@ public class LoginController{
     @Autowired
     private AuthenticationService authenticationService;//injected service
 
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    @RequestMapping(value = "/authorizing", method = RequestMethod.POST)
     public ModelAndView loginSubmit (@RequestParam("netId") String userId,
                                      @RequestParam("password") String password) {
         ModelAndView model = new ModelAndView();
