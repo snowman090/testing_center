@@ -3,6 +3,7 @@ package core.controller;
 import core.user.AuthenticationService;
 import core.user.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,27 +25,6 @@ public class LoginController{
                                @RequestParam("password") String password) {
         Authorization authorization = authenticationService.login(userId, password);
         if (authorization != null) {
-                //code here to determine user permission
-            Map<String, Object> viewVariables = new HashMap<>();
-            switch (authorization) {
-                case ADMINISTRATOR:
-                    viewVariables.put("user-level", StringResources.USER_ADMINISTRATOR);
-                    viewVariables.put("operations", StringResources.ADMINISTRATOR_OPERATIONS);
-                    /*...*/
-                    break;
-                case STUDENT:
-                    viewVariables.put("user-level", StringResources.USER_STUDENT);
-                    viewVariables.put("operations", StringResources.STUDENT_OPERATIONS);
-                    /*...*/
-                    break;
-                case INSTRUCTOR:
-                    viewVariables.put("user-level", StringResources.USER_INSTRUCTOR);
-                    viewVariables.put("operations", StringResources.INSTRUCTOR_OPERATIONS);
-                    /*...*/
-                    break;
-            }
-            //add all objects to the model
-            model.addAllObjects(viewVariables);
             return "redirect:/home";
         }else {
             if (authenticationService.registeredUserId(userId)) {
@@ -57,15 +37,9 @@ public class LoginController{
         }
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ModelAndView goToHome () {
-        model.setViewName("home");
-        return model;
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginForm () {
-        ModelAndView model = new ModelAndView("login");
+        model.setViewName("login");
         return model;
     }
 }

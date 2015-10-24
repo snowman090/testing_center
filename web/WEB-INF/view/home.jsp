@@ -25,8 +25,8 @@
     <div class="container">
         <div class="sidebar">
             <ul class="side-nav">
-                <li><a class="button" href="#"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-                <li><a class="button" href="#"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
+                <li><a class="button" href="/home"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li><a class="button" href="/view-info"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
                 <li><a class="button" href="#"><i class="fa fa-upload"></i>&nbsp;Uploade a file</a></li>
                 <li><a class="button" href="#"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
                 <li><a class="button" href="#"><i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
