@@ -15,7 +15,7 @@ import java.util.Map;
 @Controller
 public class LoginController{
     @Autowired
-    private AuthenticationService authenticationService;
+    private AuthenticationService authenticationService;//injected service
 
     @RequestMapping(value = "/home", method = RequestMethod.POST)
     public ModelAndView loginSubmit (@RequestParam("netId") String userId,
