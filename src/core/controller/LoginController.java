@@ -35,18 +35,18 @@ public class LoginController{
             */
             switch (authorization) {
                 case ADMINISTRATOR:
-                    viewVariables.put("user-level", Messages.USER_ADMINISTRATOR);
-                    viewVariables.put("operations", Messages.ADMINISTRATOR_OPERATIONS);
+                    viewVariables.put("user-level", StringResources.USER_ADMINISTRATOR);
+                    viewVariables.put("operations", StringResources.ADMINISTRATOR_OPERATIONS);
                     /*...*/
                     break;
                 case STUDENT:
-                    viewVariables.put("user-level", Messages.USER_STUDENT);
-                    viewVariables.put("operations", Messages.STUDENT_OPERATIONS);
+                    viewVariables.put("user-level", StringResources.USER_STUDENT);
+                    viewVariables.put("operations", StringResources.STUDENT_OPERATIONS);
                     /*...*/
                     break;
                 case INSTRUCTOR:
-                    viewVariables.put("user-level", Messages.USER_INSTRUCTOR);
-                    viewVariables.put("operations", Messages.INSTRUCTOR_OPERATIONS);
+                    viewVariables.put("user-level", StringResources.USER_INSTRUCTOR);
+                    viewVariables.put("operations", StringResources.INSTRUCTOR_OPERATIONS);
                     /*...*/
                     break;
             }
@@ -58,9 +58,9 @@ public class LoginController{
         }else{
             model.setViewName("login");
             if (authenticationService.registeredUserId(userId)) {
-                model.addObject("error-message", Messages.LOGIN_PASSWORD_ERROR);
+                model.addObject("error-message", StringResources.LOGIN_PASSWORD_ERROR);
             }else {
-                model.addObject("error-message", Messages.LOGIN_USER_ERROR);
+                model.addObject("error-message", StringResources.LOGIN_USER_ERROR);
             }
             return model;
         }
