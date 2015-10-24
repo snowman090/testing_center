@@ -1,26 +1,29 @@
 package core.user;
 
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eson_wang on 10/12/15.
- */
+@Repository
 public class StudentDaoImpl implements StudentDao{
-    List<Student> students;
-    public StudentDaoImpl(){
+    private List<Student> students;
 
+    public StudentDaoImpl(){
         students = new ArrayList<Student>();
         Student student1 = new Student();
         Student student2 = new Student();
         students.add(student1);
         students.add(student2);
     }
+
     @Override
     public boolean addStudent(Student student) {// return should have different cases
         students.add(student);
         return true;
     }
+
     @Override
     public boolean deleteStudent(Student student) {// return should have different cases
 //        students.remove(student.getStudent_Id());

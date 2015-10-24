@@ -14,8 +14,8 @@ public interface AuthenticationService {
      * @param userId
      * @param password
      * @return the permission level of the user associated with the
-     *          userId and password, returns null if password does not
-     *          match the userId
+     *         userId and password, returns null if password does not
+     *         match the userId
      */
     Authorization login (String userId, String password);
 }

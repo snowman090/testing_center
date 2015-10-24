@@ -18,9 +18,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Zeqli on 10/12/2015.
- */
+
 public class UnitTest {
 
     private static SessionManager sessionManager;

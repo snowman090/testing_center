@@ -45,9 +45,6 @@ public class Reservation {
 
     private String instructorName;
 
-    @Column(name="ATTENDANCE")
-    private int attendence;
-
     //haven't initiated
     @Basic(optional = false)
     @Column(name="STATUS")

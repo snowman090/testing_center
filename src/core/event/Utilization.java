@@ -15,9 +15,7 @@ public class Utilization {
     private int numSeat;
 
     private TestingCenterInfo center = new TestingCenterInfo();
-
-
-
+    //
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
     examDao examDao = new examDaoImpl();
 
