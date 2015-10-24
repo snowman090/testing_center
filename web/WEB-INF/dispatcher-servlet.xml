@@ -9,13 +9,13 @@
             </props>
         </property>
     </bean>
-    <context:component-scan base-package="core.controller"/>
+    <context:component-scan base-package="core"/>
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
-            <value>/web</value>
+            <value>/WEB-INF/view</value>
         </property>
         <property name="suffix">
-            <value>.html</value>
+            <value>.jsp</value>
         </property>
     </bean>
 </beans>
