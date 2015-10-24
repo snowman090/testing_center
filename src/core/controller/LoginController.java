@@ -17,22 +17,15 @@ public class LoginController{
     @Autowired
     private AuthenticationService authenticationService;//injected service
 
-    @RequestMapping(value = "/authorizing", method = RequestMethod.POST)
-    public ModelAndView loginSubmit (@RequestParam("netId") String userId,
-                                     @RequestParam("password") String password) {
-        ModelAndView model = new ModelAndView();
+    private ModelAndView model = new ModelAndView();
+
+    @RequestMapping("/authorizing")
+    public String authorizing (@RequestParam("netId") String userId,
+                               @RequestParam("password") String password) {
         Authorization authorization = authenticationService.login(userId, password);
         if (authorization != null) {
-            //code here to determine user permission
+                //code here to determine user permission
             Map<String, Object> viewVariables = new HashMap<>();
-            /*
-            here i feel the need to make changes to the data structure for each different
-            type of user's permission level, instead of using enum type field, which each type of
-            user has only one, making it a knot to allow the user to switch roles without logging out
-            and hogging up empty spaces in the db tables. An alternative may be to use numbers to
-            represent permission levels, and we can determine if the user has multiple identities
-            mathematically.
-            */
             switch (authorization) {
                 case ADMINISTRATOR:
                     viewVariables.put("user-level", StringResources.USER_ADMINISTRATOR);
@@ -52,18 +45,22 @@ public class LoginController{
             }
             //add all objects to the model
             model.addAllObjects(viewVariables);
-
-            model.setViewName("home");
-            return model;
-        }else{
-            model.setViewName("login");
+            return "redirect:/home";
+        }else {
             if (authenticationService.registeredUserId(userId)) {
                 model.addObject("error-message", StringResources.LOGIN_PASSWORD_ERROR);
             }else {
                 model.addObject("error-message", StringResources.LOGIN_USER_ERROR);
             }
-            return model;
+
+            return "redirect:/login";
         }
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
+    public ModelAndView goToHome () {
+        model.setViewName("home");
+        return model;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
