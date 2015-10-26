@@ -10,4 +10,14 @@ public class NavigationController {
     public ModelAndView viewCenterInfo () {
         return null;
     }
+
+    @RequestMapping("upload")
+    public ModelAndView uploadFile () {
+        return null;
+    }
+
+    @RequestMapping("view-requests")
+    public ModelAndView viewRequests () {
+        return null;
+    }
 }

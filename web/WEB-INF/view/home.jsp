@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Testing Center Schduler</title>
+    <title>Testing Center Scheduler</title>
     <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
@@ -25,7 +25,7 @@
     <div class="container">
         <div class="sidebar">
             <ul class="side-nav">
-                <li><a class="button" href="/home"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li><a class="button" href="/home/ADMINISTRATOR"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                 <li><a class="button" href="/view-info"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
                 <li><a class="button" href="#"><i class="fa fa-upload"></i>&nbsp;Uploade a file</a></li>
                 <li><a class="button" href="#"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>

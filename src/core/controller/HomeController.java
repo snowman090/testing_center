@@ -19,17 +19,17 @@ public class HomeController {
             case ADMINISTRATOR:
                 viewVariables.put("user-level", StringResources.USER_ADMINISTRATOR);
                 viewVariables.put("operations", StringResources.ADMINISTRATOR_OPERATIONS);
-                    /*...*/
+                /*...*/
                 break;
             case STUDENT:
                 viewVariables.put("user-level", StringResources.USER_STUDENT);
                 viewVariables.put("operations", StringResources.STUDENT_OPERATIONS);
-                    /*...*/
+                /*...*/
                 break;
             case INSTRUCTOR:
                 viewVariables.put("user-level", StringResources.USER_INSTRUCTOR);
                 viewVariables.put("operations", StringResources.INSTRUCTOR_OPERATIONS);
-                    /*...*/
+                /*...*/
                 break;
         }
         //add all objects to the model
