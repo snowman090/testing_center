@@ -1,4 +1,6 @@
-package core.user;
+package core.service;
+
+import core.user.Authorization;
 
 public interface AuthenticationService {
     /**

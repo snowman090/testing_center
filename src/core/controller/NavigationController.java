@@ -9,7 +9,6 @@ public class NavigationController {
     @RequestMapping("view-info")
     public ModelAndView viewCenterInfo () {
         ModelAndView model = new ModelAndView();
-
         return model;
     }
 

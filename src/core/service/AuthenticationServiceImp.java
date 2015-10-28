@@ -1,5 +1,6 @@
-package core.user;
+package core.service;
 
+import core.user.Authorization;
 import org.springframework.stereotype.Service;
 
 @Service("authenticationService")

@@ -17,4 +17,10 @@ public class ModificationController {
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
     }
+
+    @RequestMapping("modify-request-submit")
+    public ModelAndView modifyRequest (){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
 }
