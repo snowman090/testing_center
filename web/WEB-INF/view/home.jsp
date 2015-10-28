@@ -27,10 +27,10 @@
             <ul class="side-nav">
                 <li><a class="button" href="/home/ADMINISTRATOR"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                 <li><a class="button" href="/view-info"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
-                <li><a class="button" href="#"><i class="fa fa-upload"></i>&nbsp;Uploade a file</a></li>
-                <li><a class="button" href="#"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
-                <li><a class="button" href="#"><i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
-                <li><a class="button" href="#"><i class="fa fa-plus-square"></i>&nbsp;Make an appointment</a></li>
+                <li><a class="button" href="/upload"><i class="fa fa-upload"></i>&nbsp;Uploade a file</a></li>
+                <li><a class="button" href="/view-requests"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
+                <li><a class="button" href="/view-appointments"><i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
+                <li><a class="button" href="/make-appointment"><i class="fa fa-plus-square"></i>&nbsp;Make an appointment</a></li>
             </ul>
         </div>
         <div class="content">

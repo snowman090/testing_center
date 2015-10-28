@@ -8,7 +8,9 @@ import org.springframework.web.portlet.ModelAndView;
 public class NavigationController {
     @RequestMapping("view-info")
     public ModelAndView viewCenterInfo () {
-        return null;
+        ModelAndView model = new ModelAndView();
+
+        return model;
     }
 
     @RequestMapping("upload")
@@ -18,6 +20,16 @@ public class NavigationController {
 
     @RequestMapping("view-requests")
     public ModelAndView viewRequests () {
+        return null;
+    }
+
+    @RequestMapping("view-appointments")
+    public ModelAndView viewAppointments() {
+        return null;
+    }
+
+    @RequestMapping("make-appointment")
+    public ModelAndView makeAppointment(){
         return null;
     }
 }

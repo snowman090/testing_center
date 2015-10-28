@@ -1,10 +1,9 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Testing Center Schduler</title>
+  <title>Testing Center Scheduler</title>
   <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
@@ -26,29 +25,30 @@
   <div class="container">
     <div class="sidebar">
       <ul class="side-nav">
-        <li><a class="button" href="#"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-        <li><a class="button" href="#"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
-        <li><a class="button" href="#"><i class="fa fa-upload"></i>&nbsp;Uploade a file</a></li>
-        <li><a class="button" href="#"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
-        <li><a class="button" href="#"><i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
-        <li><a class="button" href="#"><i class="fa fa-plus-square"></i>&nbsp;Make an appointment</a></li>
+        <li><a class="button" href="/home/"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+        <li><a class="button" href="/view-info"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
+        <li><a class="button" href="/upload"><i class="fa fa-upload"></i>&nbsp;Upload a file</a></li>
+        <li><a class="button" href="/view-requests"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
+        <li><a class="button" href="/view-appointments"><i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
+        <li><a class="button" href="/make-appointment"><i class="fa fa-plus-square"></i>&nbsp;Make an appointment</a></li>
       </ul>
     </div>
     <div class="content">
-      <form class="edit-info">
+      <form class="edit-info" action="/edit-info-submit">
         <div class="info-column">
-          Closed Dates <input type="date" class="input-info"> <a href="#" class="button">Add another</a>
+          Closed Dates <input type="date" class="input-info" name="info-closed-date"> <a href="#" class="button">Add another</a>
         </div>
         <div class="info-column">
-          Reserved Dates <input type="date" class="input-info"> <a href="#" class="button">Add another</a>
+          Reserved Dates <input type="date" class="input-info" name="info-reserve-date"> <a href="#" class="button">Add another</a>
         </div>
         <div class="info-column">
-          Open Time <input type="time" class="input-info"> Close Time<input type="time" class="input-info">
+          Open Time <input type="time" class="input-info" name="info-open-hour">
+          Close Time<input type="time" class="input-info" name="info-close-hour">
         </div>
         <div class="info-column">Number of Seats <input type="number" class="input-info"></div>
         <div class="info-column">Number of Set-aside Seats <input type="number" class="input-info"></div>
-        <div class="info-column">Gap Time <input type="number" class="input-info">minuts</div>
-        <div class="info-column">Reminder Interval <input type="number" class="input-info">mimuts</div>
+        <div class="info-column">Gap Time <input type="number" class="input-info">minutes</div>
+        <div class="info-column">Reminder Interval <input type="number" class="input-info">minutes</div>
       </form>
     </div>
   </div>
@@ -57,7 +57,7 @@
 <div class="popup-overlay" id="popup1">
   <div class="popup">
     <a class="close" href="#"><i class="fa fa-times"></i></a>
-    <form>
+    <form action="">
       <table class="card-table">
         <thead>
         <tr>
@@ -72,13 +72,13 @@
         </thead>
         <tbody>
         <tr>
-          <td><input type="text" class="modify-input"></td>
-          <td><input type="text" class="modify-input"></td>
-          <td><input type="text" class="modify-input"></td>
-          <td><input type="text" class="modify-input"></td>
-          <td><input type="text" class="modify-input"></td>
-          <td><input type="text" class="modify-input"></td>
-          <td><input type="text" class="modify-input"></td>
+          <td><input type="text" class="modify-input" name="input-id"></td>
+          <td><input type="text" class="modify-input" name="input-instructor"></td>
+          <td><input type="text" class="modify-input" name="input-start-date"></td>
+          <td><input type="text" class="modify-input" name="input-end-date"></td>
+          <td><input type="text" class="modify-input" name="input-start-time"></td>
+          <td><input type="text" class="modify-input" name="input-end-time"></td>
+          <td><input type="text" class="modify-input" name="input-attendance"></td>
         </tr>
         </tbody>
       </table>
