@@ -10,9 +10,9 @@ public class StringResources {
     public final static String USER_STUDENT = "Student";
     public final static String USER_ADMINISTRATOR = "Administrator";
 
-    public final static List<String> ADMINISTRATOR_OPERATIONS = new ArrayList<String>();
-    public final static List<String> STUDENT_OPERATIONS = new ArrayList<String>();
-    public final static List<String> INSTRUCTOR_OPERATIONS = new ArrayList<String>();
+    public final static List<String> ADMINISTRATOR_OPERATIONS = new ArrayList<>();
+    public final static List<String> STUDENT_OPERATIONS = new ArrayList<>();
+    public final static List<String> INSTRUCTOR_OPERATIONS = new ArrayList<>();
 
     //populate the lists of user operations
     static {
@@ -23,6 +23,5 @@ public class StringResources {
 
 
         INSTRUCTOR_OPERATIONS.add("");
-
     }
 }

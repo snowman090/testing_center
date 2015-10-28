@@ -2,8 +2,10 @@ package core.event;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Roster {
     @Id
     @Basic(optional = false)
