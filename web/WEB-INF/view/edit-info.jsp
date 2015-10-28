@@ -34,22 +34,7 @@
       </ul>
     </div>
     <div class="content">
-      <form class="edit-info" action="/edit-info-submit">
-        <div class="info-column">
-          Closed Dates <input type="date" class="input-info" name="info-closed-date"> <a href="#" class="button">Add another</a>
-        </div>
-        <div class="info-column">
-          Reserved Dates <input type="date" class="input-info" name="info-reserve-date"> <a href="#" class="button">Add another</a>
-        </div>
-        <div class="info-column">
-          Open Time <input type="time" class="input-info" name="info-open-hour">
-          Close Time<input type="time" class="input-info" name="info-close-hour">
-        </div>
-        <div class="info-column">Number of Seats <input type="number" class="input-info"></div>
-        <div class="info-column">Number of Set-aside Seats <input type="number" class="input-info"></div>
-        <div class="info-column">Gap Time <input type="number" class="input-info">minutes</div>
-        <div class="info-column">Reminder Interval <input type="number" class="input-info">minutes</div>
-      </form>
+
     </div>
   </div>
 </div>
@@ -57,35 +42,22 @@
 <div class="popup-overlay" id="popup1">
   <div class="popup">
     <a class="close" href="#"><i class="fa fa-times"></i></a>
-    <form action="modify-request-submit">
-      <table class="card-table">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Made By</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Attendance</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td><input type="text" class="modify-input" name="input-id"></td>
-          <td><input type="text" class="modify-input" name="input-instructor"></td>
-          <td><input type="text" class="modify-input" name="input-start-date"></td>
-          <td><input type="text" class="modify-input" name="input-end-date"></td>
-          <td><input type="text" class="modify-input" name="input-start-time"></td>
-          <td><input type="text" class="modify-input" name="input-end-time"></td>
-          <td><input type="text" class="modify-input" name="input-attendance"></td>
-        </tr>
-        </tbody>
-      </table>
-      <input type="submit" value="Submit" class="popup-submit">
-      <input type="submit" value="Cancel Request" class="popup-submit">
-      <a href="#" class="button">Back</a>
-    </form>
+      <form class="edit-info" action="/edit-info-submit">
+          <div class="info-column">
+              Closed Dates <input type="date" class="input-info" name="info-closed-date"> <a href="#" class="button">Add another</a>
+          </div>
+          <div class="info-column">
+              Reserved Dates <input type="date" class="input-info" name="info-reserve-date"> <a href="#" class="button">Add another</a>
+          </div>
+          <div class="info-column">
+              Open Time <input type="time" class="input-info" name="info-open-hour">
+              Close Time<input type="time" class="input-info" name="info-close-hour">
+          </div>
+          <div class="info-column">Number of Seats <input type="number" class="input-info"></div>
+          <div class="info-column">Number of Set-aside Seats <input type="number" class="input-info"></div>
+          <div class="info-column">Gap Time <input type="number" class="input-info">minutes</div>
+          <div class="info-column">Reminder Interval <input type="number" class="input-info">minutes</div>
+      </form>
   </div>
 </div>
 

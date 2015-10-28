@@ -13,7 +13,7 @@ import java.util.Map;
 public class HomeController {
     @RequestMapping("/home/{permission}")
     public ModelAndView goToHome (@PathVariable("permission") Authorization authorization) {
-        ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView("home");
         Map<String, Object> viewVariables = new HashMap<>();
         switch (authorization) {
             case ADMINISTRATOR:

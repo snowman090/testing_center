@@ -21,13 +21,13 @@ public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval
     /**
      * update the testing center information by
      * taking HashMap as a parameter
-     * @param testingCenterInfo
+     * @param testingCenterInfoMap
      * @return return true if the update is a success
      *         return false if there is an error, an exception will be
      *         thrown
      */
     @Override
-    public boolean updateTestingCenterInfo(Map<String, Object> testingCenterInfo) {
+    public boolean updateTestingCenterInfo(Map<String, Object> testingCenterInfoMap) {
         //implement here
         return false;
     }

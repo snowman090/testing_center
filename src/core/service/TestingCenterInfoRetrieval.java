@@ -5,14 +5,14 @@ import java.util.Map;
 public interface TestingCenterInfoRetrieval {
     /**
      * returns all fields of TestingCenterInfo
-     * in a hashmap
+     * in a HashMap
      * @return
      */
     Map<String, Object> retrievalInfo ();
 
     /**
      * update the testing center information by
-     * taking hashmap as a parameter
+     * taking HashMap as a parameter
      * @param testingCenterInfo
      * @return return true if the update is a success
      *         return false if there is an error, an exception will be
