@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Testing Center Scheduler</title>
-  <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
+  <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
     <input type="password" class="login-text" placeholder="Password" name="password">
     <input type="submit" value="Login" class="submit-button"/>
   </form>
-  <div class="error-message">${error-message}</div>
+  <div class="error-message">${error_message}</div>
 </div>
 </body>
 </html>
