@@ -17,8 +17,8 @@ public class LoginController{
     private ModelMap model = new ModelMap();
 
     @RequestMapping(value = "/authorizing", method = RequestMethod.POST)
-    public String authorizing (@RequestParam("netId") String userId,
-                               @RequestParam("password") String password) {
+    public String authorizeUser (@RequestParam("netId") String userId,
+                                 @RequestParam("password") String password) {
         Authorization authorization = authenticationService.login(userId, password);
         if (authorization != null) {
             return "home";

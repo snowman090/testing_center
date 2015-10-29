@@ -1,11 +1,11 @@
 package core.event;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eson_wang on 10/12/15.
- */
+@Repository
 public class examDaoImpl implements examDao{
     List<exam> exams;
     public examDaoImpl(){
