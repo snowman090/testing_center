@@ -12,6 +12,7 @@ public class NavigationController {
         ModelMap model = new ModelMap();
         model.addAttribute("page_heading",
                 StringResources.ADMINISTRATOR_OPERATIONS.get("viewInfo"));
+        model.addAttribute("");
         return null;
     }
 

@@ -1,13 +1,8 @@
 package core.event;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
-/**
- * Created by eson_wang on 10/11/15.
- */
 public interface AppointmentDao {
     List<Appointment> findAllAppointment();
     boolean findByAppointmentID(String AppointmentID);

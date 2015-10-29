@@ -7,9 +7,6 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-/**
- * Created by eson_wang on 10/11/15.
- */
 @Entity
 @Table(name = "Exam")
 public class exam {
