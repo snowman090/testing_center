@@ -26,7 +26,7 @@ public class StudentDaoImpl implements StudentDao{
 
     @Override
     public boolean deleteStudent(Student student) {// return should have different cases
-//        students.remove(student.getStudent_Id());
+        students.remove(student);
         return true;
     }
 

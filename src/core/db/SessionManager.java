@@ -32,8 +32,8 @@ public class SessionManager {
         return sessionFactory;
     }
 
+
     public Session getOpenSession(){
-        Session session = sessionFactory.openSession();
         return sessionFactory.openSession();
     }
 

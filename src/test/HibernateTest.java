@@ -101,7 +101,6 @@ public class HibernateTest {
         } finally {
             session.close();
         }
-
     }
 
     // SQL UPDATE

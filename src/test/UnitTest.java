@@ -61,7 +61,6 @@ public class UnitTest {
         appointment2.setStartDateTime(LocalDateTime.of(2015, 6, 20, 13, 30));
         appointment2.setEndDateTime(LocalDateTime.of(2015, 6, 20, 15, 30));
         appointment2.setAppointmentID("2");
-
         util.getAppointmentDao().addAppointment(appointment1);
         util.getAppointmentDao().addAppointment(appointment2);
 

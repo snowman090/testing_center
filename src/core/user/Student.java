@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Student")
 public class Student extends UserType {
+    @Basic(optional = false)
     public static final Authorization permission = Authorization.STUDENT;
 
     @OneToMany(mappedBy = "student")
@@ -37,21 +39,22 @@ public class Student extends UserType {
     }
 
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public int getStudent_Id() {
-//        return student_Id;
-//    }
-//
-//    public void setStudent_Id(int student_Id) {
-//        this.student_Id = student_Id;
-//    }
+ /*   public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getStudent_Id() {
+        return student_Id;
+    }
+
+    public void setStudent_Id(int student_Id) {
+        this.student_Id = student_Id;
+    }
+    */
     public List<Appointment> getAppointments(){
         return appointments;
     }
