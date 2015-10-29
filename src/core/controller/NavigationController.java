@@ -10,6 +10,8 @@ public class NavigationController {
     @RequestMapping("view-info")
     public String viewCenterInfo () {
         ModelMap model = new ModelMap();
+        model.addAttribute("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("viewInfo"));
         return null;
     }
 
