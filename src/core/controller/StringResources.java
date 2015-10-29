@@ -1,8 +1,6 @@
 package core.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StringResources {
@@ -20,6 +18,11 @@ public class StringResources {
     //populate the lists of user operations
     static {
         ADMINISTRATOR_OPERATIONS.put("viewRequest", "View Requests");
+        ADMINISTRATOR_OPERATIONS.put("viewInfo", "Testing Center Information");
+        ADMINISTRATOR_OPERATIONS.put("uploadFile", "Upload File");
+        ADMINISTRATOR_OPERATIONS.put("viewAppointments", "View Appointments");
+        ADMINISTRATOR_OPERATIONS.put("makeAppointment", "Make An Appointments");
+
 
     }
 }
