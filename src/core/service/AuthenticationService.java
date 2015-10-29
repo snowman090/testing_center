@@ -12,6 +12,15 @@ public interface AuthenticationService {
     boolean registeredUserId(String userId);
 
     /**
+     * check whether userId match pass
+     * @param userId
+     * @param password
+     * @return
+     */
+    boolean userMatchPassword(String userId, String password);
+
+
+    /**
      * determine the user's permission level
      * @param userId
      * @param password

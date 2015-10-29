@@ -6,6 +6,7 @@
   <title>Testing Center Scheduler</title>
   <link rel="stylesheet" href="assets/css/styles.css"/>
 </head>
+
 <body>
 <div class="header-wrapper">
   <div class="header-logo">
@@ -65,4 +66,6 @@
 
 </footer>
 </body>
+
+
 </html>

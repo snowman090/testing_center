@@ -8,12 +8,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+//import javax.persistence.Entity;
 
 @Entity
 @Table( name = "Instructor")
 public class Instructor extends UserType {
+    @Basic(optional = false)
     public static final Authorization authLevel = Authorization.INSTRUCTOR;
     private List<Appointment> reservations;
 
