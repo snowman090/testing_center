@@ -1,14 +1,15 @@
 package core.service;
 
+import core.event.TestingCenterInfo;
+
 import java.util.Map;
 
 public interface TestingCenterInfoRetrieval {
     /**
-     * returns all fields of TestingCenterInfo
-     * in a HashMap
+     * returns the testing center information
      * @return
      */
-    Map<String, Object> retrievalInfo ();
+    TestingCenterInfo retrieveInfo ();
 
     /**
      * update the testing center information by

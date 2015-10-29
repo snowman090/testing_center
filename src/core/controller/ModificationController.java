@@ -4,6 +4,7 @@ import core.service.TestingCenterInfoRetrieval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.portlet.ModelAndView;
 
 /**
@@ -17,13 +18,13 @@ public class ModificationController {
     @Autowired
     private TestingCenterInfoRetrieval infoRetrieval;
 
-    @RequestMapping("edit-info-submit")
+    @RequestMapping(value = "/edit-info-form", method = RequestMethod.GET)
     public ModelAndView editTestingCenterInfo (){
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
     }
 
-    @RequestMapping("modify-request-submit")
+    @RequestMapping(value = "/edit-info-submit", method = RequestMethod.POST)
     public ModelAndView modifyRequest (){
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;

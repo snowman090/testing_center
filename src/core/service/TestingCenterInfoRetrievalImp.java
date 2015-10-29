@@ -1,19 +1,20 @@
 package core.service;
 
-import org.springframework.stereotype.Repository;
+import core.event.TestingCenterInfo;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Repository("infoRetrieval")
+@Service("infoRetrieval")
 public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval {
 
     /**
-     * this method retrieves all fields in TestingCenterInfo and wrap and return
-     * them in a HashMap for display
+     * retrieves the testing center information, return the object
+     * of class TestingCenterInfo
      * @return
      */
     @Override
-    public Map<String, Object> retrievalInfo() {
+    public TestingCenterInfo retrieveInfo() {
         //implement here
         return null;
     }

@@ -35,7 +35,22 @@
       </ul>
     </div>
     <div class="content">
-
+        <p>
+        <div class="info-column">
+            Closed Dates <input type="date" class="input-info" name="info-closed-date"> <a href="#" class="button">Add another</a>
+        </div>
+        <div class="info-column">
+            Reserved Dates <input type="date" class="input-info" name="info-reserve-date"> <a href="#" class="button">Add another</a>
+        </div>
+        <div class="info-column">
+            Open Time <input type="time" class="input-info" name="info-open-hour">
+            Close Time<input type="time" class="input-info" name="info-close-hour">
+        </div>
+        <div class="info-column">Number of Seats <input type="number" class="input-info"></div>
+        <div class="info-column">Number of Set-aside Seats <input type="number" class="input-info"></div>
+        <div class="info-column">Gap Time <input type="number" class="input-info">minutes</div>
+        <div class="info-column">Reminder Interval <input type="number" class="input-info">minutes</div>
+        </p>
     </div>
   </div>
 </div>
@@ -44,20 +59,7 @@
   <div class="popup">
     <a class="close" href="#"><i class="fa fa-times"></i></a>
       <form class="edit-info" action="/edit-info-submit">
-          <div class="info-column">
-              Closed Dates <input type="date" class="input-info" name="info-closed-date"> <a href="#" class="button">Add another</a>
-          </div>
-          <div class="info-column">
-              Reserved Dates <input type="date" class="input-info" name="info-reserve-date"> <a href="#" class="button">Add another</a>
-          </div>
-          <div class="info-column">
-              Open Time <input type="time" class="input-info" name="info-open-hour">
-              Close Time<input type="time" class="input-info" name="info-close-hour">
-          </div>
-          <div class="info-column">Number of Seats <input type="number" class="input-info"></div>
-          <div class="info-column">Number of Set-aside Seats <input type="number" class="input-info"></div>
-          <div class="info-column">Gap Time <input type="number" class="input-info">minutes</div>
-          <div class="info-column">Reminder Interval <input type="number" class="input-info">minutes</div>
+          <div>Enter a new </div>
       </form>
   </div>
 </div>
