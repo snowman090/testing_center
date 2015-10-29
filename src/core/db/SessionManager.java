@@ -6,8 +6,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-import java.sql.Connection;
-
 public class SessionManager {
     private static SessionManager instance;
     private static SessionFactory sessionFactory;
@@ -38,7 +36,7 @@ public class SessionManager {
     }
 
 
-    // USE CASE - SEE Adminstrator Class
+    // USE CASE - SEE Administrator Class
 //    public Appointment getAppointment(String apptID){
     // Open a session
 //        Session session = sessionManager.getInstance().getOpenSession();
