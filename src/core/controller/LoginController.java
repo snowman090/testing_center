@@ -21,7 +21,7 @@ public class LoginController{
                                  @RequestParam("password") String password) {
         Authorization authorization = authenticationService.login(userId, password);
         if (authorization != null) {
-            return "home";
+            return "home/" + authorization;
         }else {
             if (authenticationService.registeredUserId(userId)) {
                 model.addAttribute("error_message", StringResources.LOGIN_PASSWORD_ERROR);

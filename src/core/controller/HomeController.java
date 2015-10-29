@@ -4,36 +4,19 @@ import core.user.Authorization;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.portlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class HomeController {
     @RequestMapping("/home/{permission}")
-    public ModelAndView goToHome (@PathVariable("permission") Authorization authorization) {
-        ModelAndView model = new ModelAndView("home");
-        Map<String, Object> viewVariables = new HashMap<>();
+    public String goToHome (@PathVariable("permission") Authorization authorization) {
         switch (authorization) {
             case ADMINISTRATOR:
-                viewVariables.put("user-level", StringResources.USER_ADMINISTRATOR);
-                viewVariables.put("operations", StringResources.ADMINISTRATOR_OPERATIONS);
-                /*...*/
-                break;
+                return "admin-home";
             case STUDENT:
-                viewVariables.put("user-level", StringResources.USER_STUDENT);
-                viewVariables.put("operations", StringResources.STUDENT_OPERATIONS);
-                /*...*/
-                break;
+                return "student-home";
             case INSTRUCTOR:
-                viewVariables.put("user-level", StringResources.USER_INSTRUCTOR);
-                viewVariables.put("operations", StringResources.INSTRUCTOR_OPERATIONS);
-                /*...*/
-                break;
+                return "instructor-home";
         }
-        //add all objects to the model
-        model.addAllObjects(viewVariables);
-        return model;
+        return null;
     }
 }
