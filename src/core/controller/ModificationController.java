@@ -6,11 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.ModelAndView;
 
 /**
  * all actions concerning modifications of information
- * are directed to the methods in this class, including the
+ * are directed to the methods in this controller class, including the
  * modifications and cancellations of requests, appointments,
  * as well as testing center information
  */
@@ -34,9 +35,15 @@ public class ModificationController {
         return model;
     }
 
-    @RequestMapping(value = "/edit-info-submit", method = RequestMethod.POST)
-    public ModelAndView modifyRequest (){
-        ModelAndView modelAndView = new ModelAndView();
+    /**
+     * This method is called if the submit button is clicked indicating that the user
+     * is ready to commit changes made to the selected field on testing center information
+     * @return
+     */
+    @RequestMapping(value = "/edit-info/{field-type}/form-submit", method = RequestMethod.POST)
+    public ModelAndView modifyRequestSubmit (@PathVariable("field-type") String fieldType,
+                                             @RequestParam("modified_field") String modifiedField){
+        ModelAndView modelAndView = new ModelAndView("edit-info");
         return modelAndView;
     }
 }
