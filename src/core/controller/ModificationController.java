@@ -31,7 +31,7 @@ public class ModificationController {
     @RequestMapping(value = "/edit-info/{field-type}/form", method = RequestMethod.GET)
     public ModelAndView editTestingCenterInfo (@PathVariable("field-type") String fieldType){
         ModelAndView model = new ModelAndView("edit-info");
-        model.addObject("modify-field", fieldType);
+        model.addObject("modify-field", "Change " + fieldType);
         return model;
     }
 
@@ -44,7 +44,9 @@ public class ModificationController {
     public ModelAndView modifyRequestSubmit (@PathVariable("field-type") String fieldType,
                                              @RequestParam("modified_field") Object modifiedField){
         ModelAndView modelAndView = new ModelAndView("edit-info");
-        infoRetrieval.updateField(fieldType, modifiedField);
+        if(infoRetrieval.updateField(fieldType, modifiedField))
+            modelAndView.addObject("modify-field", fieldType + " updated");
+
         return modelAndView;
     }
 }
