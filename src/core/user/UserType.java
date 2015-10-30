@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table( name = "UserTypes")
 public abstract class UserType {
     @Id
-    @Column(name = "netId")
+    @Column(name = "net_id")
     protected String netId;
 
     @Basic(optional = false)
@@ -14,26 +14,26 @@ public abstract class UserType {
     protected String password;
 
     @Basic(optional = false)
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     protected String firstName;
 
     @Basic(optional = false)
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     protected String lastName;
     @Basic(optional = false)
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     protected String email;
 
     @Basic(optional = false)
-    @Column(name = "studentPermission")
+    @Column(name = "student_permission")
     protected Authorization studentPermission;
 
     @Basic(optional = false)
-    @Column(name = "instructorPermission")
+    @Column(name = "instructor_permission")
     protected Authorization instructorPermission;
 
     @Basic(optional = false)
-    @Column(name = "Administorermission")
+    @Column(name = "Administor_permission")
     protected Authorization administorPerssion;
 
     public UserType()
