@@ -24,6 +24,18 @@ public abstract class UserType {
     @Column(name = "EMAIL")
     protected String email;
 
+    @Basic(optional = false)
+    @Column(name = "studentPermission")
+    protected Authorization studentPermission;
+
+    @Basic(optional = false)
+    @Column(name = "instructorPermission")
+    protected Authorization instructorPermission;
+
+    @Basic(optional = false)
+    @Column(name = "Administorermission")
+    protected Authorization administorPerssion;
+
     public UserType()
     {
 

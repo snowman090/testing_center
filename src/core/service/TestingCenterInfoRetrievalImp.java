@@ -8,6 +8,8 @@ import java.util.Map;
 @Service("infoRetrieval")
 public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval {
 
+    private static TestingCenterInfo testingCenterInfo = new TestingCenterInfo();
+
     /**
      * retrieves the testing center information, return the object
      * of class TestingCenterInfo
@@ -15,8 +17,7 @@ public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval
      */
     @Override
     public TestingCenterInfo retrieveInfo() {
-        //implement here
-        return null;
+        return testingCenterInfo.deserialize();
     }
 
     /**
@@ -28,8 +29,7 @@ public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval
      *         thrown
      */
     @Override
-    public boolean updateTestingCenterInfo(Map<String, Object> testingCenterInfoMap) {
-        //implement here
-        return false;
+    public boolean updateTestingCenterInfo(TestingCenterInfo testingCenterInfoMap) {
+        return testingCenterInfo.update(testingCenterInfo);
     }
 }

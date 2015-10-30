@@ -19,5 +19,5 @@ public interface TestingCenterInfoRetrieval {
      *         return false if there is an error, an exception will be
      *         thrown
      */
-    boolean updateTestingCenterInfo(Map<String, Object> testingCenterInfo);
+    boolean updateTestingCenterInfo(TestingCenterInfo testingCenterInfo);
 }

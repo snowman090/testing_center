@@ -17,12 +17,19 @@ public class StringResources {
 
     //populate the lists of user operations
     static {
-        ADMINISTRATOR_OPERATIONS.put("viewRequest", "View Requests");
-        ADMINISTRATOR_OPERATIONS.put("viewInfo", "Testing Center Information");
-        ADMINISTRATOR_OPERATIONS.put("uploadFile", "Upload File");
-        ADMINISTRATOR_OPERATIONS.put("viewAppointments", "View Appointments");
-        ADMINISTRATOR_OPERATIONS.put("makeAppointment", "Make An Appointments");
+        ADMINISTRATOR_OPERATIONS.put("viewRequest", "Manage Schedule Requests");
+        ADMINISTRATOR_OPERATIONS.put("viewInfo", "View Testing Center Information");
+        ADMINISTRATOR_OPERATIONS.put("upload", "Upload a file");
+        ADMINISTRATOR_OPERATIONS.put("viewAppointments", "View Appointment");
+        ADMINISTRATOR_OPERATIONS.put("makeAppointment", "Make An Appointment");
+        ADMINISTRATOR_OPERATIONS.put("checkIn","Check in a Student");
+        ADMINISTRATOR_OPERATIONS.put("generateReport","Generate Report");
 
+        INSTRUCTOR_OPERATIONS.put("scheduleEvent", "Schedule an Event");
+        INSTRUCTOR_OPERATIONS.put("viewReservation","View Pengding Request");
+        INSTRUCTOR_OPERATIONS.put("viewAppointment","View Appointment");
 
+        STUDENT_OPERATIONS.put("makeAppointment","Make Appointment");
+        STUDENT_OPERATIONS.put("viewAppointment","View Appointment");
     }
 }

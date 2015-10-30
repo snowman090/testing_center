@@ -53,6 +53,9 @@ public class Appointment {
     @JoinColumn(name="studentId")
     private Student student;
 
+    @JoinColumn(name="status")
+    private String status;
+
     public Appointment(){}
 
     public Appointment(String appointmentID, String examId, String madeBy, LocalDateTime startDateTime,
@@ -143,6 +146,14 @@ public class Appointment {
 
     public void setIsAttend(boolean isAttend) {
         this.isAttend = isAttend;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     // TODO SOME FIELD SHOULD NOT BE CHANGED
