@@ -32,4 +32,9 @@ public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval
     public boolean updateTestingCenterInfo(TestingCenterInfo testingCenterInfoMap) {
         return testingCenterInfo.update(testingCenterInfo);
     }
+
+    @Override
+    public boolean updateField(String fieldName, Object value) {
+        return false;
+    }
 }

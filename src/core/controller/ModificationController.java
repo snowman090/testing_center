@@ -42,8 +42,9 @@ public class ModificationController {
      */
     @RequestMapping(value = "/edit-info/{field-type}/form-submit", method = RequestMethod.POST)
     public ModelAndView modifyRequestSubmit (@PathVariable("field-type") String fieldType,
-                                             @RequestParam("modified_field") String modifiedField){
+                                             @RequestParam("modified_field") Object modifiedField){
         ModelAndView modelAndView = new ModelAndView("edit-info");
+        infoRetrieval.updateField(fieldType, modifiedField);
         return modelAndView;
     }
 }

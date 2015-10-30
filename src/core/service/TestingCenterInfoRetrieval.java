@@ -12,7 +12,7 @@ public interface TestingCenterInfoRetrieval {
     TestingCenterInfo retrieveInfo ();
 
     /**
-     * update the testing center information by
+     * update all of testing center information by
      * taking HashMap as a parameter
      * @param testingCenterInfo
      * @return return true if the update is a success
@@ -20,4 +20,14 @@ public interface TestingCenterInfoRetrieval {
      *         thrown
      */
     boolean updateTestingCenterInfo(TestingCenterInfo testingCenterInfo);
+
+    /**
+     * update a field of testing center information specified
+     * by the fieldName argument with the new value. This method should
+     * be able to perform a getInfoByName or setInfoByName operation.
+     * @param fieldName
+     * @param value
+     * @return
+     */
+    boolean updateField(String fieldName, Object value);
 }
