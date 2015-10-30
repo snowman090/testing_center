@@ -18,6 +18,12 @@ public class ModificationController {
     @Autowired
     private TestingCenterInfoRetrieval infoRetrieval;
 
+    /**
+     * this method is called when a information cell is clicked and
+     * the user is then allowed to change the contents of the fields of
+     * testing center information
+     * @return
+     */
     @RequestMapping(value = "/edit-info-form", method = RequestMethod.GET)
     public ModelAndView editTestingCenterInfo (){
         ModelAndView modelAndView = new ModelAndView();

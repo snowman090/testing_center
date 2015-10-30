@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -37,7 +38,8 @@
     <div class="content">
         <p>
         <div class="info-column">
-            Closed Dates <input type="date" class="input-info" name="info-closed-date"> <a href="#" class="button">Add another</a>
+            Closed Dates
+            <a href="#" class="button">Add another</a>
         </div>
         <div class="info-column">
             Reserved Dates <input type="date" class="input-info" name="info-reserve-date"> <a href="#" class="button">Add another</a>
@@ -46,7 +48,7 @@
             Open Time <input type="time" class="input-info" name="info-open-hour">
             Close Time<input type="time" class="input-info" name="info-close-hour">
         </div>
-        <div class="info-column">Number of Seats <input type="number" class="input-info"></div>
+        <div class="info-column">Number of Seats </div>
         <div class="info-column">Number of Set-aside Seats <input type="number" class="input-info"></div>
         <div class="info-column">Gap Time <input type="number" class="input-info">minutes</div>
         <div class="info-column">Reminder Interval <input type="number" class="input-info">minutes</div>

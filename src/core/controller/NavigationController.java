@@ -19,6 +19,7 @@ public class NavigationController {
     @RequestMapping("/view-info")
     public ModelAndView viewCenterInfo() {
         ModelAndView model = new ModelAndView("edit-info");
+        //set the heading to that of view information page
         model.addObject("page_heading",
                 StringResources.ADMINISTRATOR_OPERATIONS.get("viewInfo"));
         //infoRetrieval method will get a Map of testing center information
@@ -28,6 +29,10 @@ public class NavigationController {
 
     @RequestMapping("/upload")
     public ModelAndView uploadFile() {
+        ModelAndView model = new ModelAndView("upload-file");
+        model.addObject("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("uploadFile"));
+
         return null;
     }
 
