@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface RosterDao {
 
-    List<exam> findBynetId(String netId);
+    List<Exam> findBynetId(String netId);
 
     boolean addRoster(Roster roster);
 

@@ -16,24 +16,24 @@ import java.util.Date;
 public class Appointment {
 
     @Id
-    @Column(name = "appointmentID")
+    @Column(name = "appointment_id")
     private String appointmentID;
 
-    @Column(name = "EXAM_ID")
+    @Column(name = "exam_id")
     @Basic(optional = false)
     private String examId;
 
-    @Column(name = "MADE_BY")
+    @Column(name = "made_by")
     @Basic(optional = false)
     private String madeBy;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="START_TIME")
+    @Column(name="start_time")
     @Basic(optional = false)
     private Date startDateTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="END_TIME")
+    @Column(name="end_time")
     @Basic(optional = false)
     private Date endDateTime;
 
@@ -45,7 +45,7 @@ public class Appointment {
     @Basic(optional = false)
     private String seat;
 
-    @Column(name="isAdded")
+    @Column(name="is_attend")
     @Basic(optional = false)
     private boolean isAttend;
 

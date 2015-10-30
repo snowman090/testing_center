@@ -12,9 +12,7 @@ import core.db.SessionManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Created by zeqing on 10/30/2015.
- */
+
 public class ReportTest {
 
     public static void main(String[] args){

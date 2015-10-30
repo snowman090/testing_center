@@ -6,9 +6,7 @@ import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.util.IllegalFormatException;
 
-/**
- * Created by zeqing on 10/29/2015.
- */
+
 public class Term {
 
     /**
@@ -67,7 +65,7 @@ public class Term {
 
         int year = (termId % 1000) / 10;
         int semId = termId % 10;
-        String semester = "";
+        String semester;
         switch (semId){
             case 1: semester = "Winter"; break;
             case 4: semester = "Spring"; break;

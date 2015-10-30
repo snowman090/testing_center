@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Course {
     @Id
-    @Column(name = "courseId" )
+    @Column(name = "course_id" )
     @Basic(optional = false)
     private String courseId;
 
@@ -21,7 +21,7 @@ public class Course {
     private String subject;
 
     @Basic(optional = false)
-    @Column(name = "catalogNumber")
+    @Column(name = "catalog_number")
     private int catalog;
 
     @Basic(optional = false)
@@ -33,7 +33,7 @@ public class Course {
     private Instructor instructor;
 
     @Basic(optional = false)
-    @OneToMany(mappedBy = "courseId")
+    @OneToMany(mappedBy = "course_id")
     private List<Student> enrolledStudents;
 
     // Empty Constructor For Hibernate

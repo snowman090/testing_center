@@ -10,44 +10,44 @@ import java.time.LocalTime;
 @Table(name="Reservation")
 public class Reservation {
     @Id
-    @Column(name = "RESERVATION_ID")
+    @Column(name = "reservation_id")
     @Basic(optional = false)
     private String reservationID;
 
     @Temporal(TemporalType.TIME)
-    @Column(name="START_TIME")
+    @Column(name="start_time")
     @Basic(optional = false)
     private LocalTime startTime;
 
     @Temporal(TemporalType.TIME)
-    @Column(name="END_TIME")
+    @Column(name="end_time")
     @Basic(optional = false)
     private LocalTime endTime;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="START_DATE")
+    @Column(name="start_date")
     @Basic(optional = false)
     private LocalDate startDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="END_DATE")
+    @Column(name="end_date")
     @Basic(optional = false)
     private LocalDate endDate;
 
     private int duration;
 
-    @Column(name="INSTRUCTOR_NAME")
+    @Column(name="instructor")
     @Basic(optional = false)
     private Instructor instructor;
 
-    @Column(name="ATTENDANCE")
+    @Column(name="attendace")
     private int attendance;
 
     private String instructorName;
 
     //haven't initiated
     @Basic(optional = false)
-    @Column(name="STATUS")
+    @Column(name="status")
     private Status status;
 
     public LocalTime getStartTime() {

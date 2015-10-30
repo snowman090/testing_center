@@ -11,9 +11,9 @@
       <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
       <property name="hbm2ddl.auto">create-drop</property>
       <property name="show_sql">true</property>
-      <!-- Mapping -->
 
-      <mapping class="core.user.Administrator"></mapping>
+      <!-- Mapping Info -->
+        <mapping class="core.user.Administrator"></mapping>
       <mapping class="core.event.Exam"></mapping>
       <mapping class="core.event.Utilization"></mapping>
       <mapping class="core.event.Appointment"></mapping>

@@ -17,7 +17,7 @@ public class Utilization {
     private TestingCenterInfo center = new TestingCenterInfo();
     //
     AppointmentDao appointmentDao = new AppointmentDaoImpl();
-    examDao examDao = new examDaoImpl();
+    ExamDao examDao = new ExamDaoImpl();
 
     public double countUtilzActual(){
         double TotalDuration = 0;//
@@ -37,11 +37,11 @@ public class Utilization {
 
 //        System.out.println(examDao.find);
 
-        for (exam exam: examDao.getAllExams()) {
-//            System.out.println(exam.getDuration()+gap);
-//            System.out.println((double)exam.getNumStudentNeed());
-//            System.out.println((double)exam.getNumStudentAppointment()/(double)(day*24));
-//            System.out.println((double)exam.getNumStudentAppointment());
+        for (Exam exam: examDao.getAllExams()) {
+//            System.out.println(Exam.getDuration()+gap);
+//            System.out.println((double)Exam.getNumStudentNeed());
+//            System.out.println((double)Exam.getNumStudentAppointment()/(double)(day*24));
+//            System.out.println((double)Exam.getNumStudentAppointment());
 //            System.out.println((double)day);
             TotalExamDuration += (exam.getDuration()+ gap) * (((double)exam.getNumStudentNeed() - (double)exam.getNumStudentAppointment())/(double)(day*24)) ;
         }
@@ -130,7 +130,7 @@ public class Utilization {
         return appointmentDao;
     }
 
-    public core.event.examDao getExamDao() {
+    public ExamDao getExamDao() {
         return examDao;
     }
 

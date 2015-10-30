@@ -87,7 +87,6 @@ public class Report {
             query.setTimestamp("startDate", Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             List<Appointment> list = query.list();
 
-            ;
             term.getTermEndDate();
 
             for(LocalDate localDate = term.getTermStartDate(); localDate.isBefore(term.getTermEndDate().plusDays(1));localDate = localDate.plusDays(1) ){

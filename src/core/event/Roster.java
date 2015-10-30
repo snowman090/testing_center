@@ -9,12 +9,12 @@ import javax.persistence.Id;
 public class Roster {
     @Id
     @Basic(optional = false)
-    @Column(name = "NETID")
+    @Column(name = "net_id")
     private String netID;
 
     @Id
     @Basic(optional = false)
-    @Column(name = "COURSE_ID")
+    @Column(name = "course_id")
     private String CourseID;
 
     public Roster(String netID, String courseID) {
