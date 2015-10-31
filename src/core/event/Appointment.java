@@ -12,7 +12,6 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "Appointment")
 public class Appointment {
 
     @Id

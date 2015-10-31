@@ -46,7 +46,8 @@ public class ModificationController {
         ModelAndView modelAndView = new ModelAndView("edit-info");
         if(infoRetrieval.updateField(fieldType, modifiedField))
             modelAndView.addObject("modify-field", fieldType + " updated");
-
+        else
+            modelAndView.addObject("modify-field", "Update failed");
         return modelAndView;
     }
 }
