@@ -36,8 +36,8 @@ public class UnitTest {
         admin1.setEmail("zeqing.li@stonybrook.edu");
         ut.updateAdmin(admin1);
 
-        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
-        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
+        Exam exam1 = new Exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
+        Exam exam2 = new Exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
         ut.addExam(exam1);
         ut.addExam(exam2);
         ut.listExams();
