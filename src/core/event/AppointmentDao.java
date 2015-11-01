@@ -8,15 +8,13 @@ public interface AppointmentDao {
 
     List<Appointment> findAllByStudent(String netId);
 
-    List<Appointment> findAllByInstructor(String netId);
+    //List<Appointment> findAllByInstructor(String netId);   why???
 
-    boolean findByAppointmentID(String AppointmentID);
+    Appointment findByAppointmentID(String AppointmentID);
 
-    boolean addAppointment(Appointment appointment);
+    boolean insertAppointment(Appointment appointment);
 
-    boolean updateAppointmentTime(Appointment appointment, LocalDateTime startTime, LocalDateTime endTime);
-
-    boolean updateAppointmentName(Appointment appointment, String name);
+    boolean updateAppointment(Appointment appointment);
 
     boolean deleteAppointment(Appointment appointment);
 
