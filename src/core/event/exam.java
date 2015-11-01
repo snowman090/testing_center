@@ -17,11 +17,11 @@ public class exam {
 
     @Basic(optional = false)
     @Column(name = "exam_name" )
-    private String examName;//course or adhoc
+    private String examName;//course or ad hoc
 
     @Basic(optional = false)
     @Column(name = "type" )
-    private String type;//course or adhoc
+    private String type;//course or ad hoc
 
     @Basic(optional = false)
     @Column(name = "Num_Student_Need" )

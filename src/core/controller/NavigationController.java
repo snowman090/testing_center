@@ -1,5 +1,6 @@
 package core.controller;
 
+import core.event.ReservationDao;
 import core.service.TestingCenterInfoRetrieval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.portlet.ModelAndView;
 public class NavigationController {
     @Autowired
     private TestingCenterInfoRetrieval infoRetrieval;
+    @Autowired
+    private ReservationDao reservationAccess;
 
     /**
      * this is a controller method for view and edit information
@@ -27,18 +30,30 @@ public class NavigationController {
         return model;
     }
 
+    /**
+     * This method implements administrator's functionality for uploading
+     * a file containing all users.
+     * @return
+     */
     @RequestMapping("/upload")
     public ModelAndView uploadFile() {
         ModelAndView model = new ModelAndView("upload-file");
         model.addObject("page_heading",
                 StringResources.ADMINISTRATOR_OPERATIONS.get("uploadFile"));
-
-        return null;
+        return model;
     }
 
     @RequestMapping("/view-requests")
     public ModelAndView viewRequests() {
-        return null;
+        ModelAndView model = new ModelAndView("view-requests");
+        model.addObject("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("viewRequest"));
+        //by default, when the user enters the page all requests are displayed in chronological order
+        //by selecting different tabs on top of the list, the user is able to view the list
+        //in different orders: by alphabetical order of instructors' last names, number of attendants,
+        //utilization
+        model.addObject("all_requests", reservationAccess.findAll());
+        return model;
     }
 
     @RequestMapping("/view-appointments")
