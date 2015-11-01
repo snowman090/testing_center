@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class StudentDaoImpl implements StudentDao{
+public class StudentDaoImp implements StudentDao{
     private List<Student> students;
 
-    public StudentDaoImpl(){
+    public StudentDaoImp(){
         students = new ArrayList<Student>();
         Student student1 = new Student();
         Student student2 = new Student();

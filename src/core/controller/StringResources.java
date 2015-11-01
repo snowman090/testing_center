@@ -11,6 +11,10 @@ public class StringResources {
     public final static String USER_STUDENT = "Student";
     public final static String USER_ADMINISTRATOR = "Administrator";
 
+    public final static String STUDENT_VIEW_NAME = "student-home";
+    public final static String ADMIN_VIEW_NAME = "admin-home";
+    public final static String INSTRUCTOR_VIEW_NAME = "instructor-home";
+
     public final static Map<String, String> ADMINISTRATOR_OPERATIONS = new HashMap<>();
     public final static Map<String, String> STUDENT_OPERATIONS = new HashMap<>();
     public final static Map<String, String> INSTRUCTOR_OPERATIONS = new HashMap<>();
@@ -30,6 +34,6 @@ public class StringResources {
         INSTRUCTOR_OPERATIONS.put("viewAppointment","View Appointment");
 
         STUDENT_OPERATIONS.put("makeAppointment","Make Appointment");
-        STUDENT_OPERATIONS.put("viewAppointment","View Appointment");
+        STUDENT_OPERATIONS.put("viewAppointments","View Appointments");
     }
 }

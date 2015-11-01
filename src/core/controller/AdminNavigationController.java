@@ -20,14 +20,14 @@ public class AdminNavigationController {
 
     private ModelMap model = new ModelMap();
 
-    private String viewName = "admin-home";
+    private String viewName = StringResources.ADMIN_VIEW_NAME;
 
     /**
      * this is a controller method for view and edit information
      * this functionality is for administrator only
      * @return
      */
-    @RequestMapping("/view-info")
+    @RequestMapping("/{permission}/view-info")
     public String viewCenterInfo() {
         model.clear();
         //set the heading to that of view information page
@@ -43,7 +43,7 @@ public class AdminNavigationController {
      * a file containing all users.
      * @return
      */
-    @RequestMapping("/upload")
+    @RequestMapping("/{permission}/upload")
     public String uploadFile() {
         model.clear();
         model.addAttribute("page_heading",
@@ -51,7 +51,7 @@ public class AdminNavigationController {
         return viewName;
     }
 
-    @RequestMapping("/view-requests")
+    @RequestMapping("/{permission}/view-requests")
     public String viewRequests() {
         model.clear();
         model.addAttribute("page_heading",
@@ -64,7 +64,7 @@ public class AdminNavigationController {
         return viewName;
     }
 
-    @RequestMapping("/view-appointments")
+    @RequestMapping("/{permission}/view-appointments")
     public String viewAppointments() {
         model.clear();
         model.addAttribute("page_heading",
@@ -73,7 +73,7 @@ public class AdminNavigationController {
         return viewName;
     }
 
-    @RequestMapping("/make-appointment")
+    @RequestMapping("/{permission}/make-appointment")
     public String makeAppointment() {
         model.clear();
         model.addAttribute("page_heading",
@@ -81,7 +81,7 @@ public class AdminNavigationController {
         return viewName;
     }
 
-    @RequestMapping("/check-in")
+    @RequestMapping("/{permission}/check-in")
     public String checkIn() {
         model.clear();
         model.addAttribute("page_heading",
@@ -89,7 +89,7 @@ public class AdminNavigationController {
         return viewName;
     }
 
-    @RequestMapping("/generate-report")
+    @RequestMapping("/{permission}/generate-report")
     public String generateReport() {
         model.clear();
         model.addAttribute("page_heading",
