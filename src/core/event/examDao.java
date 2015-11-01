@@ -8,7 +8,7 @@ import java.util.List;
 public interface ExamDao {
     List<Exam> getAllExams ();
 
-    Exam findByExamId(String examId);
+    List<Exam> findByexamId(String examId);
 
     boolean addExam(Exam exam);
 
