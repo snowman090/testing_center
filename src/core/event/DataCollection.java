@@ -1,7 +1,6 @@
 package core.event;
 
-import core.db.SessionManager;
-import core.user.UserType;
+import core.service.SessionManager;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

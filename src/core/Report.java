@@ -1,23 +1,19 @@
 package core;
 
-import core.db.SessionManager;
+import core.service.SessionManager;
 import core.event.Appointment;
 import core.event.Course;
 import core.event.Exam;
 import core.event.Term;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
  * Created by Zeqli on 10/7/2015.

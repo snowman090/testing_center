@@ -1,6 +1,6 @@
 package core.user;
 
-import core.db.SessionManager;
+import core.service.SessionManager;
 import core.event.Appointment;
 
 import javax.persistence.Basic;

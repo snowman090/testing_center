@@ -2,7 +2,6 @@ package core.service;
 
 import core.user.*;
 
-import core.db.SessionManager;
 import org.hibernate.Session;
 
 import org.hibernate.SessionFactory;

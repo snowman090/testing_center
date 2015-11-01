@@ -1,10 +1,9 @@
 package test;
 
-import core.db.SessionManager;
+import core.service.SessionManager;
 import core.event.*;
 import core.user.Administrator;
 import core.user.Student;
-import core.user.UserType;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,9 +11,7 @@ import org.hibernate.Transaction;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 

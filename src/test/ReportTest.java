@@ -7,7 +7,7 @@ import core.user.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import core.db.SessionManager;
+import core.service.SessionManager;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

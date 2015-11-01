@@ -1,4 +1,4 @@
-package core.db;
+package core.service;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

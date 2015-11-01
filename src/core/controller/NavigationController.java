@@ -51,7 +51,7 @@ public class NavigationController {
         //by default, when the user enters the page all requests are displayed in chronological order
         //by selecting different tabs on top of the list, the user is able to view the list
         //in different orders: by alphabetical order of instructors' last names, number of attendants,
-        //utilization
+        //utilization, or, display only the ones made by one instructor by search the instructor's name
         model.addObject("all_requests", reservationAccess.findAll());
         return model;
     }
