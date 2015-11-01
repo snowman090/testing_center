@@ -1,5 +1,6 @@
 package core.controller;
 
+import core.event.AppointmentDao;
 import core.event.ReservationDao;
 import core.service.TestingCenterInfoRetrieval;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.ModelAndView;
 
 @Controller
-public class NavigationController {
+public class AdminNavigationController {
     @Autowired
     private TestingCenterInfoRetrieval infoRetrieval;
     @Autowired
     private ReservationDao reservationAccess;
+    @Autowired
+    private AppointmentDao appointmentDao;
 
     /**
      * this is a controller method for view and edit information
@@ -48,21 +51,44 @@ public class NavigationController {
         ModelAndView model = new ModelAndView("view-requests");
         model.addObject("page_heading",
                 StringResources.ADMINISTRATOR_OPERATIONS.get("viewRequest"));
-        //by default, when the user enters the page all requests are displayed in chronological order
-        //by selecting different tabs on top of the list, the user is able to view the list
-        //in different orders: by alphabetical order of instructors' last names, number of attendants,
-        //utilization, or, display only the ones made by one instructor by search the instructor's name
+        /*by default, when the user enters the page all requests are displayed in chronological order
+        by selecting different tabs on top of the list, the user is able to view the list
+        in different orders: by alphabetical order of instructors' last names, number of attendants,
+        utilization, or, display only the ones made by one instructor by search the instructor's name*/
         model.addObject("all_requests", reservationAccess.findAll());
         return model;
     }
 
     @RequestMapping("/view-appointments")
     public ModelAndView viewAppointments() {
-        return null;
+        ModelAndView model = new ModelAndView("view-appointments");
+        model.addObject("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("viewAppointments"));
+        model.addObject("all_appointments", appointmentDao.findAllAppointment());
+        return model;
     }
 
     @RequestMapping("/make-appointment")
     public ModelAndView makeAppointment() {
-        return null;
+        ModelAndView model = new ModelAndView("make-appointments");
+        model.addObject("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("makeAppointment"));
+        return model;
+    }
+
+    @RequestMapping("/check-in")
+    public ModelAndView checkIn() {
+        ModelAndView model = new ModelAndView("check-in");
+        model.addObject("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("checkIn"));
+        return model;
+    }
+
+    @RequestMapping("/generate-report")
+    public ModelAndView generateReport() {
+        ModelAndView model = new ModelAndView("general-report");
+        model.addObject("page_heading",
+                StringResources.ADMINISTRATOR_OPERATIONS.get("generateReport"));
+        return model;
     }
 }
