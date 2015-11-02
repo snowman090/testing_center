@@ -56,7 +56,6 @@ public class ReportTest {
         terms.add(term2);
         terms.add(term3);
         report.showTermRangeReport(terms);
-
     }
 
     // Insert a row into Administrator Table

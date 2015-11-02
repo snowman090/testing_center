@@ -1,58 +1,78 @@
 package core.event;
 import core.service.SessionManager;
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import test.Log4J;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Repository
 public class ReservationDaoImp implements ReservationDao {
     List<Reservation> reservations;
+    public static final Logger log = Logger.getLogger(Log4J.class);
 
-    public ReservationDaoImp(){
+    public ReservationDaoImp(){}
+
+    @Override
+    public List<Reservation> findAll() {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         tx = session.beginTransaction();
         reservations = session.createQuery("FROM Reservation").list();
         session.close();
-
-    }
-
-    @Override
-    public List<Reservation> findAll() {
         return reservations;
     }
 
+
     @Override
-    public Reservation findByID(String reservationID) {
-        return reservations.get(Integer.parseInt(reservationID));
+    public Reservation findByID(String id) {
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Reservation r WHERE r.reservationID = :reservationID");
+        query.setParameter("reservationID", id);
+        tx.commit();
+        Reservation result = (Reservation)query.uniqueResult();
+        session.close();
+        return result;
+        //
+
+        //return reservations.get(Integer.parseInt(reservationID));
     }
 
     @Override
     public List<Reservation> findByDate(LocalDate date) {
-        ArrayList<Reservation> result = new ArrayList<>();
-        for(int i = 0, index = 0; i < reservations.size(); i++){
-            if((reservations.get(i).getStartDate().isBefore(date)||reservations.get(i).getStartDate().isEqual(date))
-                    && (reservations.get(i).getEndDate().isAfter(date)||reservations.get(i).getEndDate().isEqual(date))){
-                result.set(index,reservations.get(i));
-                index++;
-            }
-        }
-        return reservations;
+        ArrayList<Reservation> result;
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Reservation r WHERE r.startDateTime <= :startDate and r.endDateTime >= :endDate");
+
+        query.setParameter("startDate", date);
+        query.setParameter("endDate", date);
+
+        tx.commit();
+        result = (ArrayList<Reservation>)query.list();
+        session.close();
+        return result;
+
     }
 
     @Override
     public List<Reservation> findByInstructorId(String InstructorID) {
-        List<Reservation> result = new ArrayList<>();
-        for(int i = 0, index = 0; i < reservations.size(); i++){
-            if(reservations.get(i).getInstructorId().equals(InstructorID)){
-                result.set(index,reservations.get(i));
-                index++;
-            }
-        }
+        ArrayList<Reservation> result;
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Reservation r WHERE r.instructorId = :insId");
+
+        query.setParameter("insId", InstructorID);
+        tx.commit();
+        result = (ArrayList<Reservation>)query.list();
+        session.close();
         return result;
     }
 
@@ -64,7 +84,7 @@ public class ReservationDaoImp implements ReservationDao {
 
             tx = session.beginTransaction();
             session.save(reservation);
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         }
         catch (HibernateException he){
@@ -87,8 +107,6 @@ public class ReservationDaoImp implements ReservationDao {
                     ("update Reservation R set R  = :R where R.reservationID = :reservationID");
             query.setParameter("R", newReservation);
             query.setParameter("reservationID", id);
-
-            int ret = query.executeUpdate();
             tx.commit();
             session.close();
         }
@@ -121,6 +139,6 @@ public class ReservationDaoImp implements ReservationDao {
             //log.error("Error with addExam ", he);
             return false;
         }
-        return  true;
+        return true;
     }
 }

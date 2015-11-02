@@ -13,33 +13,41 @@ import java.util.List;
 public class AppointmentDaoImp implements AppointmentDao {
     List<Appointment> appointments;
 
-    public AppointmentDaoImp(){
+    public AppointmentDaoImp(){}
+
+    @Override
+    public List<Appointment> findAllAppointment() {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
         appointments = session.createQuery("FROM Appointment").list();
         session.close();
-    }
-
-    @Override
-    public List<Appointment> findAllAppointment() {
         return appointments;
     }
 
     @Override
     public List<Appointment> findAllByStudent(String NetId) {
-        List<Appointment> result = new ArrayList<Appointment>();
-        for(int i = 0, index = 0; i < appointments.size(); i++){
-            if(appointments.get(i).getStudentId().equals(NetId)){
-                result.set(index, appointments.get(i));
-                index++;
-            }
-        }
+        ArrayList<Appointment> result;
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Appointment A WHERE A.studentId = :stuId");
+
+        query.setParameter("stuId", NetId);
+        tx.commit();
+        result = (ArrayList<Appointment>)query.list();
+        session.close();
         return result;
     }
 
     @Override
     public Appointment findByAppointmentID(String AppointmentID) {
-        return appointments.get(Integer.parseInt(AppointmentID));
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Appointment A WHERE A.appointmentID = :appId");
+        query.setParameter("appId", AppointmentID);
+        tx.commit();
+        Appointment result = (Appointment)query.uniqueResult();
+        session.close();
+        return result;
     }
 
     /*@Override
@@ -84,7 +92,7 @@ public class AppointmentDaoImp implements AppointmentDao {
 
             Query query = session.createQuery("delete from Appointment R where R.appointmentID = :appointmentID");
             query.setParameter("appointmentID", appointment.getAppointmentID());
-            int ret = query.executeUpdate();// this int return the number of entities updated or deleted
+
             tx.commit();
             session.close();
         }
@@ -109,7 +117,6 @@ public class AppointmentDaoImp implements AppointmentDao {
             query.setParameter("A", appointment);
             query.setParameter("appointmentID", id);
 
-            int ret = query.executeUpdate();
             tx.commit();
             session.close();
         }

@@ -21,7 +21,7 @@ public class Exam {// approved request
 
     @Basic(optional = false)
     @Column(name = "type" )
-    private String type;//course or ad hoc
+    private String type;//"course" or "ad hoc"
 
 
 
@@ -49,7 +49,6 @@ public class Exam {// approved request
     @Column(name="instructor_id")
     @Basic(optional = false)
     private String instructorId;
-
 
     private double duration;// lasting time
     

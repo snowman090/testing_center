@@ -14,7 +14,6 @@ import com.google.gson.GsonBuilder;
 public class TestingCenterInfo {
 
     static final private String PATH = "./doc/TestingCenterInfo.json";
-
     private int numSeats;
     private int numSetAsideSeats;
     private LocalTime open;

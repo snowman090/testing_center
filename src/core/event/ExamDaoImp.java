@@ -17,33 +17,43 @@ import java.util.List;
 public class ExamDaoImp implements ExamDao{
     //public static final Logger log = Logger.getLogger(ExamDaoImp.class);
     List<Exam> exams;
-    public ExamDaoImp() {
+    public ExamDaoImp() {}
+
+    @Override
+    public List<Exam> getAllExams() {//approved request
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         tx = session.beginTransaction();
         exams = session.createQuery("FROM Exam").list();
         session.close();
-    }
-    @Override
-    public List<Exam> getAllExams() {//approved request
         return exams;
     }
 
 
     @Override
     public Exam findByExamId(String examId) {
-        return exams.get(Integer.parseInt(examId));
+
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Exam E WHERE E.examId = :eId");
+        query.setParameter("eId", examId);
+        tx.commit();
+        Exam result = (Exam)query.uniqueResult();
+        session.close();
+        return result;
     }
 
     @Override
     public List<Exam> findByInStructorId(String instructorId) {
-        List<Exam> result = new ArrayList<Exam>();
-        for(int i = 0, index = 0; i < exams.size(); i++){
-            if(exams.get(i).getInstructorId().equals(instructorId)){
-                result.set(index, exams.get(i));
-                index++;
-            }
-        }
+        ArrayList<Exam> result;
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Exam E WHERE E.instructorId = :insId");
+
+        query.setParameter("insId", instructorId);
+        tx.commit();
+        result = (ArrayList<Exam>)query.list();
+        session.close();
         return result;
     }
 
@@ -89,7 +99,6 @@ public class ExamDaoImp implements ExamDao{
             query.setParameter("E", exam);
             query.setParameter("examId", id);
 
-            int ret = query.executeUpdate();
             tx.commit();
 
             session.close();
@@ -113,7 +122,7 @@ public class ExamDaoImp implements ExamDao{
 
             Query query = session.createQuery("delete from Exam E where E.examId = :examId");
             query.setParameter("examId", exam.getExamId());
-            int ret = query.executeUpdate();// this int return the number of entities updated or deleted
+
             tx.commit();
             session.close();
         }

@@ -12,13 +12,7 @@ import java.util.Date;
 public class Reservation {
     @Id
     @Column(name = "reservation_id")
-    @Basic(optional = false)
     private String reservationID;
-
-    @Temporal(TemporalType.TIME)
-    @Column(name="start_time")
-    @Basic(optional = false)
-    private Date startTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="start_date_time")
@@ -36,20 +30,47 @@ public class Reservation {
     @Basic(optional = false)
     private String instructorId;
 
-
     //haven't initiated
     @Basic(optional = false)
     @Column(name="status")
-    private Status status;
+    private String status;
+
+    @Basic(optional = false)
+    @Column(name="terms")
+    private String terms;
 
 
 
-    public Date getStartTime() {// for ReservationDaoImp
-        return startTime;
+    @Basic(optional = false)
+    @Column(name="type")
+    private String type;
+
+    public Reservation(){}
+
+    //This constructor is for testing
+    public Reservation(String id, LocalDateTime sTime, LocalDateTime eTime, String insId, String terms){
+        reservationID = id;
+        this.setStartDateTime(sTime);
+        this.setEndDateTime(eTime);
+        instructorId = insId;
+        this.terms = terms;
+        this.status = "Pending";
+        this.type = "Course";
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    public String getTerms() {
+        return terms;
+    }
+
+    public void setTerms(String terms) {
+        this.terms = terms;
     }
 
 
@@ -101,10 +122,10 @@ public class Reservation {
     }
 
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -119,4 +140,6 @@ public class Reservation {
         Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
+
+
 }

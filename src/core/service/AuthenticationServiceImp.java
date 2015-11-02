@@ -2,12 +2,15 @@ package core.service;
 
 import core.user.*;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import test.Log4J;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class AuthenticationServiceImp implements AuthenticationService{
     //SessionFactory sessionFactory = sessionManager.createSessionFactory();
 
     //UserType AllUser = new UserType();
+
     @Override
     public boolean registeredUserId(String userId) {
 

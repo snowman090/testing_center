@@ -1,9 +1,12 @@
 package core.user;
 
-import core.event.Appointment;
+import core.event.*;
 import core.event.Reservation;
+import core.event.ReservationDao;
+import core.event.ReservationDaoImp;
 import core.user.Authorization;
 import core.user.UserType;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
 import java.util.Iterator;

@@ -2,30 +2,38 @@ package core.event;
 
 import core.service.SessionManager;
 import org.hibernate.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by eson_wang on 11/2/15.
  */
+@Repository
 public class CourseDaoImp implements CourseDao{
     List<Course> courses;
 
-    public CourseDaoImp(){
+    public CourseDaoImp(){}
+
+    @Override
+    public List<Course> getAllCourse() {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
         courses = session.createQuery("FROM Course ").list();
         session.close();
-    }
-
-    @Override
-    public List<Course> getAllCourse() {
         return courses;
     }
 
     @Override
     public Course findByCourseId(String courseId) {
-        return courses.get(Integer.parseInt(courseId));
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Course C WHERE C.courseId = :coId");
+        query.setParameter("coId", courseId);
+        tx.commit();
+        Course result = (Course)query.uniqueResult();
+        session.close();
+        return result;
     }
 
     @Override
@@ -58,8 +66,6 @@ public class CourseDaoImp implements CourseDao{
             Query query = session.createQuery("update Course C set C  = :C where C.courseId = :courseId");
             query.setParameter("C", course);
             query.setParameter("courseId", id);
-
-            int ret = query.executeUpdate();
             tx.commit();
             session.close();
         }
@@ -81,7 +87,6 @@ public class CourseDaoImp implements CourseDao{
             tx = session.beginTransaction();
             Query query = session.createQuery("delete from Course R where R.courseId = :courseId");
             query.setParameter("courseId", course.getCourseId());
-            int ret = query.executeUpdate();// this int return the number of entities updated or deleted
             tx.commit();
             session.close();
         }
