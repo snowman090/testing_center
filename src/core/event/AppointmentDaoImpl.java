@@ -20,6 +20,11 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
+    public List<Appointment> findAllByStudent(String NetId) {
+        return null;
+    }
+
+    @Override
     public boolean deleteAppointment(Appointment appointment) {
         appointments.remove(appointment.getAppointmentID());
         return true;

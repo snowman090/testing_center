@@ -88,7 +88,7 @@ public class NavigationController {
                 model.clear();
                 model.addAttribute("page_heading",
                         StringResources.STUDENT_OPERATIONS.get("viewAppointments"));
-
+                //model.addAttribute("main_content", appointmentDao.);
                 break;
         }
         return viewName;
