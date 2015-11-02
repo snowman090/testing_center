@@ -32,7 +32,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public List<Reservation> getAllReservation() {
+    public List<Reservation> findAll() {
         return reservations;
     }
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-
 public class ExamDaoImp implements ExamDao{
     List<Exam> exams;
     public ExamDaoImp() {
@@ -18,11 +17,9 @@ public class ExamDaoImp implements ExamDao{
         return exams;
     }
 
+
     @Override
-    public List<Exam> findByexamId(String examId) {
-        return null;
-    }
-    public exam findByExamId(String examId) {
+    public Exam findByExamId(String examId) {
         return exams.get(Integer.parseInt(examId));
     }
 

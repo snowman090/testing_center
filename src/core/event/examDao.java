@@ -5,14 +5,14 @@ import java.util.List;
 /**
  * Created by eson_wang on 10/11/15.
  */
-public interface examDao {
-    List<exam> getAllExams ();
+public interface ExamDao {
+    List<Exam> getAllExams ();
 
-    exam findByExamId(String examId);
+    Exam findByExamId(String examId);
 
-    boolean addExam(exam exam);
+    boolean addExam(Exam exam);
 
-    boolean updateExam(exam exam, String examId);
+    boolean updateExam(Exam exam, String examId);
 
     boolean deleteCExam(String examId);
 
