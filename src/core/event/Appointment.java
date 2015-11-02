@@ -52,7 +52,7 @@ public class Appointment {
     @JoinColumn(name="studentId")
     private Student student;
 
-    @JoinColumn(name="status")
+    @Column(name="status")
     private String status;
 
     public Appointment(){}
