@@ -3,6 +3,9 @@ package core.controller;
 import core.service.AuthenticationService;
 import core.user.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +21,11 @@ public class LoginController{
 
     @RequestMapping(value = "/authorizing", method = RequestMethod.POST)
     public String authorizeUser (@RequestParam("netId") String userId,
-                                 @RequestParam("password") String password) {
+                                 @RequestParam("password") String password,
+                                 MockHttpSession session) {
         Authorization authorization = authenticationService.login(userId, password);
         if (authorization != null) {
+            session.setAttribute("netId", userId);
             return "home/" + authorization;
         }else {
             if (authenticationService.registeredUserId(userId)) {

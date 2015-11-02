@@ -5,6 +5,11 @@ import java.util.List;
 
 public interface AppointmentDao {
     List<Appointment> findAllAppointment();
+
+    List<Appointment> findAllByStudent(String netId);
+
+    List<Appointment> findAllByInstructor(String netId);
+
     boolean findByAppointmentID(String AppointmentID);
 
     boolean addAppointment(Appointment appointment);
@@ -14,4 +19,5 @@ public interface AppointmentDao {
     boolean updateAppointmentName(Appointment appointment, String name);
 
     boolean deleteAppointment(Appointment appointment);
+
 }
