@@ -1,8 +1,7 @@
 package test;
 
 import core.Report;
-import core.event.Appointment;
-import core.event.Term;
+import core.event.*;
 import core.user.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,7 +28,7 @@ public class ReportTest {
         Appointment yimApp = new Appointment("cse308examYim", "cse_308", "yim", LocalDateTime.of(2015,10,30, 1, 0),
                 LocalDateTime.of(2015,10,30,2,20),"yim", "5R15", false);
 
-        Appointment yisApp = new Appointment("cse308examYis", "cse_308", "yis", LocalDateTime.of(2015,10,30, 1, 0),
+        Appointment yisApp = new Appointment("cse308examYis", "cse_219", "yis", LocalDateTime.of(2015,10,30, 1, 0),
                 LocalDateTime.of(2015,12,17,2,20),"yim", "5R15", false);
 
         addAppointment(walApp);
@@ -39,6 +38,14 @@ public class ReportTest {
         Report report = new Report();
         report.showDayReport(term);
         report.showWeekReport(term);
+
+        Exam exam1 = new Exam("308","software","ad hoc", LocalDateTime.of(2015,9,20,13,30),LocalDateTime.of(2015,9,21,15,0), 1.5,50,80);
+        Exam exam2 = new Exam("305","system","course", LocalDateTime.of(2015,9,20,15,10),LocalDateTime.of(2015,9,21,17,40), 2.5,50,80);
+        ExamDao exam = new ExamDaoImp();
+        exam.addExam(exam1);
+        exam.addExam(exam2);
+
+        report.showTermReport(term);
 
     }
 

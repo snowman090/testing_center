@@ -117,7 +117,7 @@ public class Report {
 
     public void showWeekReport(Term term) {
         appointments = getAppointments(term);
-        Log4J.log.info("------------Show report by Day------------");
+        Log4J.log.info("------------Show report by Week------------");
 
 
         // Assume Each Semester Starts on Monday
@@ -157,6 +157,49 @@ public class Report {
 
         }
         Log4J.log.info("End of report...");
+
+    }
+
+    // Report Date
+    public void showTermReport(Term term){
+        // Read Database Using Left Join
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        Set<String> courses = new LinkedHashSet<>();
+        try{
+            tx = session.beginTransaction();
+            Query query = session.createQuery("select e.examName from Exam e where  :startDate <= e.startDateTime and e.endDateTime <= :endDate");
+            System.out.println(Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            System.out.println(Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            query.setTimestamp("endDate", Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            query.setTimestamp("startDate", Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
+
+            List<String> listResult = query.list();
+            for(String row : listResult){
+                String s = row;
+                Log4J.log.debug("Read examName from table Exam: " + s);
+                courses.add(s);
+
+            }
+
+            tx.commit();
+        } catch (HibernateException he) {
+            if(tx!=null){
+                tx.rollback();
+            }
+            Log4J.log.error("Error with Table Join", he);
+        }
+
+
+        Log4J.log.info("------------Show report by Year------------");
+        Log4J.log.info(term.getTermName() + " starts from " + term.getTermStartDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
+        Iterator<String> it = courses.iterator();
+        while (it.hasNext()){
+            Log4J.log.info(it.next());
+        }
+        Log4J.log.info(term.getTermName() + " ends on " + term.getTermEndDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
+
 
     }
 }

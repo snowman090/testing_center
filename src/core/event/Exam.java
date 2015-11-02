@@ -24,21 +24,21 @@ public class Exam {
     private String type;//course or ad hoc
 
     @Basic(optional = false)
-    @Column(name = "Num_Student_Need" )
+    @Column(name = "num_student_need" )
     private int numStudentNeed;//
 
     @Basic(optional = false)
-    @Column(name = "Num_Student_appointment" )
+    @Column(name = "num_student_appointment" )
     private int numStudentAppointment;//
 
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="START_DATE_TIME")// start time of an exam
+    @Column(name="start_date_time")// start time of an exam
     @Basic(optional = false)
     private Date startDateTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="END_DATE_TIME")// end time of an exam
+    @Column(name="end_date_time")// end time of an exam
     @Basic(optional = false)
     private Date endDateTime;
 

@@ -2,14 +2,20 @@ package core.event;
 
 import java.util.List;
 
+/**
+ * Created by zeqing on 11/2/2015.
+ */
 public interface ExamDao {
-    List<Exam> getAllExams();
+    public List<Exam> getAllExams()  ;
 
-    Exam findByExamId(String examId);
 
-    boolean addExam(Exam exam);
+    public Exam findByExamId(String examId);
 
-    boolean updateExam(Exam exam, String examId);
 
-    boolean deleteCExam(String examId);
+    public boolean addExam(Exam exam);
+
+    public boolean updateExam(Exam exam, String examId);
+
+    public boolean deleteCExam(String examId);
+
 }
