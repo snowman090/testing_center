@@ -29,8 +29,8 @@ public class Course {
     private int session;
 
     @Basic(optional = false)
-    @Column(name = "instructor")
-    private Instructor instructor;
+    @Column(name = "instructored")
+    private String instructorID;
 
     @Basic(optional = false)
     @OneToMany(mappedBy = "course_id")
@@ -48,12 +48,12 @@ public class Course {
         this.courseId = courseId;
     }
 
-    public Instructor getInstructor() {
-        return this.instructor;
+    public String getInstructorID() {
+        return instructorID;
     }
 
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
+    public void setInstructorID(String instructorID) {
+        this.instructorID = instructorID;
     }
 
     public List<Student> getEnrolledStudents() {

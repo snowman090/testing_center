@@ -20,20 +20,22 @@ public class DataCollection {
     static final private String PATH = "/course_registration_data/";
     static final private String fileExt = ".csv";
 
-    private List<String[]> users;
-    private List<String[]> courses;
-    private List<String[]> rosters;
+    //private List<String[]> users;
+    //private List<String[]> courses;
+    //private List<String[]> rosters;
 
-    private String path_usersCSV;
-    private String path_coursesCSV;
-    private String path_rostersCSV;
+    private List<String[]> list;
+
+    //private String path_usersCSV;
+    //private String path_coursesCSV;
+    //private String path_rostersCSV;
 
     private AppointmentDaoImpl appointmentDaoImpl = new AppointmentDaoImpl();
 
     //import ata from CSV file
     //0: fail; 1: user; 2: class; 3: rooster
-    public boolean readFile(String path){
-        List<String[]> list = new ArrayList<String[]>();
+    public int readFile(String path){
+        List<String[]> readList = new ArrayList<String[]>();
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
@@ -43,19 +45,19 @@ public class DataCollection {
             log.info("---------- readFile(String path) ----------");
             while ((line = br.readLine()) != null) {
                 String[] listItem = line.split(cvsSplitBy);
-                list.add(listItem);
+                readList.add(listItem);
             }
+            setList(readList);
             if(path.contains("user.csv")){
-                setUsers(list);
                 log.info("|  Import User Information: ");
                 //add users to table;
+               return 1;
             }
             else if(path.contains("class.csv")){
-                setCourses(list);
                 log.info("|  Import Class Information: ");
+                return 2;
             }
             else if(path.contains("roster.csv")){
-                setRosters(list);
                 log.info("|  Import Roster Information: ");
                 //change the list to hashmap
                 HashMap<String, String> hash = new HashMap();
@@ -103,13 +105,13 @@ public class DataCollection {
             if (br != null) {
                 try {
                     br.close();
-                    return true;
+                    return 3;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return false;
+        return 0;
     }
     public void markSuperfluous(List<Appointment> appointmentList, List<String[]> list){
         Iterator databaseIterator = appointmentList.iterator();
@@ -124,51 +126,59 @@ public class DataCollection {
         }
     }
 
-    public List<String[]> getUsers() {
-        return users;
+    public List<String[]> getList() {
+        return list;
     }
 
-    public void setUsers(List<String[]> users) {
-        this.users = users;
+    public void setList(List<String[]> list) {
+        this.list = list;
     }
 
-    public List<String[]> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<String[]> courses) {
-        this.courses = courses;
-    }
-
-    public List<String[]> getRosters() {
-        return rosters;
-    }
-
-    public void setRosters(List<String[]> rosters) {
-        this.rosters = rosters;
-    }
-
-    public String getPath_usersCSV() {
-        return path_usersCSV;
-    }
-
-    public void setPath_usersCSV(String path_usersCSV) {
-        this.path_usersCSV = path_usersCSV;
-    }
-
-    public String getPath_coursesCSV() {
-        return path_coursesCSV;
-    }
-
-    public void setPath_coursesCSV(String path_coursesCSV) {
-        this.path_coursesCSV = path_coursesCSV;
-    }
-
-    public String getPath_rostersCSV() {
-        return path_rostersCSV;
-    }
-
-    public void setPath_rostersCSV(String path_rostersCSV) {
-        this.path_rostersCSV = path_rostersCSV;
-    }
+    //    public List<String[]> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<String[]> users) {
+//        this.users = users;
+//    }
+//
+//    public List<String[]> getCourses() {
+//        return courses;
+//    }
+//
+//    public void setCourses(List<String[]> courses) {
+//        this.courses = courses;
+//    }
+//
+//    public List<String[]> getRosters() {
+//        return rosters;
+//    }
+//
+//    public void setRosters(List<String[]> rosters) {
+//        this.rosters = rosters;
+//    }
+//
+//    public String getPath_usersCSV() {
+//        return path_usersCSV;
+//    }
+//
+//    public void setPath_usersCSV(String path_usersCSV) {
+//        this.path_usersCSV = path_usersCSV;
+//    }
+//
+//    public String getPath_coursesCSV() {
+//        return path_coursesCSV;
+//    }
+//
+//    public void setPath_coursesCSV(String path_coursesCSV) {
+//        this.path_coursesCSV = path_coursesCSV;
+//    }
+//
+//    public String getPath_rostersCSV() {
+//        return path_rostersCSV;
+//    }
+//
+//    public void setPath_rostersCSV(String path_rostersCSV) {
+//        this.path_rostersCSV = path_rostersCSV;
+//    }
 }

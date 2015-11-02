@@ -3,6 +3,8 @@ package test;
 import core.service.SessionManager;
 import core.event.*;
 import core.user.Administrator;
+import core.user.Instructor;
+import core.user.InstructorDao;
 import core.user.Student;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -449,9 +451,38 @@ public class UnitTest {
         log.info("|  -Gap Time: " + info.getGap());
         log.info("|  -Reminder Interval: " + info.getReminderInterval());
     }
+
     public void importDate(String path){
         DataCollection data = new DataCollection();
-        data.readFile(path);
+        int listType = data.readFile(path);
+        List<String[]> list = data.getList();
+        if(listType == 1){
+            //add student
+            for(int i = 0; i < list.size(); i++){
+                String[] items = list.get(i);
+                Student student = new Student();
+                student.setFirstName(items[0]);
+                student.setLastName(items[1]);
+                student.setNetId(items[2]);
+                student.setEmail(items[3]);
+                addStudent(student);
+            }
+        }
+        else if(listType == 2){
+            //add class
+            for(int i = 0; i < list.size(); i++){
+                String[] items = list.get(i);
+                Course course = new Course();
+                course.setCourseId(items[0]);
+                course.setSubject(items[1]);
+                course.setCatalog(Integer.parseInt(items[2]));
+                course.setSession(Integer.parseInt(items[3]));
+                course.setInstructorID(items[4]);
+            }
+        }
+        else if(listType == 3){
+            //add rooster, added
+        }
     }
 
 }
