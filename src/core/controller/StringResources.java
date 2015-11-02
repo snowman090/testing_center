@@ -26,14 +26,14 @@ public class StringResources {
         ADMINISTRATOR_OPERATIONS.put("upload", "Upload a file");
         ADMINISTRATOR_OPERATIONS.put("viewAppointments", "View Appointment");
         ADMINISTRATOR_OPERATIONS.put("makeAppointment", "Make An Appointment");
-        ADMINISTRATOR_OPERATIONS.put("checkIn","Check in a Student");
+        ADMINISTRATOR_OPERATIONS.put("checkIn", "Check in a Student");
         ADMINISTRATOR_OPERATIONS.put("generateReport","Generate Report");
 
         INSTRUCTOR_OPERATIONS.put("scheduleEvent", "Schedule an Event");
-        INSTRUCTOR_OPERATIONS.put("viewReservation","View Pending Request");
-        INSTRUCTOR_OPERATIONS.put("viewAppointment","View Appointment");
+        INSTRUCTOR_OPERATIONS.put("viewReservations", "View Requests");
+        INSTRUCTOR_OPERATIONS.put("viewAppointments", "View Appointments");
 
-        STUDENT_OPERATIONS.put("makeAppointment","Make Appointment");
-        STUDENT_OPERATIONS.put("viewAppointments","View Appointments");
+        STUDENT_OPERATIONS.put("makeAppointment", "Make Appointment");
+        STUDENT_OPERATIONS.put("viewAppointments", "View Appointments");
     }
 }

@@ -5,6 +5,7 @@ import core.event.ReservationDao;
 import core.service.TestingCenterInfoRetrieval;
 import core.user.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,7 +60,8 @@ public class NavigationController {
     }
 
     @RequestMapping("/{permission}/view-requests")
-    public String viewRequests(@PathVariable("permission") Authorization permission) {
+    public String viewRequests(@PathVariable("permission") Authorization permission,
+                               MockHttpSession session) {
         switch (permission) {
             case ADMINISTRATOR:
                 model.clear();
@@ -70,12 +72,21 @@ public class NavigationController {
                 in different orders: by alphabetical order of instructors' last names, number of attendants,
                 utilization, or, display only the ones made by one instructor by search the instructor's name*/
                 model.addAttribute("main_content", reservationAccess.findAll());
+                break;
+            case INSTRUCTOR:
+                model.clear();
+                model.addAttribute("page_heading",
+                        StringResources.INSTRUCTOR_OPERATIONS.get("viewReservations"));
+                String netId = (String) session.getAttribute("userId");
+                model.addAttribute("main_content", reservationAccess.findByInstructor(netId));
         }
         return viewName;
     }
 
     @RequestMapping("/{permission}/view-appointments")
-    public String viewAppointments(@PathVariable("permission") Authorization permission) {
+    public String viewAppointments(@PathVariable("permission") Authorization permission,
+                                   MockHttpSession session) {
+        String netId = (String) session.getAttribute("netId");
         switch (permission) {
             case ADMINISTRATOR:
                 model.clear();
@@ -88,33 +99,62 @@ public class NavigationController {
                 model.clear();
                 model.addAttribute("page_heading",
                         StringResources.STUDENT_OPERATIONS.get("viewAppointments"));
-                //model.addAttribute("main_content", appointmentDao.);
+                model.addAttribute("main_content", appointmentDao.findAllByStudent(netId));
                 break;
+
+            case INSTRUCTOR:
+                model.clear();
+                model.addAttribute("page_heading",
+                        StringResources.INSTRUCTOR_OPERATIONS.get("viewAppointments"));
+                model.addAttribute("main_content", appointmentDao.findAllByInstructor(netId));
         }
         return viewName;
     }
 
     @RequestMapping("/{permission}/make-appointment")
-    public String makeAppointment(@PathVariable("permission") String permission) {
-        model.clear();
-        model.addAttribute("page_heading",
-                StringResources.ADMINISTRATOR_OPERATIONS.get("makeAppointment"));
+    public String makeAppointment(@PathVariable("permission") Authorization permission) {
+        switch (permission) {
+            case ADMINISTRATOR:
+                model.clear();
+                model.addAttribute("page_heading",
+                        StringResources.ADMINISTRATOR_OPERATIONS.get("makeAppointment"));
+            break;
+
+            case STUDENT:
+                model.clear();
+                model.addAttribute("page_heading",
+                        StringResources.STUDENT_OPERATIONS.get("makeAppointment"));
+        }
         return viewName;
     }
 
     @RequestMapping("/{permission}/check-in")
-    public String checkIn(@PathVariable("permission") String permission) {
-        model.clear();
-        model.addAttribute("page_heading",
-                StringResources.ADMINISTRATOR_OPERATIONS.get("checkIn"));
+    public String checkIn(@PathVariable("permission") Authorization permission) {
+        if (permission == Authorization.ADMINISTRATOR) {
+            model.clear();
+            model.addAttribute("page_heading",
+                    StringResources.ADMINISTRATOR_OPERATIONS.get("checkIn"));
+        }
         return viewName;
     }
 
     @RequestMapping("/{permission}/generate-report")
-    public String generateReport(@PathVariable("permission") String permission) {
-        model.clear();
-        model.addAttribute("page_heading",
-                StringResources.ADMINISTRATOR_OPERATIONS.get("generateReport"));
+    public String generateReport(@PathVariable("permission") Authorization permission) {
+        if (permission == Authorization.ADMINISTRATOR) {
+            model.clear();
+            model.addAttribute("page_heading",
+                    StringResources.ADMINISTRATOR_OPERATIONS.get("generateReport"));
+        }
+        return viewName;
+    }
+
+    @RequestMapping("/{permission}/schedule-event")
+    public String scheduleEvent(@PathVariable("permission") Authorization permission){
+        if (permission == Authorization.INSTRUCTOR) {
+            model.clear();
+            model.addAttribute("page_heading",
+                    StringResources.INSTRUCTOR_OPERATIONS.get("scheduleEvent"));
+        }
         return viewName;
     }
 }
