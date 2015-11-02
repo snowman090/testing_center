@@ -38,7 +38,7 @@ public class ReportTest {
 
         Report report = new Report();
         report.showDayReport(term);
-
+        report.showWeekReport(term);
 
     }
 
