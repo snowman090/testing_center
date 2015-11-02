@@ -39,6 +39,4 @@ public class ExamDaoImp implements ExamDao{
     public boolean deleteCExam(String examId) {
         return false;
     }
-
-
 }
