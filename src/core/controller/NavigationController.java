@@ -4,8 +4,8 @@ import core.event.AppointmentDao;
 import core.event.ReservationDao;
 import core.service.TestingCenterInfoRetrieval;
 import core.user.Authorization;
+import core.user.SessionProfile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +19,8 @@ public class NavigationController {
     private ReservationDao reservationAccess;
     @Autowired
     private AppointmentDao appointmentDao;
+    @Autowired
+    private SessionProfile profile;
 
     private ModelMap model = new ModelMap();
 
@@ -60,8 +62,7 @@ public class NavigationController {
     }
 
     @RequestMapping("/{permission}/view-requests")
-    public String viewRequests(@PathVariable("permission") Authorization permission,
-                               MockHttpSession session) {
+    public String viewRequests(@PathVariable("permission") Authorization permission) {
         switch (permission) {
             case ADMINISTRATOR:
                 model.clear();
@@ -77,16 +78,15 @@ public class NavigationController {
                 model.clear();
                 model.addAttribute("page_heading",
                         StringResources.INSTRUCTOR_OPERATIONS.get("viewReservations"));
-                String netId = (String) session.getAttribute("userId");
+                String netId = profile.getUserId();
                 model.addAttribute("main_content", reservationAccess.findByInstructor(netId));
         }
         return viewName;
     }
 
     @RequestMapping("/{permission}/view-appointments")
-    public String viewAppointments(@PathVariable("permission") Authorization permission,
-                                   MockHttpSession session) {
-        String netId = (String) session.getAttribute("netId");
+    public String viewAppointments(@PathVariable("permission") Authorization permission) {
+        String netId = profile.getUserId();
         switch (permission) {
             case ADMINISTRATOR:
                 model.clear();
@@ -101,12 +101,6 @@ public class NavigationController {
                         StringResources.STUDENT_OPERATIONS.get("viewAppointments"));
                 model.addAttribute("main_content", appointmentDao.findAllByStudent(netId));
                 break;
-
-            case INSTRUCTOR:
-                model.clear();
-                model.addAttribute("page_heading",
-                        StringResources.INSTRUCTOR_OPERATIONS.get("viewAppointments"));
-                model.addAttribute("main_content", appointmentDao.findAllByInstructor(netId));
         }
         return viewName;
     }

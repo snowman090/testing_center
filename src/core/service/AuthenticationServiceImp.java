@@ -5,19 +5,18 @@ import core.user.*;
 import org.hibernate.Session;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import java.util.Iterator;
 import java.util.List;
 
-
+@Repository
 public class AuthenticationServiceImp implements AuthenticationService{
     /*      SessionFactory sessionFactory = sessionManager.createSessionFactory();
             Session session = sessionFactory.openSession();
             session.beginTransaction();
             session.save(e);                    //save object using hibernate
             session.getTransaction().commit();*/
-
-
 
     private static SessionManager sessionManager = new SessionManager();
     SessionFactory sessionFactory = sessionManager.createSessionFactory();
