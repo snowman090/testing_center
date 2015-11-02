@@ -21,7 +21,7 @@
       <mapping class="core.event.Exam"></mapping>
       <mapping class="core.event.Utilization"></mapping>
       <mapping class="core.event.Appointment"></mapping>
-      <mapping class="core.event.Reservation"></mapping>
+      <!--<mapping class="core.event.Reservation"></mapping>-->
 
 
   </session-factory>
