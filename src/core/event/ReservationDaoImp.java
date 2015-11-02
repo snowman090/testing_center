@@ -1,9 +1,6 @@
 package core.event;
-
 import core.service.SessionManager;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,18 +10,15 @@ import java.util.List;
 
 @Repository
 public class ReservationDaoImp implements ReservationDao {
-
-    @Autowired
-    private SessionManager sessionManager = new SessionManager();
-    SessionFactory sessionFactory = sessionManager.createSessionFactory();
-
     List<Reservation> reservations;
 
     public ReservationDaoImp(){
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        tx = session.beginTransaction();
         reservations = session.createQuery("FROM Reservation").list();
         session.close();
+
     }
 
     @Override
@@ -51,10 +45,10 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public List<Reservation> findByInstructor(String InstructorID) {
+    public List<Reservation> findByInstructorId(String InstructorID) {
         List<Reservation> result = new ArrayList<Reservation>();
         for(int i = 0, index = 0; i < reservations.size(); i++){
-            if(reservations.get(i).getInstructor().getNetId().equals(InstructorID)){
+            if(reservations.get(i).getInstructorId().equals(InstructorID)){
                 result.set(index,reservations.get(i));
                 index++;
             }
@@ -64,47 +58,44 @@ public class ReservationDaoImp implements ReservationDao {
 
     @Override
     public boolean insertReservation(Reservation reservation){//how to know which table we add in
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
         try {
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
+
+            tx = session.beginTransaction();
             session.save(reservation);
             session.getTransaction().commit();
             session.close();
         }
-        catch (Exception ex){
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            //log.error("Error with addExam ", he);
             return false;
         }
-        return true;
+        return  true;
     }
 
     @Override
     public boolean updateReservation(Reservation newReservation, String id){// same Id as the old reservation, but we have set the new data in this newone
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
         try {
-            Session session = sessionFactory.openSession();//needt to throw exception
-            session.beginTransaction();
-        /*Query query = session.createQuery("update Reservation set startTime = :startTime, endTime = :endTime," +
-                " startDate = :startDate, endDate = :endDate, duration = :duration, instructor = :instructor, attendance = :attendance, status = :status" +
-                " where reservationID = :reservationID");
-
-        query.setParameter("startTime", newReservation.getStartTime());
-        query.setParameter("endTime", newReservation.getEndTime());
-        query.setParameter("startDate", newReservation.getStartDate());
-        query.setParameter("endDate", newReservation.getEndDate());
-        query.setParameter("duration", newReservation.getDuration());
-        query.setParameter("instructor", newReservation.getInstructor());
-        query.setParameter("attendance", newReservation.getAttendance());
-        query.setParameter("status", newReservation.getStatus());
-        query.setParameter("reservationID", newReservation.getReservationID());
-        query.executeUpdate();*/
+            tx = session.beginTransaction();
             Query query = session.createQuery("update Reservation R set R  = :R where R.reservationID = :reservationID");
             query.setParameter("R", newReservation);
             query.setParameter("reservationID", id);
 
             int ret = query.executeUpdate();
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         }
-        catch(Exception ex){
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            //log.error("Error with addExam ", he);
             return false;
         }
         return true;
@@ -112,18 +103,23 @@ public class ReservationDaoImp implements ReservationDao {
 
     @Override
     public boolean deleteReservation(Reservation reservation){//needt to throw exception
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
         try {
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
+            tx = session.beginTransaction();
             Query query = session.createQuery("delete from Reservation R where R.reservationID = :reservationID");
             query.setParameter("reservationID", reservation.getReservationID());
             int ret = query.executeUpdate();// this int return the number of entities updated or deleted
-            session.getTransaction().commit();
+            tx.commit();
             session.close();
         }
-        catch(Exception ex){
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            //log.error("Error with addExam ", he);
             return false;
         }
-        return true;
+        return  true;
     }
 }

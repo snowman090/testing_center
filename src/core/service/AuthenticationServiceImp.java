@@ -5,6 +5,7 @@ import core.user.*;
 import org.hibernate.Session;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import java.util.Iterator;
@@ -18,15 +19,16 @@ public class AuthenticationServiceImp implements AuthenticationService{
             session.save(e);                    //save object using hibernate
             session.getTransaction().commit();*/
 
-    private static SessionManager sessionManager = new SessionManager();
-    SessionFactory sessionFactory = sessionManager.createSessionFactory();
+   // private static SessionManager sessionManager = new SessionManager();
+    //SessionFactory sessionFactory = sessionManager.createSessionFactory();
 
     //UserType AllUser = new UserType();
     @Override
     public boolean registeredUserId(String userId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        //session.get(UserType.class, userId);
+
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+
         List allUserId = session.createQuery("SELECT netId FROM UserType").list();
 
         boolean result = allUserId.contains(userId);
@@ -62,9 +64,8 @@ public class AuthenticationServiceImp implements AuthenticationService{
         session.beginTransaction();
         session.save(e);
         session.getTransaction().commit();*/
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
         List allUser = session.createQuery("FROM UserType").list();
 
         Iterator userIter = allUser.iterator();
@@ -85,8 +86,9 @@ public class AuthenticationServiceImp implements AuthenticationService{
     @Override
     public Authorization login(String userId, String password) {
         //Authorization result = Authorization.STUDENT;
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+
         List allAdministrator = session.createQuery("FROM Administrator").list();
         List allInstructor = session.createQuery("FROM Instructor").list();
         List allStudent = session.createQuery("FROM Student").list();

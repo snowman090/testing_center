@@ -32,27 +32,19 @@ public class Reservation {
 
     private int duration;
 
-    @Column(name="instructor")
+    @Column(name="instructor_id")
     @Basic(optional = false)
-    private String instructorNetId;
+    private String instructorId;
 
-    @Column(name="attendace")
-    private int attendance;
 
     //haven't initiated
     @Basic(optional = false)
     @Column(name="status")
     private Status status;
 
-    public String getReservationID() {
-        return reservationID;
-    }
 
-    public void setReservationID(String reservationID) {
-        this.reservationID = reservationID;
-    }
 
-    public Date getStartTime() {
+    public Date getStartTime() {// for ReservationDaoImp
         return startTime;
     }
 
@@ -60,13 +52,13 @@ public class Reservation {
         this.startTime = startTime;
     }
 
+
+    //---------------------------------------
     public LocalDateTime getStartDateTime() {
         Date ts = startDateTime;
         Instant instant = Instant.ofEpochMilli(ts.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
-
-
 
     public void setStartDateTime(LocalDateTime startDateTime) {
         Instant instant = startDateTime.atZone(ZoneId.systemDefault()).toInstant();
@@ -83,45 +75,46 @@ public class Reservation {
         Instant instant = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
         this.endDateTime = Date.from(instant);
     }
-
+    //---------------------------------------
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
     public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+
+    public void setReservationID(String reservationID) {
+        this.reservationID = reservationID;
+    }
+    public String getReservationID() {
+        return reservationID;
+    }
+
+
+    public void setInstructorId(String instructorId) {
+        this.instructorId = instructorId;
     }
 
     public String getInstructorId() {
-        return instructorNetId;
+        return instructorId;
     }
 
-    public void setInstructorNetId(String instructorNetId) {
-        this.instructorNetId = instructorNetId;
-    }
-
-    public int getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(int attendance) {
-        this.attendance = attendance;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
 
     public void setStatus(Status status) {
         this.status = status;
     }
+    public Status getStatus() {
+        return status;
+    }
+
+
 
     // Extend functionality
     public LocalDate getStartDate(){
         Instant instant = Instant.ofEpochMilli(startDateTime.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
-
     public LocalDate getEndDate(){
         Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
