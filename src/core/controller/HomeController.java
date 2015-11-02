@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    @RequestMapping("/home/{permission}")
+    @RequestMapping("{permission}/home")
     public String goToHome (@PathVariable("permission") Authorization authorization) {
         switch (authorization) {
             case ADMINISTRATOR:
