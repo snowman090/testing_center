@@ -6,7 +6,9 @@ import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.util.IllegalFormatException;
 
-
+/**
+ * This class holds Term information and responsible to translate between Term id to actual Term name
+ */
 public class Term {
 
     /**

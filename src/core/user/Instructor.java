@@ -1,6 +1,7 @@
 package core.user;
 
 import core.event.Appointment;
+import core.event.Reservation;
 import core.user.Authorization;
 import core.user.UserType;
 
@@ -11,6 +12,7 @@ import java.util.ListIterator;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 //import javax.persistence.Entity;
 
@@ -19,7 +21,11 @@ import javax.persistence.Table;
 public class Instructor extends UserType {
     @Basic(optional = false)
     public static final Authorization authLevel = Authorization.INSTRUCTOR;
-    private List<Appointment> reservations;
+
+    // Comments this because it cause Runtime Error When Hibernate Do Mapping
+//
+//    @OneToMany(mappedBy = "intructor_id")
+//    private List<Reservation> reservations;
 
     // Empty Constructor for Hibernate
     public Instructor() { }
@@ -32,13 +38,13 @@ public class Instructor extends UserType {
         this.email = email;
     }
 
-    public List<Appointment> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Appointment> reservations) {
-        this.reservations = reservations;
-    }
+//    public List<Reservation> getReservations() {
+//        return reservations;
+//    }
+//
+//    public void setReservations(List<Reservation> reservations) {
+//        this.reservations = reservations;
+//    }
 
 
 }
