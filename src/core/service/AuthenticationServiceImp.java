@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Iterator;
 import java.util.List;
 
-@Service("authenticationService")
+
 public class AuthenticationServiceImp implements AuthenticationService{
     /*      SessionFactory sessionFactory = sessionManager.createSessionFactory();
             Session session = sessionFactory.openSession();

@@ -13,12 +13,16 @@
       <property name="show_sql">true</property>
 
       <!-- Mapping Info -->
-        <mapping class="core.user.Administrator"></mapping>
+      <mapping class="core.user.Administrator"></mapping>
+      <mapping class="core.user.UserType"></mapping>
+      <mapping class="core.user.Student"></mapping>
+      <mapping class="core.user.Instructor"></mapping>
+
       <mapping class="core.event.Exam"></mapping>
       <mapping class="core.event.Utilization"></mapping>
       <mapping class="core.event.Appointment"></mapping>
-      <mapping class="core.user.UserType"></mapping>
-      <mapping class="core.user.Student"></mapping>
-      
+      <mapping class="core.event.Reservation"></mapping>
+
+
   </session-factory>
 </hibernate-configuration>
