@@ -88,11 +88,11 @@ public class Exam {// approved request
      *
      * @param Id ExamID
      * @param type Type
-     * @param start
-     * @param end
-     * @param duration
-     * @param numApp
-     * @param numNeed
+     * @param start Start Time
+     * @param end End Time
+     * @param duration Duration
+     * @param numApp Num of Application
+     * @param numNeed Num of Needed
      */
     public Exam(String Id, String type, LocalDateTime start, LocalDateTime end, double duration, int numApp, int numNeed){
         examId = Id;
@@ -108,6 +108,24 @@ public class Exam {// approved request
 
         numStudentAppointment = numApp;
         numStudentNeed = numNeed;
+
+
+    }
+
+    /**
+     * Use this one in case of error
+     * @param Id ExamID
+     * @param type Type
+     * @param start Start Time
+     * @param end End Time
+     * @param duration Duration
+     * @param numApp Num of Application
+     * @param numNeed Num of Needed
+     * @param instructorId Instructor Id
+     */
+    public Exam(String Id, String type, LocalDateTime start, LocalDateTime end, double duration, int numApp, int numNeed, String instructorId) {
+        this(Id, type,  start,  end,  duration,  numApp,  numNeed);
+        this.instructorId = instructorId;
     }
 
 

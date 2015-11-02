@@ -3,13 +3,11 @@ package core.controller;
 import core.event.AppointmentDao;
 import core.event.ReservationDao;
 import core.service.TestingCenterInfoRetrieval;
-import core.user.Authorization;
 import core.user.SessionProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.portlet.ModelAndView;
 
 @Controller
 public class InstructorController {
@@ -22,25 +20,19 @@ public class InstructorController {
     @Autowired
     private SessionProfile profile;
 
-    private ModelMap model = new ModelMap();
-
-    private String viewName = StringResources.ADMIN_VIEW_NAME;
+    private ModelAndView model = new ModelAndView();
 
     @RequestMapping("/INSTRUCTOR/view-requests")
-    public String viewRequests() {
+    public ModelAndView viewRequests() {
         model.clear();
-        model.addAttribute("page_heading",
-                StringResources.INSTRUCTOR_OPERATIONS.get("viewReservations"));
-        String netId = profile.getUserId();
-        model.addAttribute("main_content", reservationAccess.findByInstructorId(netId));
-        return viewName;
+        model.setViewName("instructor-view-requests");
+        return model;
     }
 
     @RequestMapping("/INSTRUCTOR/schedule-event")
-    public String scheduleEvent(){
+    public ModelAndView scheduleEvent() {
         model.clear();
-        model.addAttribute("page_heading",
-                StringResources.INSTRUCTOR_OPERATIONS.get("scheduleEvent"));
-        return viewName;
+        model.setViewName("instructor-schedule-event");
+        return model;
     }
 }

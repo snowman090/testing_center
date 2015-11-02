@@ -1,7 +1,10 @@
 package core.event;
 
+import core.service.SessionManager;
 import core.user.Student;
 import core.user.UserType;
+import org.hibernate.*;
+import org.hibernate.Query;
 
 import javax.persistence.*;
 
@@ -9,6 +12,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 @Entity
 public class Appointment {
@@ -46,6 +51,8 @@ public class Appointment {
     @Basic(optional = false)
     private boolean isAttend;
 
+//    @Basic?optional=false?
+//TODO change to StudentId
     @ManyToOne
     @JoinColumn(name="studentId")
     private Student student;
@@ -66,8 +73,56 @@ public class Appointment {
         this.endDateTime = Date.from(instant2);
         this.studentId = netId;
         this.seat = seat;
-        this.isAttend = isAttend;    }
+        this.isAttend = isAttend;
+    }
 
+    private static SessionManager sessionManager;
+
+    public boolean checkLegalAppointment(){
+        String studentIdCheck = getStudentId();
+        String examIdCheck = getExamId();
+        int legalAppointment = 0;
+        int size = -1;
+        Session session = sessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Student studentCheck = (Student)session.get(Student.class, studentIdCheck);
+            Exam exam = (Exam)session.get(Exam.class, examIdCheck);
+            //map to object
+            Query query = session.createQuery("FROM Appointment a WHERE a.student = :StudentID");
+            query.setParameter("StudentID", studentCheck.getNetId());
+            List<Appointment> list = query.list();
+            size = list.size();
+            Iterator it = list.iterator();
+            while (it.hasNext()) {
+                Appointment appt = (Appointment) it.next();
+                //check b
+                if(appt.getExamId().equals(examIdCheck)) {
+                    //check c
+                    if((getStartDateTime().isAfter(appt.getEndDateTime())) ||
+                            (getEndDateTime().isBefore(appt.getStartDateTime()))) {
+                        //check d
+                        if ((getStartDateTime().isAfter(exam.getStartDateTime())) &&
+                                (getEndDateTime().isBefore(exam.getEndDateTime()))) {
+                            legalAppointment +=1;
+                        }
+                    }
+                }
+            }
+        }catch (HibernateException var9) {
+            if(tx != null) {
+                tx.rollback();
+            }
+            var9.printStackTrace();
+        } finally {
+            session.close();
+        }
+        if(legalAppointment==size)
+            return true;
+        else
+            return false;
+    }
 
     public String getAppointmentID() {
         return appointmentID;
@@ -170,5 +225,4 @@ public class Appointment {
         }
 
     }
-
 }

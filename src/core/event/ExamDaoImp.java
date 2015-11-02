@@ -15,18 +15,29 @@ import java.util.List;
 
 @Repository
 public class ExamDaoImp implements ExamDao{
-    //public static final Logger log = Logger.getLogger(ExamDaoImp.class);
+    public static final Logger log = Logger.getLogger(ExamDaoImp.class);
     List<Exam> exams;
-    public ExamDaoImp() {}
-
+    public ExamDaoImp() {
+    }
     @Override
     public List<Exam> getAllExams() {//approved request
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
-        tx = session.beginTransaction();
-        exams = session.createQuery("FROM Exam").list();
-        session.close();
-        return exams;
+        List<Exam> e = null;
+        try {
+            tx = session.beginTransaction();
+            e = session.createQuery("FROM Exam ").list();
+            tx.commit();
+        } catch (HibernateException he) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            log.error("", he);
+        } finally {
+            session.close();
+            return e;
+        }
+
     }
 
 
@@ -68,22 +79,13 @@ public class ExamDaoImp implements ExamDao{
         try {
             tx = session.beginTransaction();
             session.save(exam);
-            /*log.info("---------- add Exam info----------");
-            log.info("|  -Exam Id: " + exam.getExamId());
-            log.info("|  -Type: " + exam.getType());
-            log.info("|  -Start Date Time: " + exam.getStartDateTime());
-            log.info("|  -End Date Time" + exam.getEndDateTime());
-            log.info("|  -Duration: " + exam.getDuration());
-            log.info("|  -Number of Students who has appointments: " + exam.getNumStudentAppointment());
-            log.info("|  -Number of Students who need to take exam: " + exam.getNumStudentNeed());*/
-
             tx.commit();
             session.close();
         }catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
         }
         return  true;

@@ -8,9 +8,6 @@ import org.apache.log4j.Logger;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-/**
- * Created by eson_wang on 11/2/15.
- */
 public class TestSchedulingRequest {
     public static final Logger log = Logger.getLogger(Log4J.class);
     public static void main(String[] args){
