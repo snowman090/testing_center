@@ -24,7 +24,6 @@ public class ExamDaoImp implements ExamDao{
     }
 
 
-
     @Override
     public boolean addExam(Exam exam) {// return should have different cases
         exams.add(exam);
