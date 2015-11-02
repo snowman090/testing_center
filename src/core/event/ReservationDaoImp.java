@@ -63,7 +63,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public boolean insertReservation(Reservation reservation) throws Exception{// need to throw exception
+    public boolean insertReservation(Reservation reservation){//how to know which table we add in
         try {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
@@ -78,7 +78,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public boolean updateReservation(Reservation newReservation) throws Exception{// same Id as the old reservation, but we have set the new data in this newone
+    public boolean updateReservation(Reservation newReservation){// same Id as the old reservation, but we have set the new data in this newone
         try {
             Session session = sessionFactory.openSession();//needt to throw exception
             session.beginTransaction();
@@ -109,8 +109,9 @@ public class ReservationDaoImp implements ReservationDao {
         }
         return true;
     }
+
     @Override
-    public boolean deleteReservation(Reservation reservation) throws Exception{//needt to throw exception
+    public boolean deleteReservation(Reservation reservation){//needt to throw exception
         try {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
