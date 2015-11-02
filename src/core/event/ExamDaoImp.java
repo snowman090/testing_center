@@ -98,7 +98,7 @@ public class ExamDaoImp implements ExamDao{
             Query query = session.createQuery("update Exam E set E  = :E where E.examId = :examId");
             query.setParameter("E", exam);
             query.setParameter("examId", id);
-
+            query.executeUpdate();
             tx.commit();
 
             session.close();

@@ -107,6 +107,7 @@ public class ReservationDaoImp implements ReservationDao {
                     ("update Reservation R set R  = :R where R.reservationID = :reservationID");
             query.setParameter("R", newReservation);
             query.setParameter("reservationID", id);
+            query.executeUpdate();
             tx.commit();
             session.close();
         }
@@ -141,4 +142,117 @@ public class ReservationDaoImp implements ReservationDao {
         }
         return true;
     }
+
+    @Override
+    public boolean setType(String reservationId, String type) {
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+
+            Query query = session.createQuery
+                    ("update Reservation R set R.types = :tp where R.reservationID = :reservationID");
+
+            query.setParameter("tp", type);
+            query.setParameter("reservationID", reservationId);
+            query.executeUpdate();
+            tx.commit();
+            session.close();
+        }
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            log.error("Error with addExam ", he);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String getType(String reservationId) {
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        String result = "";
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery
+                    ("select types from Reservation R where R.reservationID = :reservationID");
+
+            query.setParameter("reservationID", reservationId);
+
+            tx.commit();
+            result = (String)query.uniqueResult();
+            //System.out.println("CAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMA"+result);
+            session.close();
+        }
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            log.error("Error with addExam ", he);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean setStatus(String reservationId, String Status) {
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery
+                    ("update Reservation R set R.status = :status where R.reservationID = :reservationID");
+            query.setParameter("status", Status);
+            query.setParameter("reservationID", reservationId);
+            query.executeUpdate();
+            tx.commit();
+            session.close();
+        }
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            log.error("Error with addExam ", he);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String getStatus(String reservationId) {
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        String result = "";
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery
+                    ("select status from Reservation R where R.reservationID = :reservationID");
+
+            query.setParameter("reservationID", reservationId);
+            tx.commit();
+            result = (String)query.uniqueResult();
+            session.close();
+        }
+        catch (HibernateException he){
+            if(tx != null){
+                tx.rollback();
+            }
+            log.error("Error with addExam ", he);
+        }
+        return result;
+    }
+
+
+
+    /*public void listAllReservation(String id){
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("FROM Reservation r WHERE r.reservationID = :reservationID");
+        query.setParameter("reservationID", id);
+        tx.commit();
+        Reservation result = (Reservation)query.uniqueResult();
+        session.close();
+        return result;
+    }*/
 }

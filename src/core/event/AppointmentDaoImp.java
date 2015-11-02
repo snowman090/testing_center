@@ -116,7 +116,7 @@ public class AppointmentDaoImp implements AppointmentDao {
             Query query = session.createQuery("update Appointment A set A  = :A where A.appointmentID = :appointmentID");
             query.setParameter("A", appointment);
             query.setParameter("appointmentID", id);
-
+            query.executeUpdate();
             tx.commit();
             session.close();
         }

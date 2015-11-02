@@ -66,6 +66,7 @@ public class CourseDaoImp implements CourseDao{
             Query query = session.createQuery("update Course C set C  = :C where C.courseId = :courseId");
             query.setParameter("C", course);
             query.setParameter("courseId", id);
+            query.executeUpdate();
             tx.commit();
             session.close();
         }
