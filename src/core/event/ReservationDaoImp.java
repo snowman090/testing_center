@@ -11,10 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by eson_wang on 10/30/15.
- */
-
 @Repository
 public class ReservationDaoImp implements ReservationDao {
 
