@@ -16,7 +16,7 @@ public class TestSchedulingRequest {
 
         Reservation R1 = new Reservation("1", LocalDateTime.of(2015,11,1,10,0), LocalDateTime.of(2015,11,1,14,30),"1", "Fall 2015");
         Reservation R2 = new Reservation("2", LocalDateTime.of(2015,11,2,10,0), LocalDateTime.of(2015,11,1,14,30),"2", "Fall 2015");
-        Reservation R3 = new Reservation("3", LocalDateTime.of(2015,11,3,10,0), LocalDateTime.of(2015,11,1,14,30),"3", "Fall 2015");
+        Reservation R3 = new Reservation("3", LocalDateTime.of(2015,11,3,10,0), LocalDateTime.of(2015,11,1,14,30),"1", "Fall 2015");
         Reservation R4 = new Reservation("4", LocalDateTime.of(2015,11,4,10,0), LocalDateTime.of(2015,11,1,14,30),"4", "Fall 2015");
         Reservation R5 = new Reservation("5", LocalDateTime.of(2015,11,5,10,0), LocalDateTime.of(2015,11,1,14,30),"5", "Fall 2015");
         //Reservation R1 = new Reservation("1", LocalDateTime.of(2015,11,1,10,0), LocalDateTime.of(2015,11,1,14,30),"1", "Fall 2015");
@@ -104,7 +104,7 @@ public class TestSchedulingRequest {
 
 
         boolean d1 = reservationDao.deleteReservation(R2);
-        t1 = reservationDao.findAll().get(0);
+       /* t1 = reservationDao.findAll().get(0);
         t2 = reservationDao.findAll().get(1);
         S = reservationDao.getStatus(t1.getReservationID());
         T = reservationDao.getType(t1.getReservationID());
@@ -127,7 +127,8 @@ public class TestSchedulingRequest {
         log.info("|  -Instructor Id: " + t2.getInstructorId());
         log.info("|  -Term: " + t2.getTerms());
         log.info("|  -Status " + S);
-        log.info("|  -Type: " + T);
+        log.info("|  -Type: " + T);*/
+        reservationDao.listAllReservation("1");
 
 
 
