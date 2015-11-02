@@ -9,6 +9,6 @@ public interface ReservationDao {
     List<Reservation> findByDate(LocalDate date);
     List<Reservation> findByInstructor(String InstructorID);
     boolean insertReservation(Reservation reservation);
-    boolean updateReservation(Reservation reservation);
+    boolean updateReservation(Reservation reservation, String id);
     boolean deleteReservation(Reservation reservation);
 }

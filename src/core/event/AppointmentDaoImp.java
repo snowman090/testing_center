@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class AppointmentDaoImpl implements AppointmentDao {
+public class AppointmentDaoImp implements AppointmentDao {
 
     @Autowired
     private SessionManager sessionManager = new SessionManager();
@@ -20,7 +20,7 @@ public class AppointmentDaoImpl implements AppointmentDao {
 
     List<Appointment> appointments;
 
-    public AppointmentDaoImpl(){
+    public AppointmentDaoImp(){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         appointments = session.createQuery("FROM Appointment").list();
@@ -81,8 +81,8 @@ public class AppointmentDaoImpl implements AppointmentDao {
         try {
             Session session = sessionFactory.openSession();
             session.beginTransaction();
-            Query query = session.createQuery("delete from Appointment R where R.appointmentID = :appintmentID");
-            query.setParameter("appintmentID", appointment.getAppointmentID());
+            Query query = session.createQuery("delete from Appointment R where R.appointmentID = :appointmentID");
+            query.setParameter("appointmentID", appointment.getAppointmentID());
             int ret = query.executeUpdate();// this int return the number of entities updated or deleted
             session.getTransaction().commit();
             session.close();
@@ -94,14 +94,14 @@ public class AppointmentDaoImpl implements AppointmentDao {
     }
 
     @Override
-    public boolean updateAppointment(Appointment appointment){
+    public boolean updateAppointment(Appointment appointment, String id){
         try {
             Session session = sessionFactory.openSession();//need to throw exception
             session.beginTransaction();
 
             Query query = session.createQuery("update Appointment A set A  = :A where A.appointmentID = :appointmentID");
             query.setParameter("A", appointment);
-            query.setParameter("appointmentID", appointment.getAppointmentID());
+            query.setParameter("appointmentID", id);
 
             int ret = query.executeUpdate();
             session.getTransaction().commit();

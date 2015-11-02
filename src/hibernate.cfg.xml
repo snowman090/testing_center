@@ -19,6 +19,7 @@
       <mapping class="core.user.Instructor"></mapping>
 
       <mapping class="core.event.Exam"></mapping>
+      <mapping class="core.event.Course"></mapping>
       <mapping class="core.event.Utilization"></mapping>
       <mapping class="core.event.Appointment"></mapping>
       <!--<mapping class="core.event.Reservation"></mapping>-->

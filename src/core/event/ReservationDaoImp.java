@@ -78,7 +78,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public boolean updateReservation(Reservation newReservation){// same Id as the old reservation, but we have set the new data in this newone
+    public boolean updateReservation(Reservation newReservation, String id){// same Id as the old reservation, but we have set the new data in this newone
         try {
             Session session = sessionFactory.openSession();//needt to throw exception
             session.beginTransaction();
@@ -98,7 +98,7 @@ public class ReservationDaoImp implements ReservationDao {
         query.executeUpdate();*/
             Query query = session.createQuery("update Reservation R set R  = :R where R.reservationID = :reservationID");
             query.setParameter("R", newReservation);
-            query.setParameter("reservationID", newReservation.getReservationID());
+            query.setParameter("reservationID", id);
 
             int ret = query.executeUpdate();
             session.getTransaction().commit();
