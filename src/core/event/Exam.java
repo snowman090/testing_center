@@ -15,9 +15,15 @@ public class Exam {// approved request
     @Basic(optional = false)
     private String examId;
 
+
+    @Column(name = "exam_name" )
+    private String examName;//course or ad hoc
+
     @Basic(optional = false)
     @Column(name = "type" )
     private String type;//course or ad hoc
+
+
 
     @Basic(optional = false)
     @Column(name = "num_student_need_to_take_exam" )
@@ -78,6 +84,17 @@ public class Exam {// approved request
 
     
     public Exam(){}
+
+    /**
+     *
+     * @param Id ExamID
+     * @param type Type
+     * @param start
+     * @param end
+     * @param duration
+     * @param numApp
+     * @param numNeed
+     */
     public Exam(String Id, String type, LocalDateTime start, LocalDateTime end, double duration, int numApp, int numNeed){
         examId = Id;
         this.type = type;
@@ -101,6 +118,14 @@ public class Exam {// approved request
 
     public void setExamId(String examId) {
         this.examId = examId;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
     }
 
     public int getNumStudentAppointment() {

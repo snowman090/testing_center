@@ -30,7 +30,7 @@ public class DataCollection {
     //private String path_coursesCSV;
     //private String path_rostersCSV;
 
-    private AppointmentDaoImpl appointmentDaoImpl = new AppointmentDaoImpl();
+    private AppointmentDaoImp appointmentDaoImpl = new AppointmentDaoImp();
 
     //import ata from CSV file
     //0: fail; 1: user; 2: class; 3: rooster

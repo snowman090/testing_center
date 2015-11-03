@@ -2,7 +2,7 @@ package test;
 
 import core.event.Utilization;
 import core.event.Appointment;
-import core.event.exam;
+import core.event.Exam;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,8 +11,8 @@ import java.time.LocalTime;
 public class UtilizationTest {
     public static void main(String[] args){
 
-        exam exam1 = new exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,10,30),LocalDateTime.of(2015,6,20,15,0), 4.5,50,80);
-        exam exam2 = new exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,18,40), 2.5,50,80);
+        Exam exam1 = new Exam("308","ad hoc", LocalDateTime.of(2015,6,20,10,30),LocalDateTime.of(2015,6,20,15,0), 4.5,50,80);
+        Exam exam2 = new Exam("390","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,18,40), 2.5,50,80);
         Utilization util = new Utilization();
 
 
@@ -30,8 +30,8 @@ public class UtilizationTest {
         appointment2.setEndDateTime(LocalDateTime.of(2015, 6, 20, 15, 30));
         appointment2.setAppointmentID("2");
 
-        util.getAppointmentDao().addAppointment(appointment1);
-        util.getAppointmentDao().addAppointment(appointment2);
+        util.getAppointmentDao().insertAppointment(appointment1);
+        util.getAppointmentDao().insertAppointment(appointment2);
 
 
 
