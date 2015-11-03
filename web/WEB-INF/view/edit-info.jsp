@@ -28,12 +28,18 @@
   <div class="container">
     <div class="sidebar">
       <ul class="side-nav">
-        <li><a class="button" href="ADMINISTRATOR/home"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-        <li><a class="button" href="ADMINISTRATOR/view-info"><i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
-        <li><a class="button" href="ADMINISTRATOR/upload"><i class="fa fa-upload"></i>&nbsp;Upload a file</a></li>
-        <li><a class="button" href="ADMINISTRATOR/view-requests"><i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
-        <li><a class="button" href="ADMINISTRATOR/view-appointments"><i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
-        <li><a class="button" href="ADMINISTRATOR/make-appointment"><i class="fa fa-plus-square"></i>&nbsp;Make an appointment</a></li>
+        <li><a class="button" href="ADMINISTRATOR/home">
+            <i class="fa fa-home"></i>&nbsp;Home</a></li>
+        <li><a class="button" href="ADMINISTRATOR/view-info">
+            <i class="fa fa-info"></i>&nbsp;View testing center info</a></li>
+        <li><a class="button" href="ADMINISTRATOR/upload">
+            <i class="fa fa-upload"></i>&nbsp;Upload a file</a></li>
+        <li><a class="button" href="ADMINISTRATOR/view-requests">
+            <i class="fa fa-spinner"></i>&nbsp;View requests</a></li>
+        <li><a class="button" href="ADMINISTRATOR/view-appointments">
+            <i class="fa fa-eye"></i>&nbsp;View appointments</a></li>
+        <li><a class="button" href="ADMINISTRATOR/make-appointment">
+            <i class="fa fa-plus-square"></i>&nbsp;Make an appointment</a></li>
       </ul>
     </div>
     <div class="content">
