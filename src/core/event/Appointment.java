@@ -90,8 +90,8 @@ public class Appointment {
             Student studentCheck = (Student)session.get(Student.class, studentIdCheck);
             Exam exam = (Exam)session.get(Exam.class, examIdCheck);
             //map to object
-            Query query = session.createQuery("FROM Appointment a WHERE a.student = :StudentID");
-            query.setParameter("StudentID", studentCheck.getNetId());
+            Query query = session.createQuery("FROM Appointment a WHERE a.studentId = :stuId");
+            query.setParameter("stuId", studentCheck.getNetId());
             List<Appointment> list = query.list();
             size = list.size();
             Iterator it = list.iterator();
