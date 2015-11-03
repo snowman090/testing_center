@@ -61,4 +61,12 @@ public class Student extends UserType {
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
+
+    public String toString(){
+        String s  = "Student Information: \n" +
+                "NetId: " + getNetId() + "\n" +
+                "First Name: " + getFirstName() + "\n" +
+                "Last Name " + getLastName() + "\n";
+        return s;
+    }
 }
