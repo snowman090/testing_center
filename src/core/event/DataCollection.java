@@ -15,7 +15,6 @@ import java.util.*;
 
 public class DataCollection {
     public static final Logger log = Logger.getLogger(Log4J.class);
-    private static SessionManager sessionManager;
 
     static final private String PATH = "/course_registration_data/";
     static final private String fileExt = ".csv";
@@ -65,7 +64,7 @@ public class DataCollection {
                     hash.put(list.get(i)[0],list.get(i)[1]);
                 }
                 markSuperfluous(appointmentList, list);
-                Session session = sessionManager.getInstance().getOpenSession();
+                Session session = SessionManager.getInstance().getOpenSession();
                 Transaction tx = null;
                 try {
                     tx = session.beginTransaction();

@@ -3,6 +3,7 @@ package test;
 import core.Report;
 import core.event.*;
 import core.user.Student;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 public class ReportTest {
+    private static Logger log = Logger.getLogger(ReportTest.class);
 
     public static void main(String[] args){
         Term term1 = new Term(1158,LocalDate.of(2015, 8, 22), LocalDate.of(2015, 12, 17) );
@@ -61,6 +63,8 @@ public class ReportTest {
         terms.add(term3);
         report.showTermRangeReport(terms);
 
+        String res = "" + report.showDayReport(term1) + "" + report.showWeekReport(term1) + "" + report.showTermReport(term1) + "" + report.showTermRangeReport(terms);
+        log.info(res);
     }
 
     // Insert a row into Administrator Table

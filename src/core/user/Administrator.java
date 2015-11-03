@@ -24,7 +24,6 @@ import java.util.List;
 @Table(name = "Administrator")
 public class Administrator extends UserType {
 
-    private static SessionManager sessionManager;
     public static final Logger log = Logger.getLogger(Log4J.class);
 
     @Basic(optional = false)
@@ -48,7 +47,7 @@ public class Administrator extends UserType {
 
     public List listAllAppointments(LocalDateTime ldt){
 
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         List appointments = null;
         try {
@@ -93,7 +92,7 @@ public class Administrator extends UserType {
     }
 
     public List listAllAppointments(){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         List appointments = null;
         try {
@@ -137,7 +136,7 @@ public class Administrator extends UserType {
     // 1. Delete Appointment
     // 2. Release Seats
     public void cancelAppointment(String apptId){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -168,7 +167,7 @@ public class Administrator extends UserType {
 
     // GET APPOINTMENT
     public Appointment getAppointment(String apptID){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         Appointment appt = null;
         try {
@@ -195,7 +194,7 @@ public class Administrator extends UserType {
 
     // Update Edited Appointment
     public void updateAppointment(Appointment appt){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -229,7 +228,7 @@ public class Administrator extends UserType {
      * @param netId
      */
     public String checkInStudent(String examId, String netId){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         String assignedSeat = "N/A";
         Appointment appt = new Appointment();

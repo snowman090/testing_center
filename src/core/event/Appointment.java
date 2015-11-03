@@ -76,14 +76,12 @@ public class Appointment {
         this.isAttend = isAttend;
     }
 
-    private static SessionManager sessionManager;
-
     public boolean checkLegalAppointment(){
         String studentIdCheck = getStudentId();
         String examIdCheck = getExamId();
         int legalAppointment = 0;
         int size = -1;
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
