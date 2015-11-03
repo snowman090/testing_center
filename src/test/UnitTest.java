@@ -60,8 +60,8 @@ public class UnitTest {
         appointment2.setStartDateTime(LocalDateTime.of(2015, 6, 20, 13, 30));
         appointment2.setEndDateTime(LocalDateTime.of(2015, 6, 20, 15, 30));
         appointment2.setAppointmentID("2");
-        util.getAppointmentDao().addAppointment(appointment1);
-        util.getAppointmentDao().addAppointment(appointment2);
+        util.getAppointmentDao().insertAppointment(appointment1);
+        util.getAppointmentDao().insertAppointment(appointment2);
 
         util.setNumSeat(60);
         ut.viewActualUtilization(util);
@@ -317,7 +317,7 @@ public class UnitTest {
 
     }
 
-    public void addExam(exam exam){
+    public void addExam(Exam exam){
         Session session = sessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
@@ -348,11 +348,11 @@ public class UnitTest {
 
         try {
             tx = session.beginTransaction();
-            List e = session.createQuery("FROM exam").list();
+            List e = session.createQuery("FROM Exam ").list();
             Iterator iterator = e.iterator();
 
             while(iterator.hasNext()) {
-                exam exam = (exam)iterator.next();
+                Exam exam = (Exam)iterator.next();
                 log.info("---------- View Exams()----------");
                 log.info("|  -Exam Id: " + exam.getExamId());
                 log.info("|  -Exam Name: " + exam.getExamName());

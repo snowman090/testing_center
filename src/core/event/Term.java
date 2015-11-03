@@ -25,7 +25,10 @@ public class Term {
     private LocalDate termStartDate;
     private LocalDate termEndDate;
 
-    public Term() {
+    public Term(int termId, LocalDate termStartDate, LocalDate termEndDate) {
+        this.setTermId(termId);
+        this.setTermStartDate(termStartDate);
+        this.setTermEndDate(termEndDate);
     }
 
     public int getTermId() {

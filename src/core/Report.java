@@ -1,27 +1,21 @@
 package core;
 
-import core.service.SessionManager;
 import core.event.Appointment;
 import core.event.Course;
 import core.event.Exam;
 import core.event.Term;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.web.util.Log4jConfigListener;
-import sun.rmi.runtime.Log;
-import test.Log4J;
+import core.service.SessionManager;
+import org.apache.log4j.Logger;
+import org.hibernate.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * Created by Zeqli on 10/7/2015.
- */
+
 public class Report {
+    private static final Logger log = Logger.getLogger(Report.class);
 
     private List<Exam> exams;
     private List<Course> courses;
@@ -101,23 +95,23 @@ public class Report {
     // TODO: Migrate return type
     public void showDayReport(Term term) {
         appointments = getAppointments(term);
-        Log4J.log.info("------------Show report by Day------------");
+        log.info("------------Show report by Day------------");
         // Print A List of Entire Semester, and Appointment corresponding to each day.
         for (LocalDate localDate = term.getTermStartDate(); localDate.isBefore(term.getTermEndDate().plusDays(1)); localDate = localDate.plusDays(1)) {
-            Log4J.log.info(localDate.toString());
+            log.info(localDate.toString());
             for (Appointment appt : appointments) {
                 if (appt.getStartDateTime().toLocalDate().equals(localDate)) {
-                    Log4J.log.info(appt.getExamId() + "|" + appt.getAppointmentID() + "|" + appt.getMadeBy());
+                    log.info(appt.getExamId() + "|" + appt.getAppointmentID() + "|" + appt.getMadeBy());
                 }
             }
         }
 
-        Log4J.log.info("End of report...");
+        log.info("End of report...");
     }
 
     public void showWeekReport(Term term) {
         appointments = getAppointments(term);
-        Log4J.log.info("------------Show report by Week------------");
+        log.info("------------Show report by Week------------");
 
 
         // Assume Each Semester Starts on Monday
@@ -146,17 +140,17 @@ public class Report {
                 }
             }
             String s = date.format(DateTimeFormatter.ofPattern("LLLL dd, yyyy"));
-            Log4J.log.info(" Week of " + s + " ------------ " + list.size() + "Appointments");
+            log.info(" Week of " + s + " ------------ " + list.size() + "Appointments");
 
             // Read Course
             Iterator it = courseCount.entrySet().iterator();
             while (it.hasNext()){
                 Map.Entry pair = (Map.Entry)it.next();
-                Log4J.log.info(pair.getKey() + "-----------" + pair.getValue());
+                log.info(pair.getKey() + "-----------" + pair.getValue());
             }
 
         }
-        Log4J.log.info("End of report...");
+        log.info("End of report...");
 
     }
 
@@ -169,8 +163,9 @@ public class Report {
         try{
             tx = session.beginTransaction();
             Query query = session.createQuery("select e.examName from Exam e where  :startDate <= e.startDateTime and e.endDateTime <= :endDate");
-            System.out.println(Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-            System.out.println(Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
+            log.debug("Begin Term " + Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            log.debug("End Term " + Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             query.setTimestamp("endDate", Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             query.setTimestamp("startDate", Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 
@@ -178,7 +173,7 @@ public class Report {
             List<String> listResult = query.list();
             for(String row : listResult){
                 String s = row;
-                Log4J.log.debug("Read examName from table Exam: " + s);
+                log.debug("Read examName from table Exam: " + s);
                 courses.add(s);
 
             }
@@ -188,18 +183,59 @@ public class Report {
             if(tx!=null){
                 tx.rollback();
             }
-            Log4J.log.error("Error with Table Join", he);
+            log.error("Error with Table Join", he);
         }
 
 
-        Log4J.log.info("------------Show report by Year------------");
-        Log4J.log.info(term.getTermName() + " starts from " + term.getTermStartDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
+        log.info("------------Show report by Year------------");
+        log.info(term.getTermName() + " starts from " + term.getTermStartDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
         Iterator<String> it = courses.iterator();
         while (it.hasNext()){
-            Log4J.log.info(it.next());
+            log.info(it.next());
         }
-        Log4J.log.info(term.getTermName() + " ends on " + term.getTermEndDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
-
-
+        log.info(term.getTermName() + " ends on " + term.getTermEndDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")));
+        log.info("End of report...");
     }
+
+    // Report Date
+    public void showTermRangeReport(List<Term> terms){
+
+        log.info("------------Show report by Term Range------------");
+
+        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        Set<String> courses = new LinkedHashSet<>();
+
+        for (Term term: terms){
+            try{
+                tx = session.beginTransaction();
+                Query query = session.createQuery("select count(Appointment.studentId) from Appointment a where  :startDate <= a.startDateTime and a.endDateTime <= :endDate");
+
+                log.debug("[showTermRangeReport-Begin] " + term.getTermName() + " " + Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                log.debug("[showTermRangeReport-End] " + term.getTermName() + " " + Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
+                query.setTimestamp("startDate", Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                query.setTimestamp("endDate", Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
+                try {
+                    int apptInTerm = (Integer) query.uniqueResult();
+                    log.debug("[showTermRangeReport-UniqueResult]" + apptInTerm);
+                    log.info("In" + term.getTermName() + " There Are " + apptInTerm + " Student Appointments");
+                } catch (NonUniqueResultException nre){
+                    log.error("" + nre);
+                }
+
+                tx.commit();
+            } catch (HibernateException he) {
+                if(tx!=null){
+                    tx.rollback();
+                }
+                log.error("Error with Table Join", he);
+            }
+
+            log.info("End of report...");
+        }
+    }
+
+
 }

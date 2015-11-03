@@ -23,6 +23,7 @@ public abstract class UserType {
     @Basic(optional = false)
     @Column(name = "last_name")
     protected String lastName;
+
     @Basic(optional = false)
     @Column(name = "email")
     protected String email;
@@ -41,7 +42,6 @@ public abstract class UserType {
 
     public UserType()
     {
-
     }
 
     public String getNetId() {

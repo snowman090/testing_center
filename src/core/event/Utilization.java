@@ -16,8 +16,8 @@ public class Utilization {
 
     private TestingCenterInfo center = new TestingCenterInfo();
     //
-    AppointmentDao appointmentDao = new AppointmentDaoImpl();
-    ExamDao examDao = new ExamDaoImpl();
+    AppointmentDao appointmentDao = new AppointmentDaoImp();
+    ExamDao examDao = new ExamDaoImp();
 
     public double countUtilzActual(){
         double TotalDuration = 0;//
