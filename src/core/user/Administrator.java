@@ -14,7 +14,9 @@ import org.hibernate.*;
 import test.Log4J;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,8 +59,12 @@ public class Administrator extends UserType {
             String sql = "select * from appointment where '" + ldt.format(formatter) + "' > START_TIME AND '" + ldt.format(formatter) + "' < END_TIME ";
             log.info("---------- listAllAppointments(LocalDateTime ldt) ----------");
             log.info("- SQL script = " + sql);
-            SQLQuery query = session.createSQLQuery(sql);
-            query.addEntity(Appointment.class);
+
+
+
+            Query query = session.createQuery("select count(*) from Appointment a where  :startDate <= a.startDateTime and a.endDateTime <= :endDate");
+            query.setTimestamp("startDate", Date.from(ldt.toLocalDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+            query.setTimestamp("endDate", Date.from(ldt.toLocalDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             appointments = query.list();
 
             Iterator it = appointments.iterator();

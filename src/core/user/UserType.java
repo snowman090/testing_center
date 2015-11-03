@@ -30,17 +30,6 @@ public abstract class UserType {
     @Column(name = "email")
     protected String email;
 
-    @Basic(optional = false)
-    @Column(name = "student_permission")
-    protected Authorization studentPermission;
-
-    @Basic(optional = false)
-    @Column(name = "instructor_permission")
-    protected Authorization instructorPermission;
-
-    @Basic(optional = false)
-    @Column(name = "Administor_permission")
-    protected Authorization administorPerssion;
 
     public UserType()
     {

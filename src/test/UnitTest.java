@@ -21,7 +21,6 @@ import java.util.List;
 
 public class UnitTest {
 
-    private static SessionManager sessionManager;
     public static final Logger log = Logger.getLogger(Log4J.class);
 
     public static void main(String[] args) {
@@ -39,8 +38,8 @@ public class UnitTest {
         admin1.setEmail("zeqing.li@stonybrook.edu");
         ut.updateAdmin(admin1);
 
-        Exam exam1 = new Exam("308","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
-        Exam exam2 = new Exam("390","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
+        Exam exam1 = new Exam("308","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80, "prof");
+        Exam exam2 = new Exam("390","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80, "prof");
         ut.addExam(exam1);
         ut.addExam(exam2);
         ut.listExams();
@@ -147,7 +146,7 @@ public class UnitTest {
     }
 
     public void addStudent(Student student){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -170,7 +169,7 @@ public class UnitTest {
 
     // Insert a row into Administrator Table
     public void addAdmin(Administrator admin){
-            Session session = sessionManager.getInstance().getOpenSession();
+            Session session = SessionManager.getInstance().getOpenSession();
             Transaction tx = null;
             try {
                 tx = session.beginTransaction();
@@ -193,7 +192,7 @@ public class UnitTest {
 
     // SQL VIEW
     public void listAdmins() {
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
 
         try {
@@ -226,7 +225,7 @@ public class UnitTest {
 
     // SQL UPDATE
     public void updateAdmin(Administrator admin) {
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
 
         try {
@@ -249,7 +248,7 @@ public class UnitTest {
 
     // SQL DELETE
     public void deleteAdmin(String NetId) {
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
 
         try {
@@ -271,7 +270,7 @@ public class UnitTest {
 
     // Insert a row into Administrator Table
     public void addAppointment(Appointment appt){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
 
         try {
@@ -319,7 +318,7 @@ public class UnitTest {
     }
 
     public void addExam(Exam exam){
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -344,7 +343,7 @@ public class UnitTest {
         }
     }
     public void listExams() {
-        Session session = sessionManager.getInstance().getOpenSession();
+        Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
 
         try {
