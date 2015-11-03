@@ -253,14 +253,28 @@ public class ReservationDaoImp implements ReservationDao {
 
 
 
-    /*public void listAllReservation(String id){
+    public void listAllReservation(String instructorId){
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM Reservation r WHERE r.reservationID = :reservationID");
-        query.setParameter("reservationID", id);
+        Query query = session.createQuery("FROM Reservation r WHERE r.instructorId = :instructorId");
+        query.setParameter("instructorId", instructorId);
         tx.commit();
-        Reservation result = (Reservation)query.uniqueResult();
+        List result = query.list();
         session.close();
-        return result;
-    }*/
+
+        Iterator resultIter = result.iterator();
+
+        while(resultIter.hasNext()){
+            Reservation re = (Reservation)resultIter.next();
+
+            System.out.println("|  -Reservation Id: " + re.getReservationID());
+            System.out.println("|  -StartDateTime: " + re.getStartDateTime());
+            System.out.println("|  -EndDateTime: " + re.getEndDateTime());
+            System.out.println("|  -Instructor Id: " + re.getInstructorId());
+            System.out.println("|  -Term: " + re.getTerms());
+            System.out.println("|  -Status " + re.getStatus());
+            System.out.println("|  -Type: " + re.getType());
+            System.out.println("----------------------------------------------------------------------");
+        }
+    }
 }

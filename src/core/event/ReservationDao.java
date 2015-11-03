@@ -15,4 +15,5 @@ public interface ReservationDao {
     String getType(String reservationId);
     boolean setStatus(String reservationId, String Status);
     String getStatus(String reservationId);
+    void listAllReservation(String instructorId);
 }
