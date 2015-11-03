@@ -1,15 +1,20 @@
 package test;
 
 import core.event.Appointment;
+import core.event.AppointmentDao;
+import core.event.AppointmentDaoImp;
 import core.event.Exam;
 import core.service.SessionManager;
 import core.user.Student;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * This Class Contains Test
@@ -47,17 +52,19 @@ public class StudentFunctionalityTest {
         sf.makeAppointment(appt3);
 
         //TODO need to add seats for exam
-        Appointment appt4 = new Appointment("cse305examZeqli1", "cse_305_1", "admin", LocalDateTime.of(2015, 8, 28, 1, 0),
+        Appointment appt4 = new Appointment("cse305examZeqliSuccess", "cse_305_1", "admin", LocalDateTime.of(2015, 8, 28, 1, 0),
                 LocalDateTime.of(2015,9,15,2,20),"balabala", "5R13", false);
         sf.makeAppointment(appt4);
 
-        Appointment appt5 = new Appointment("mat200exam", "mat_200", "admin", LocalDateTime.of(2015, 9, 29, 1, 0),
+        Appointment appt5 = new Appointment("mat200examFail", "mat_200", "admin", LocalDateTime.of(2015, 9, 29, 1, 0),
                 LocalDateTime.of(2015,9,30,2,20),"balabala", "5R14", false);
         sf.makeAppointment(appt5);
+
+        sf.cancelAppointment(appt1);
     }
 
     public void makeAppointment(Appointment appt){
-        if(appt.checkLegalAppointment()==true){
+        if(checkLegalAppointment(appt)==true){
             addAppointment(appt);
             System.out.print("\nSuccess.");
         }
@@ -71,11 +78,17 @@ public class StudentFunctionalityTest {
     public void addAppointment(Appointment appt) {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
-
         try {
             tx = session.beginTransaction();
             session.save(appt);
-
+            log.info("---------- addAppointmentForStudent(Appointment appt) ----------");
+            log.info("|  -AppointmentID" + appt.getAppointmentID());
+            log.info("|  -EmailId" + appt.getExamId());
+            log.info("|  -StartDateTime" + appt.getStartDateTime());
+            log.info("|  -EndDateTime" + appt.getEndDateTime());
+            log.info("|  -StudentId" + appt.getStudentId());
+            log.info("|  -Seat" + appt.getSeat());
+            log.info("|  -IsAttended" + appt.isAttend());
             tx.commit();
             session.close();
         } catch (HibernateException he) {
@@ -109,7 +122,6 @@ public class StudentFunctionalityTest {
         try {
             tx = session.beginTransaction();
             session.save(exam);
-
             tx.commit();
             session.close();
         }catch (HibernateException he){
@@ -120,9 +132,72 @@ public class StudentFunctionalityTest {
         }
     }
 
-    public void cancelAppointment(Appointment appt){
-        if(appt.getStartDateTime().minusHours(24).isAfter(LocalDateTime.now())){
-            //cancel appointment
+    public boolean checkLegalAppointment(Appointment a){
+        Session session = SessionManager.getInstance().getOpenSession();
+        String studentIdCheck = a.getStudentId();
+        String examIdCheck = a.getExamId();
+        boolean result = true;
+//        Session session = SessionManager.getInstance().getOpenSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Exam exam = (Exam)session.get(Exam.class, examIdCheck);
+            //the appt time is during exam time period
+            //check d
+            if((exam.getStartDateTime().isBefore(a.getStartDateTime()))
+                    &&(exam.getEndDateTime().isAfter(a.getEndDateTime()))) {
+                //map to object
+                String hql = "FROM Appointment b WHERE b.studentId = :stuId";
+                String stuId = studentIdCheck;
+                Query query = session.createQuery(hql);
+                query.setParameter("stuId", "%" + stuId + "%");
+                List<Appointment> list = query.list();
+                Iterator it = list.iterator();
+                while (it.hasNext()) {
+                    Appointment appt = new Appointment();
+                    appt = (Appointment) it.next();
+                    //check b
+                    if (!appt.getExamId().equals(examIdCheck)) {
+                        //check c
+                        if ((a.getStartDateTime().isAfter(appt.getEndDateTime())) ||
+                                (a.getEndDateTime().isBefore(appt.getStartDateTime()))) {
+                        } else {
+                            result = false;
+                            break;
+                        }
+                    } else {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+            else{
+                result = false;
+            }
+        }catch (HibernateException var9) {
+            if(tx != null) {
+                tx.rollback();
+            }
+            var9.printStackTrace();
+        } finally {
+            session.close();
         }
+        return result;
+    }
+
+    public void cancelAppointment(Appointment appt){
+        AppointmentDaoImp imp = new AppointmentDaoImp();
+//        if(appt.getStartDateTime().minusHours(24).isAfter(LocalDateTime.now())){
+            imp.deleteAppointment(appt);
+//            System.out.print("Successfully deleted.");
+//        }
+        log.info("---------- cancelAppointment(Appointment appt) ----------");
+        log.info("|  -AppointmentID" + appt.getAppointmentID());
+        log.info("|  -EmailId" + appt.getExamId());
+        log.info("|  -StartDateTime" + appt.getStartDateTime());
+        log.info("|  -EndDateTime" + appt.getEndDateTime());
+        log.info("|  -StudentId" + appt.getStudentId());
+        log.info("|  -Seat" + appt.getSeat());
+        log.info("|  -IsAttended" + appt.isAttend());
     }
 }
