@@ -73,8 +73,8 @@ public class StudentFunctionalityTest {
         System.out.print("\n"+appt.getAppointmentID());
 
     }
-//
-//    // Insert a row into Appointment Table
+
+    // Insert a row into Appointment Table
     public void addAppointment(Appointment appt) {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
@@ -115,7 +115,7 @@ public class StudentFunctionalityTest {
             }
         }
     }
-//
+
     public void addExam(Exam exam){
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
