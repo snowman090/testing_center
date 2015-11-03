@@ -1,7 +1,8 @@
-package core.controller;
-
-import org.springframework.stereotype.Controller;
-
-@Controller
-public class ViewRequestController {
-}
+//package core.controller;
+//
+//import org.springframework.stereotype.Controller;
+//
+//@Controller
+//public class ViewRequestController {
+//}
+//
