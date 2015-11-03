@@ -79,7 +79,7 @@ public class NavigationController {
                 model.addAttribute("page_heading",
                         StringResources.INSTRUCTOR_OPERATIONS.get("viewReservations"));
                 String netId = profile.getUserId();
-                model.addAttribute("main_content", reservationAccess.findByInstructor(netId));
+                model.addAttribute("main_content", reservationAccess.findByInstructorId(netId));
         }
         return viewName;
     }
