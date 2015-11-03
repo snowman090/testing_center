@@ -1,10 +1,11 @@
 package core.event;
 
 import core.user.Instructor;
+import org.springframework.cglib.core.Local;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
+import java.util.Date;
 
 @Entity
 @Table(name="Reservation")
@@ -17,82 +18,31 @@ public class Reservation {
     @Temporal(TemporalType.TIME)
     @Column(name="start_time")
     @Basic(optional = false)
-    private LocalTime startTime;
+    private Date startTime;
 
-    @Temporal(TemporalType.TIME)
-    @Column(name="end_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="start_date_time")
     @Basic(optional = false)
-    private LocalTime endTime;
+    private Date startDateTime;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="end_date_time")
     @Basic(optional = false)
-    private LocalDate startDate;
-
-    @Temporal(TemporalType.DATE)
-    @Column(name="end_date")
-    @Basic(optional = false)
-    private LocalDate endDate;
+    private Date endDateTime;
 
     private int duration;
 
     @Column(name="instructor")
     @Basic(optional = false)
-    private Instructor instructor;
+    private String instructorNetId;
 
     @Column(name="attendace")
     private int attendance;
-
-    //private String instructorName;
 
     //haven't initiated
     @Basic(optional = false)
     @Column(name="status")
     private Status status;
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     public String getReservationID() {
         return reservationID;
@@ -100,6 +50,54 @@ public class Reservation {
 
     public void setReservationID(String reservationID) {
         this.reservationID = reservationID;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        Date ts = startDateTime;
+        Instant instant = Instant.ofEpochMilli(ts.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    }
+
+
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        Instant instant = startDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.startDateTime = Date.from(instant);
+    }
+
+    public LocalDateTime getEndDateTime() {
+        Date ts = endDateTime;
+        Instant instant = Instant.ofEpochMilli(ts.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    }
+
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        Instant instant = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.endDateTime = Date.from(instant);
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getInstructorId() {
+        return instructorNetId;
+    }
+
+    public void setInstructorNetId(String instructorNetId) {
+        this.instructorNetId = instructorNetId;
     }
 
     public int getAttendance() {
@@ -110,11 +108,22 @@ public class Reservation {
         this.attendance = attendance;
     }
 
-    public Instructor getInstructor() {
-        return instructor;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    // Extend functionality
+    public LocalDate getStartDate(){
+        Instant instant = Instant.ofEpochMilli(startDateTime.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public LocalDate getEndDate(){
+        Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
 }
