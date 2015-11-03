@@ -27,7 +27,7 @@ public class ViewOptionsController {
     @RequestMapping("/view-request/chrono")
     public ModelAndView viewByChronology(){
         ModelAndView model = new ModelAndView();
-
+        
         return model;
     }
 }

@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-
 @Entity
 public class Appointment {
 
@@ -27,8 +26,7 @@ public class Appointment {
     private String madeBy;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="start_time")
-    @Basic(optional = false)
+    @Column(name="start_time", nullable = false)
     private Date startDateTime;
 
     @Temporal(TemporalType.TIMESTAMP)
