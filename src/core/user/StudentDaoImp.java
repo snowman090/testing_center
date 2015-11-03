@@ -41,7 +41,9 @@ public class StudentDaoImp implements StudentDao{
                 tx.rollback();
             }
             return  false;
-        }
+        } finally {
+        session.close();
+    }
         return true;
     }
 

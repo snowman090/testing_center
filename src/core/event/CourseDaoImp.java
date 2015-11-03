@@ -1,6 +1,7 @@
 package core.event;
 
 import core.service.SessionManager;
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.List;
  */
 @Repository
 public class CourseDaoImp implements CourseDao{
+    private static final Logger log = Logger.getLogger(CourseDaoImp.class);
     List<Course> courses;
 
     public CourseDaoImp(){}
@@ -44,14 +46,15 @@ public class CourseDaoImp implements CourseDao{
             tx = session.beginTransaction();
             session.save(course);
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
@@ -68,14 +71,15 @@ public class CourseDaoImp implements CourseDao{
             query.setParameter("courseId", id);
             query.executeUpdate();
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
@@ -89,14 +93,15 @@ public class CourseDaoImp implements CourseDao{
             Query query = session.createQuery("delete from Course R where R.courseId = :courseId");
             query.setParameter("courseId", course.getCourseId());
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }

@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class ReservationDaoImp implements ReservationDao {
     List<Reservation> reservations;
-    public static final Logger log = Logger.getLogger(Log4J.class);
+    private static final Logger log = Logger.getLogger(Log4J.class);
 
     public ReservationDaoImp(){}
 
@@ -85,14 +85,15 @@ public class ReservationDaoImp implements ReservationDao {
             tx = session.beginTransaction();
             session.save(reservation);
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
@@ -109,14 +110,15 @@ public class ReservationDaoImp implements ReservationDao {
             query.setParameter("reservationID", id);
             query.executeUpdate();
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }
@@ -131,14 +133,15 @@ public class ReservationDaoImp implements ReservationDao {
             query.setParameter("reservationID", reservation.getReservationID());
             int ret = query.executeUpdate();// this int return the number of entities updated or deleted
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }
@@ -157,7 +160,6 @@ public class ReservationDaoImp implements ReservationDao {
             query.setParameter("reservationID", reservationId);
             query.executeUpdate();
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
@@ -165,6 +167,8 @@ public class ReservationDaoImp implements ReservationDao {
             }
             log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }
@@ -184,13 +188,15 @@ public class ReservationDaoImp implements ReservationDao {
             tx.commit();
             result = (String)query.uniqueResult();
             //System.out.println("CAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMA"+result);
-            session.close();
+
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
             log.error("Error with addExam ", he);
+        } finally {
+            session.close();
         }
         return result;
     }
@@ -207,7 +213,6 @@ public class ReservationDaoImp implements ReservationDao {
             query.setParameter("reservationID", reservationId);
             query.executeUpdate();
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
@@ -215,6 +220,8 @@ public class ReservationDaoImp implements ReservationDao {
             }
             log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }
@@ -232,13 +239,14 @@ public class ReservationDaoImp implements ReservationDao {
             query.setParameter("reservationID", reservationId);
             tx.commit();
             result = (String)query.uniqueResult();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
             log.error("Error with addExam ", he);
+        } finally {
+            session.close();
         }
         return result;
     }

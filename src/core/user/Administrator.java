@@ -26,8 +26,8 @@ public class Administrator extends UserType {
 
     public static final Logger log = Logger.getLogger(Log4J.class);
 
-    @Basic(optional = false)
-    public final static Authorization authLevel = Authorization.ADMINISTRATOR;
+//    @Basic(optional = false)
+//    public final static Authorization authLevel = Authorization.ADMINISTRATOR;
 
     // Empty Constructor for Hibernate
     public Administrator() {
@@ -61,7 +61,7 @@ public class Administrator extends UserType {
 
 
 
-            Query query = session.createQuery("select count(*) from Appointment a where  :startDate <= a.startDateTime and a.endDateTime <= :endDate");
+            Query query = session.createQuery("from Appointment a where  :startDate <= a.startDateTime and a.endDateTime <= :endDate");
             query.setTimestamp("startDate", Date.from(ldt.toLocalDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             query.setTimestamp("endDate", Date.from(ldt.toLocalDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
             appointments = query.list();
@@ -87,6 +87,8 @@ public class Administrator extends UserType {
             if(tx != null){
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
         return appointments;
     }
@@ -100,11 +102,8 @@ public class Administrator extends UserType {
 
             // USE SQL script
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String sql = "select * from appointment";
             log.info("---------- listAllAppointments() ----------");
-            log.info("- SQL script = " + sql);
-            SQLQuery query = session.createSQLQuery(sql);
-            query.addEntity(Appointment.class);
+            Query query = session.createQuery("from Appointment");
             appointments = query.list();
 
             Iterator it = appointments.iterator();
@@ -128,6 +127,8 @@ public class Administrator extends UserType {
             if(tx != null){
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
         return appointments;
     }
@@ -161,6 +162,8 @@ public class Administrator extends UserType {
             if(tx != null){
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
         // TestingCenterInfo.releaseSeat(appt)
     }
@@ -188,6 +191,8 @@ public class Administrator extends UserType {
             if(tx != null){
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
         return appt;
     }
@@ -217,6 +222,8 @@ public class Administrator extends UserType {
             if(tx != null){
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
     }
 
@@ -262,6 +269,8 @@ public class Administrator extends UserType {
             if(tx != null){
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
         return assignedSeat;
 

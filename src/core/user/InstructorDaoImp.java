@@ -4,15 +4,18 @@ package core.user;
 import core.event.ReservationDao;
 import core.event.ReservationDaoImp;
 import core.service.SessionManager;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import test.Log4J;
 
 import java.util.List;
 
 public class InstructorDaoImp implements InstructorDao{
+    public static final Logger log = Logger.getLogger(InstructorDaoImp.class);
     List<Instructor> instructors;
     public InstructorDaoImp(){
         Session session = SessionManager.getInstance().getOpenSession();
@@ -41,14 +44,15 @@ public class InstructorDaoImp implements InstructorDao{
             tx = session.beginTransaction();
             session.save(instructor);
             session.getTransaction().commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        }finally {
+            session.close();
         }
         return true;
     }
@@ -65,14 +69,15 @@ public class InstructorDaoImp implements InstructorDao{
 
             int ret = query.executeUpdate();
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }
@@ -95,6 +100,8 @@ public class InstructorDaoImp implements InstructorDao{
             }
             //log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }

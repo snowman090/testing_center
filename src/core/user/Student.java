@@ -17,8 +17,8 @@ public class Student extends UserType {
 //    @Basic(optional = false)
 //    public static final Authorization permission = Authorization.STUDENT;
 //
-    @OneToMany(mappedBy = "student")
-    private List<Appointment> appointments;
+//    @OneToMany(mappedBy = "studentID")
+//    private List<Appointment> appointments;
 
 
 //    private String name;
@@ -54,13 +54,14 @@ public class Student extends UserType {
         this.student_Id = student_Id;
     }
     */
-    public List<Appointment> getAppointments(){
-        return appointments;
-    }
-
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
-    }
+//    public List<Appointment>
+//            (){
+//        return appointments;
+//    }
+//
+//    public void setAppointments(List<Appointment> appointments) {
+//        this.appointments = appointments;
+//    }
 //
 //    public String toString(){
 //        String s  = "Student Information: \n" +

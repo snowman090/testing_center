@@ -22,8 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table( name = "Instructor")
 public class Instructor extends UserType {
-    @Basic(optional = false)
-    public static final Authorization authLevel = Authorization.INSTRUCTOR;
+//    @Basic(optional = false)
+//    public static final Authorization authLevel = Authorization.INSTRUCTOR;
 
     // Comments this because it cause Runtime Error When Hibernate Do Mapping
 //

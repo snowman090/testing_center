@@ -78,8 +78,8 @@ public class UnitTest {
         Appointment appt1 = new Appointment("cse308examZeqli", "cse_308", "admin", LocalDateTime.of(2015,10,29,1,0),
                 LocalDateTime.of(2015,10,29,2,20),"zeqli", "5R11", false);
         Student student = new Student("Robert", "abc", "robert", "li", "l.caecar@gmail.com");
-        student.setAppointments(new ArrayList<>());
-        student.getAppointments().add(appt1);
+//        student.setAppointments(new ArrayList<>());
+//        student.getAppointments().add(appt1);
         ut.addAppointment(appt1);
         ut.addStudent(student);
         // TODO Make a dummy student and make it owner of appointments.

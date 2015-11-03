@@ -80,13 +80,14 @@ public class ExamDaoImp implements ExamDao{
             tx = session.beginTransaction();
             session.save(exam);
             tx.commit();
-            session.close();
         }catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
             log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
@@ -102,15 +103,15 @@ public class ExamDaoImp implements ExamDao{
             query.setParameter("examId", id);
             query.executeUpdate();
             tx.commit();
-
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }
@@ -126,14 +127,15 @@ public class ExamDaoImp implements ExamDao{
             query.setParameter("examId", exam.getExamId());
 
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return true;
     }

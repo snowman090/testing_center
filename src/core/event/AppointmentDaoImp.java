@@ -1,6 +1,7 @@
 package core.event;
 
 import core.service.SessionManager;
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Repository
 public class AppointmentDaoImp implements AppointmentDao {
+    private static final Logger log = Logger.getLogger(AppointmentDaoImp.class);
     List<Appointment> appointments;
 
     public AppointmentDaoImp(){}
@@ -71,14 +73,15 @@ public class AppointmentDaoImp implements AppointmentDao {
 
             session.save(appointment);
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
@@ -94,14 +97,15 @@ public class AppointmentDaoImp implements AppointmentDao {
             query.setParameter("appointmentID", appointment.getAppointmentID());
 
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
@@ -118,14 +122,15 @@ public class AppointmentDaoImp implements AppointmentDao {
             query.setParameter("appointmentID", id);
             query.executeUpdate();
             tx.commit();
-            session.close();
         }
         catch (HibernateException he){
             if(tx != null){
                 tx.rollback();
             }
-            //log.error("Error with addExam ", he);
+            log.error("Error with addExam ", he);
             return false;
+        } finally {
+            session.close();
         }
         return  true;
     }
