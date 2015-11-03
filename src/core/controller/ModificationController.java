@@ -41,6 +41,12 @@ public class ModificationController {
         return viewName;
     }
 
+    /**
+     * The user adds a new reserved date range
+     * @param reservedDateStart
+     * @param reservedDateEnd
+     * @return
+     */
     @RequestMapping(value = "edit-info/reserve-dates/add", method = RequestMethod.POST)
     public String addReservedDate(@RequestParam("add-reserved-date-start")
                                   @DateTimeFormat(pattern = "MM/dd/yyyy|HH:mm") LocalDateTime reservedDateStart,
@@ -50,6 +56,12 @@ public class ModificationController {
         return viewName;
     }
 
+    /**
+     * the user's input is directed to this method and then redirected to the updated
+     * edit-info page
+     * @param openHour
+     * @return
+     */
     @RequestMapping(value = "edit-info/open/modify", method = RequestMethod.POST)
     public String modifyOpenHour(@RequestParam("modify-open-hour")
                                        @DateTimeFormat(pattern = "HH:mm") LocalDate openHour) {
@@ -57,6 +69,11 @@ public class ModificationController {
         return viewName;
     }
 
+    /**
+     *
+     * @param closeHour
+     * @return
+     */
     @RequestMapping(value = "edit-info/close/modify", method = RequestMethod.POST)
     public String modifyCloseHour(@RequestParam("modify-close-hour")
                                         @DateTimeFormat(pattern = "HH:mm") LocalDate closeHour) {
@@ -64,24 +81,44 @@ public class ModificationController {
         return viewName;
     }
 
+    /**
+     *
+     * @param numSeats
+     * @return
+     */
     @RequestMapping(value = "edit-info/num-of-seats/modify", method = RequestMethod.POST)
     public String modifyNumberOfSeats(@RequestParam("modify-seats") int numSeats) {
         infoRetrieval.updateField("numSeats", numSeats);
         return viewName;
     }
 
+    /**
+     *
+     * @param numAside
+     * @return
+     */
     @RequestMapping(value = "edit-info/set-aside/modify", method = RequestMethod.POST)
     public String modifySetAsideSeats(@RequestParam("modify-aside") int numAside) {
         infoRetrieval.updateField("numSetAsideSeats", numAside);
         return viewName;
     }
 
+    /**
+     *
+     * @param gap
+     * @return
+     */
     @RequestMapping(value = "edit-info/gap/modify", method = RequestMethod.POST)
     public String modifyGapTime(@RequestParam("gap-time") int gap) {
         infoRetrieval.updateField("gap", gap);
         return viewName;
     }
 
+    /**
+     *
+     * @param interval
+     * @return
+     */
     @RequestMapping(value = "edit-info/interval/modify", method = RequestMethod.POST)
     public String modifyReminderInterval(@RequestParam("modify-interval") int interval) {
         infoRetrieval.updateField("reminderInterval", interval);

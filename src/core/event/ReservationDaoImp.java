@@ -33,7 +33,7 @@ public class ReservationDaoImp implements ReservationDao {
 
     @Override
     public List<Reservation> findByDate(LocalDate date) {
-        ArrayList<Reservation> result = new ArrayList<Reservation>();
+        ArrayList<Reservation> result = new ArrayList<>();
         for(int i = 0, index = 0; i < reservations.size(); i++){
             if((reservations.get(i).getStartDate().isBefore(date)||reservations.get(i).getStartDate().isEqual(date))
                     && (reservations.get(i).getEndDate().isAfter(date)||reservations.get(i).getEndDate().isEqual(date))){
@@ -46,7 +46,7 @@ public class ReservationDaoImp implements ReservationDao {
 
     @Override
     public List<Reservation> findByInstructorId(String InstructorID) {
-        List<Reservation> result = new ArrayList<Reservation>();
+        List<Reservation> result = new ArrayList<>();
         for(int i = 0, index = 0; i < reservations.size(); i++){
             if(reservations.get(i).getInstructorId().equals(InstructorID)){
                 result.set(index,reservations.get(i));
@@ -83,7 +83,8 @@ public class ReservationDaoImp implements ReservationDao {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("update Reservation R set R  = :R where R.reservationID = :reservationID");
+            Query query = session.createQuery
+                    ("update Reservation R set R  = :R where R.reservationID = :reservationID");
             query.setParameter("R", newReservation);
             query.setParameter("reservationID", id);
 
@@ -102,7 +103,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public boolean deleteReservation(Reservation reservation){//needt to throw exception
+    public boolean deleteReservation(Reservation reservation){//need to throw exception
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {

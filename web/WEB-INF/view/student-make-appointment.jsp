@@ -34,7 +34,9 @@
       </ul>
     </div>
     <div class="content">
-
+        <form class="input-info">
+            
+        </form>
     </div>
   </div>
 </div>
