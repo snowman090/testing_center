@@ -25,16 +25,6 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
-    <facet type="web" name="Web2">
-      <configuration>
-        <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/core/event/Roster.java" />
-        </descriptors>
-        <webroots>
-          <root url="file://$MODULE_DIR$/src/core/event" relative="/WEB-INF" />
-        </webroots>
-      </configuration>
-    </facet>
     <facet type="google-app-engine" name="Google App Engine">
       <configuration />
     </facet>
