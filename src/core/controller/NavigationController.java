@@ -24,7 +24,7 @@ public class NavigationController {
 
     private ModelMap model = new ModelMap();
 
-    private String viewName = StringResources.ADMIN_VIEW_NAME;
+    private String viewName;
 
     /**
      * this is a controller method for view and edit information

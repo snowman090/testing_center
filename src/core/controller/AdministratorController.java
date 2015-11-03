@@ -35,7 +35,7 @@ public class AdministratorController {
      * this functionality is for administrator only
      * @return
      */
-    @RequestMapping(value = "/ADMINISTRATOR/edit-info")
+    @RequestMapping(value = "edit-info")
     public ModelAndView viewCenterInfo() {
         modelAndView.clear();
         modelAndView.setViewName("edit-info");
@@ -53,7 +53,7 @@ public class AdministratorController {
      * a file containing all users.
      * @return
      */
-    @RequestMapping("/ADMINISTRATOR/upload")
+    @RequestMapping("upload")
     public ModelAndView uploadFile() {
         modelAndView.clear();
         modelAndView.addObject("page_heading",
@@ -61,7 +61,7 @@ public class AdministratorController {
         return modelAndView;
     }
 
-    @RequestMapping("/ADMINISTRATOR/view-requests")
+    @RequestMapping("admin-view-requests")
     public ModelAndView viewRequests() {
         modelAndView.clear();
         modelAndView.addObject("page_heading",
@@ -74,7 +74,7 @@ public class AdministratorController {
         return modelAndView;
     }
 
-    @RequestMapping("/ADMINISTRATOR/view-appointments")
+    @RequestMapping("admin-view-appointments")
     public ModelAndView viewAppointments() {
         String netId = profile.getUserId();
         modelAndView.clear();
@@ -84,15 +84,7 @@ public class AdministratorController {
         return modelAndView;
     }
 
-    @RequestMapping("/ADMINISTRATOR/make-appointment")
-    public ModelAndView makeAppointment() {
-        modelAndView.clear();
-        modelAndView.addObject("page_heading",
-                StringResources.ADMINISTRATOR_OPERATIONS.get("makeAppointment"));
-        return modelAndView;
-    }
-
-    @RequestMapping("/ADMINISTRATOR/check-in")
+    @RequestMapping("check-in")
     public ModelAndView checkIn() {
         modelAndView.clear();
         modelAndView.addObject("page_heading",
@@ -100,7 +92,7 @@ public class AdministratorController {
         return modelAndView;
     }
 
-    @RequestMapping("/ADMINISTRATOR/generate-report")
+    @RequestMapping("generate-report")
     public ModelAndView generateReport() {
         modelAndView.clear();
         modelAndView.addObject("page_heading",

@@ -33,9 +33,9 @@ public class LoginController{
             return "home/" + authorization;
         }else {
             if (authenticationService.registeredUserId(userId)) {
-                model.addAttribute("error_message", StringResources.LOGIN_PASSWORD_ERROR);
+                model.addAttribute("errorMessage", StringResources.LOGIN_PASSWORD_ERROR);
             }else {
-                model.addAttribute("error_message", StringResources.LOGIN_USER_ERROR);
+                model.addAttribute("errorMessage", StringResources.LOGIN_USER_ERROR);
             }
             return "login";
         }

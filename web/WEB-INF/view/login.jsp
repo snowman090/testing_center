@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--@elvariable id="errorMessage" type="java.lang.String"--%>
 <html>
 <head>
   <title>Testing Center Scheduler</title>
@@ -22,7 +22,7 @@
     <input type="password" class="login-text" placeholder="Password" name="password">
     <input type="submit" value="Login" class="submit-button"/>
   </form>
-  <div class="error-message">${error_message}</div>
+  <div class="error-message">${errorMessage}</div>
 </div>
 </body>
 </html>
