@@ -22,6 +22,8 @@
       <mapping class="core.event.Course"></mapping>
       <mapping class="core.event.Utilization"></mapping>
       <mapping class="core.event.Appointment"></mapping>
+      <mapping class="core.event.Reservation"></mapping>
+
       <!--<mapping class="core.event.Reservation"></mapping>-->
       <mapping class="core.event.Course"></mapping>
 

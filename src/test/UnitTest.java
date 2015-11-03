@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ public class UnitTest {
         admin1.setEmail("zeqing.li@stonybrook.edu");
         ut.updateAdmin(admin1);
 
-        Exam exam1 = new Exam("308","software","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
-        Exam exam2 = new Exam("390","system","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
+        Exam exam1 = new Exam("308","ad hoc", LocalDateTime.of(2015,6,20,13,30),LocalDateTime.of(2015,6,20,15,0), 1.5,50,80);
+        Exam exam2 = new Exam("390","course", LocalDateTime.of(2015,6,20,15,10),LocalDateTime.of(2015,6,20,17,40), 2.5,50,80);
         ut.addExam(exam1);
         ut.addExam(exam2);
         ut.listExams();
@@ -398,9 +399,9 @@ public class UnitTest {
         log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
         log.info("|  -Open Hour: " + info.getOpen());
         log.info("|  -Close Hour: " + info.getClose());
-        Iterator<LocalDateTime[]> it = (info.getCloseDateRanges().iterator());
+        Iterator<LocalDate[]> it = (info.getCloseDateRanges().iterator());
         while(it.hasNext()){
-            LocalDateTime[] item = it.next();
+            LocalDate[] item = it.next();
             log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
         }
         Iterator<LocalDateTime[]> it2 = (info.getReserveRanges().iterator());
@@ -420,9 +421,9 @@ public class UnitTest {
         log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
         log.info("|  -Open Hour: " + info.getOpen());
         log.info("|  -Close Hour: " + info.getClose());
-        Iterator<LocalDateTime[]> it = (info.getCloseDateRanges().iterator());
+        Iterator<LocalDate[]> it = (info.getCloseDateRanges().iterator());
         while(it.hasNext()){
-            LocalDateTime[] item = it.next();
+            LocalDate[] item = it.next();
             log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
         }
         Iterator<LocalDateTime[]> it2 = (info.getReserveRanges().iterator());
@@ -438,9 +439,9 @@ public class UnitTest {
         log.info("|  -Number of Set-Aside-Seats: " + info.getNumSetAsideSeats());
         log.info("|  -Open Hour: " + info.getOpen());
         log.info("|  -Close Hour: " + info.getClose());
-        Iterator<LocalDateTime[]> it3 = (info.getCloseDateRanges().iterator());
+        Iterator<LocalDate[]> it3 = (info.getCloseDateRanges().iterator());
         while(it.hasNext()){
-            LocalDateTime[] item = it3.next();
+            LocalDate[] item = it3.next();
             log.info("|  -Close Date Range: " + item[0]+ " " + item[1]);
         }
         Iterator<LocalDateTime[]> it4 = (info.getReserveRanges().iterator());

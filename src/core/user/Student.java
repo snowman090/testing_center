@@ -1,6 +1,7 @@
 package core.user;
 
 import core.event.Appointment;
+import core.event.Course;
 import core.user.Authorization;
 import core.user.UserType;
 
@@ -8,10 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Student")
@@ -21,6 +19,7 @@ public class Student extends UserType {
 
     @OneToMany(mappedBy = "student")
     private List<Appointment> appointments;
+
 
 //    private String name;
 //    private int student_Id;

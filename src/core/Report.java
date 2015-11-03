@@ -209,18 +209,17 @@ public class Report {
         for (Term term: terms){
             try{
                 tx = session.beginTransaction();
-                Query query = session.createQuery("select count(Appointment.studentId) from Appointment a where  :startDate <= a.startDateTime and a.endDateTime <= :endDate");
+                Query query = session.createQuery("select count(*) from Appointment a where  :startDate <= a.startDateTime and a.endDateTime <= :endDate");
 
-                log.debug("[showTermRangeReport-Begin] " + term.getTermName() + " " + Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-                log.debug("[showTermRangeReport-End] " + term.getTermName() + " " + Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                log.debug("Begin Term " + term.getTermName() + " " + Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                log.debug("End Term " + term.getTermName() + " " + Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 
                 query.setTimestamp("startDate", Date.from(term.getTermStartDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                 query.setTimestamp("endDate", Date.from(term.getTermEndDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 
                 try {
-                    int apptInTerm = (Integer) query.uniqueResult();
-                    log.debug("[showTermRangeReport-UniqueResult]" + apptInTerm);
-                    log.info("In" + term.getTermName() + " There Are " + apptInTerm + " Student Appointments");
+                    Long apptInTerm = (Long) query.uniqueResult();
+                    log.info("- - - - - - - - - - - - - - - - Semester " + term.getTermName() + " - - - - - - - - - - " + apptInTerm + " Appointments");
                 } catch (NonUniqueResultException nre){
                     log.error("" + nre);
                 }

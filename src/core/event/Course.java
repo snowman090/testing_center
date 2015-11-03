@@ -3,11 +3,7 @@ package core.event;
 import core.user.Instructor;
 import core.user.Student;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Course {
@@ -32,9 +28,9 @@ public class Course {
     @Column(name = "instructored")
     private String instructorID;
 
-    @Basic(optional = false)
-    @OneToMany(mappedBy = "course_id")
-    private List<Student> enrolledStudents;
+//TODO To be complete
+//    @OneToMany(mappedBy = "course_id")
+//    private List<Student> enrolledStudents;
 
     // Empty Constructor For Hibernate
     public Course() {
@@ -56,13 +52,13 @@ public class Course {
         this.instructorID = instructorID;
     }
 
-    public List<Student> getEnrolledStudents() {
-        return this.enrolledStudents;
-    }
-
-    public void setEnrolledStudents(List<Student> enrolledStudents) {
-        this.enrolledStudents = enrolledStudents;
-    }
+//    public List<Student> getEnrolledStudents() {
+//        return this.enrolledStudents;
+//    }
+//
+//    public void setEnrolledStudents(List<Student> enrolledStudents) {
+//        this.enrolledStudents = enrolledStudents;
+//    }
 
     public String getSubject() {
         return subject;

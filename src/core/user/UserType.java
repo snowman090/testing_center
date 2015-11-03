@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Entity
-@Table( name = "UserTypes")
+//@Table( name = "UserTypes")
+//@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class UserType {
     @Id
     @Column(name = "net_id")
