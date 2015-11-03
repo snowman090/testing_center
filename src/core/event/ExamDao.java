@@ -20,4 +20,6 @@ public interface ExamDao {
 
     public boolean deleteExam(Exam exam);
 
+    public void listExamByApprovedRequest(String exId);
+
 }

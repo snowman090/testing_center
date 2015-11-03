@@ -52,17 +52,7 @@ public class AppointmentDaoImp implements AppointmentDao {
         return result;
     }
 
-    /*@Override
-    public List<Appointment> findAllByInstructor(String netId) {
-        List<Appointment> result = new ArrayList<Appointment>();
-        for(int i = 0, index = 0; i < appointments.size(); i++){
-            if(appointments.get(i).get.equals(NetId)){
-                result.set(index,appointments.get(i));
-                index++;
-            }
-        }
-        return result;
-    }*/
+
 
     @Override
     public boolean insertAppointment(Appointment appointment) {// how to know which table we add in

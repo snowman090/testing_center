@@ -25,6 +25,7 @@ public class Exam {// approved request
 
 
 
+
     @Basic(optional = false)
     @Column(name = "num_student_need_to_take_exam" )
     private int numStudentNeed;//
@@ -32,6 +33,12 @@ public class Exam {// approved request
     @Basic(optional = false)
     @Column(name = "num_student_existing_appointment_to_take_exam" )
     private int numStudentAppointment;//
+
+    //@Basic(optional = false)
+    @Column(name = "num_student_show_up" )
+    private int numStudentShow;//
+
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="start_date_time")// start time of an exam
@@ -44,10 +51,10 @@ public class Exam {// approved request
     private Date endDateTime;
 
     @Column(name="attendace")
-    private int attendance;
+    private int attendance;//TODO: should be double type
 
     @Column(name="instructor_id")
-    @Basic(optional = false)
+//    @Basic(optional = false)
     private String instructorId;
 
     private double duration;// lasting time
@@ -80,7 +87,13 @@ public class Exam {// approved request
         this.duration = duration;
     }
 
+    public int getNumStudentShow() {
+        return numStudentShow;
+    }
 
+    public void setNumStudentShow(int numStudentShow) {
+        this.numStudentShow = numStudentShow;
+    }
     
     public Exam(){}
 
@@ -108,8 +121,6 @@ public class Exam {// approved request
 
         numStudentAppointment = numApp;
         numStudentNeed = numNeed;
-
-
     }
 
     /**

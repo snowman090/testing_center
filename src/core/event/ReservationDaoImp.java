@@ -81,9 +81,11 @@ public class ReservationDaoImp implements ReservationDao {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
-
+            System.out.println("CAO1");
             tx = session.beginTransaction();
+            System.out.println("CAO2");
             session.save(reservation);
+            System.out.println("CAO3");
             tx.commit();
         }
         catch (HibernateException he){
@@ -277,4 +279,6 @@ public class ReservationDaoImp implements ReservationDao {
             System.out.println("----------------------------------------------------------------------");
         }
     }
+
+
 }
