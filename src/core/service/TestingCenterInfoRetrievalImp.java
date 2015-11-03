@@ -80,4 +80,15 @@ public class TestingCenterInfoRetrievalImp implements TestingCenterInfoRetrieval
     public boolean deleteCloseDates(){
         return false;
     }
+
+    @Override
+    public boolean addReserveDateTimes(LocalDateTime[] reserveDateTimes){
+        testingCenterInfo.getReserveRanges().add(reserveDateTimes);
+        return false;
+    }
+
+    @Override
+    public boolean deleteReserveDateTimes(){
+        return false;
+    }
 }

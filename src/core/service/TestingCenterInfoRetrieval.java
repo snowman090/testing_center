@@ -3,6 +3,7 @@ package core.service;
 import core.event.TestingCenterInfo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public interface TestingCenterInfoRetrieval {
@@ -45,4 +46,17 @@ public interface TestingCenterInfoRetrieval {
      * @return
      */
     boolean deleteCloseDates();
+    /**
+     * add reserveDateTimes to testing center information
+     * @param reserveDateTimes
+     * @return
+     */
+    boolean addReserveDateTimes(LocalDateTime[] reserveDateTimes);
+
+    /**
+     * delete reserveDateTimes in testing center information
+     * @param
+     * @return
+     */
+    boolean deleteReserveDateTimes();
 }
