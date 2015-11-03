@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Testing Center Scheduler</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/styles.css" type="text/css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   </div>
 </div>
 <div>
-  <form action="/authorizing" class="login-box" method="post">
+  <form action="authorizing" class="login-box" method="post">
     <h3 class="login-heading">Sign in</h3>
     <input type="text" class="login-text" placeholder="NetID" name="netId">
     <input type="password" class="login-text" placeholder="Password" name="password">
