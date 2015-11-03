@@ -13,7 +13,7 @@
       <!--<property name="show_sql">true</property>-->
 
       <!-- Backup Database -->
-      <property name="connection.url">jdbc:mysql://studentdb.capjijo2fevl.us-east-1.rds.amazonaws.com:3306/testing_center</property>
+      <property name="connection.url">jdbc:mysql://sbu-cse-308.capjijo2fevl.us-east-1.rds.amazonaws.com:3306/testing_center</property>
       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
       <property name="connection.username">thedueteam</property>
       <property name="connection.password">thedueteam</property>
