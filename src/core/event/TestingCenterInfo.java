@@ -19,7 +19,7 @@ public class TestingCenterInfo {
     private int numSetAsideSeats;
     private LocalTime open;
     private LocalTime close;
-    private List<LocalDateTime[]> closeDateRanges;
+    private List<LocalDate[]> closeDateRanges;
     private List<LocalDateTime[]> reserveRanges;
     private int gap;
     private int reminderInterval;
@@ -101,11 +101,11 @@ public class TestingCenterInfo {
         this.close = close;
     }
 
-    public List<LocalDateTime[]> getCloseDateRanges() {
+    public List<LocalDate[]> getCloseDateRanges() {
         return closeDateRanges;
     }
 
-    public void setCloseDateRanges(List<LocalDateTime[]> closeDateRanges) {
+    public void setCloseDateRanges(List<LocalDate[]> closeDateRanges) {
         this.closeDateRanges = closeDateRanges;
     }
 

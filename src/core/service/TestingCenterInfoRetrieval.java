@@ -2,6 +2,7 @@ package core.service;
 
 import core.event.TestingCenterInfo;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 public interface TestingCenterInfoRetrieval {
@@ -30,4 +31,18 @@ public interface TestingCenterInfoRetrieval {
      * @return
      */
     boolean updateField(String fieldName, Object value);
+
+    /**
+     * add closeDates to testing center information
+     * @param closeDates
+     * @return
+     */
+    boolean addCloseDates(LocalDate[] closeDates);
+
+    /**
+     * delete closeDates in testing center information
+     * @param
+     * @return
+     */
+    boolean deleteCloseDates();
 }
