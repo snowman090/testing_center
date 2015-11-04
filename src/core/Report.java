@@ -92,7 +92,7 @@ public class Report {
         return appointments;
     }
 
-    // TODO: Migrate return type
+
     public String showDayReport(Term term) {
         appointments = getAppointments(term);
         String s = "";
@@ -171,7 +171,6 @@ public class Report {
 
     // Report Date
     public String showTermReport(Term term){
-
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         Set<String> courses = new LinkedHashSet<>();
@@ -191,7 +190,6 @@ public class Report {
                 log.debug("Read exam id from table Exam: " + s);
                 courses.add(s);
             }
-
             tx.commit();
         } catch (HibernateException he) {
             if(tx!=null){

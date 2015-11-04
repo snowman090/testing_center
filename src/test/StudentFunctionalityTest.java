@@ -90,12 +90,13 @@ public class StudentFunctionalityTest {
             log.info("|  -Seat" + appt.getSeat());
             log.info("|  -IsAttended" + appt.isAttend());
             tx.commit();
-            session.close();
         } catch (HibernateException he) {
-            he.printStackTrace();
+            log.error("", he);
             if (tx != null) {
                 tx.rollback();
             }
+        } finally {
+            session.close();
         }
 
     }
@@ -107,12 +108,13 @@ public class StudentFunctionalityTest {
             tx = session.beginTransaction();
             session.save(student);
             tx.commit();
-            session.close();
         }catch (HibernateException he){
             he.printStackTrace();
             if(tx != null){
                 tx.rollback();
             }
+        }finally {
+            session.close();
         }
     }
 
@@ -123,12 +125,13 @@ public class StudentFunctionalityTest {
             tx = session.beginTransaction();
             session.save(exam);
             tx.commit();
-            session.close();
         }catch (HibernateException he){
-            he.printStackTrace();
+            log.error("", he);
             if(tx != null){
                 tx.rollback();
             }
+        }finally {
+            session.close();
         }
     }
 
@@ -174,11 +177,11 @@ public class StudentFunctionalityTest {
             else{
                 result = false;
             }
-        }catch (HibernateException var9) {
+        }catch (HibernateException he) {
             if(tx != null) {
                 tx.rollback();
             }
-            var9.printStackTrace();
+            log.error("", he);
         } finally {
             session.close();
         }

@@ -37,14 +37,12 @@ public class ReportTest {
         Appointment yisApp = new Appointment("cse308examYis", "cse_219", "yis", LocalDateTime.of(2015,10,30, 1, 0),
                 LocalDateTime.of(2015,12,17,2,20),"yim", "5R15", false);
 
-        addAppointment(walApp);
-        addAppointment(yimApp);
-        addAppointment(yisApp);
-        addAppointment(zeqApp);
-
-        Report report = new Report();
-        report.showDayReport(term1);
-        report.showWeekReport(term1);
+        // Add Test Data Into Table
+        AppointmentDaoImp daoImp = new AppointmentDaoImp();
+        daoImp.insertAppointment(walApp);
+        daoImp.insertAppointment(yimApp);
+        daoImp.insertAppointment(yisApp);
+        daoImp.insertAppointment(zeqApp);
 
         Exam exam1 = new Exam("308","ad hoc", LocalDateTime.of(2015,9,20,13,30),LocalDateTime.of(2015,9,21,15,0), 1.5,50,80, "Prof1");
         exam1.setExamName("Software Engineering");
@@ -54,44 +52,27 @@ public class ReportTest {
         exam.addExam(exam1);
         exam.addExam(exam2);
 
+        Report report = new Report();
 
+        // 1. Show Day Report
+        report.showDayReport(term1);
+
+        // 2. Show Week Report
+        report.showWeekReport(term1);
+
+        // 3. Show Term Report
         report.showTermReport(term1);
 
         List<Term> terms = new LinkedList<>();
         terms.add(term1);
         terms.add(term2);
         terms.add(term3);
+
+        // 4. Show Report By A Range of Terms
         report.showTermRangeReport(terms);
 
-        String res = "" + report.showDayReport(term1) + "" + report.showWeekReport(term1) + "" + report.showTermReport(term1) + "" + report.showTermRangeReport(terms);
-        log.info(res);
-    }
-
-    // Insert a row into Administrator Table
-    public static void addAppointment(Appointment appt){
-        Session session = SessionManager.getInstance().getOpenSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            session.save(appt);
-            System.out.println("---------- addAppointment(Appointment appt) ----------");
-            System.out.println("|  -AppointmentID" + appt.getAppointmentID());
-            System.out.println("|  -EmailId" + appt.getExamId());
-            System.out.println("|  -MadeBy" + appt.getMadeBy());
-            System.out.println("|  -StartDateTime" + appt.getStartDateTime());
-            System.out.println("|  -EndDateTime" + appt.getEndDateTime());
-            System.out.println("|  -StudentId" + appt.getStudentId());
-            System.out.println("|  -Seat" + appt.getSeat());
-            System.out.println("|  -IsAttended" + appt.isAttend());
-
-            tx.commit();
-            session.close();
-        }catch (HibernateException he){
-            he.printStackTrace();
-            if(tx != null){
-                tx.rollback();
-            }
-        }
+        // 5. Concatenate All Four Reports Into A Single List to Out Put in File
+        String doc = "" + report.showDayReport(term1) + "" + report.showWeekReport(term1) + "" + report.showTermReport(term1) + "" + report.showTermRangeReport(terms);
+        log.info(doc);
     }
 }

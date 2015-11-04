@@ -45,7 +45,15 @@ public class Reservation {
 
     public Reservation(){}
 
-    //This constructor is for testing
+
+    /**
+     * This constructor is for testing
+     * @param id Reservation Id
+     * @param sTime Start Time
+     * @param eTime End Time
+     * @param insId Instructor Id
+     * @param terms Term
+     */
     public Reservation(String id, LocalDateTime sTime, LocalDateTime eTime, String insId, String terms){
         reservationID = id;
         this.setStartDateTime(sTime);

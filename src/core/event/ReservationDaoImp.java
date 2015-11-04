@@ -176,7 +176,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public String getType(String reservationId) {
+    public String getTypeById(String reservationId) {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         String result = "";
@@ -229,7 +229,7 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public String getStatus(String reservationId) {
+    public String getStatusById(String reservationId) {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         String result = "";
@@ -255,7 +255,7 @@ public class ReservationDaoImp implements ReservationDao {
 
 
 
-    public void listAllReservation(String instructorId){
+    public void listAllReservationByInstructorId(String instructorId){
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery("FROM Reservation r WHERE r.instructorId = :instructorId");

@@ -60,7 +60,6 @@ public class AppointmentDaoImp implements AppointmentDao {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-
             session.save(appointment);
             tx.commit();
         }
