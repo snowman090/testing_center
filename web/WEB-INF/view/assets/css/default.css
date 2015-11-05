@@ -21,7 +21,6 @@
 
 .sidebar {
     box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
-    margin-top: -3px;
     z-index: 50;
     margin-top: 3.5em;
     position: fixed;
@@ -34,7 +33,6 @@
     display: block;
     width: inherit;
     max-width: inherit;
-    height: auto;
     min-height: 4em;
     border-bottom: 1px solid #b5b5b5;
     border-top: 1px solid #b5b5b5;
@@ -97,7 +95,6 @@
 }
 
 .modify-input {
-    width: auto;
     width: 5em;
     margin: 0 1em 0 1em;
 }
@@ -118,7 +115,6 @@
 }
 
 .card-table {
-    width: inherit;
     margin: 0;
     width: 100%;
     height: 100%;
@@ -165,7 +161,7 @@
     flex-flow: column;
     max-width: 35em;
     border: 1px solid #b5b5b5;
-    margin: 0em 5em 5em 13em;
+    margin: 0 5em 5em 13em;
 }
 
 .input-info {
