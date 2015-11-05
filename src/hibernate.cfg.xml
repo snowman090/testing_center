@@ -23,19 +23,19 @@
 
 
       <!-- Mapping Info -->
-      <mapping class="core.user.Administrator"></mapping>
-      <mapping class="core.user.UserType"></mapping>
-      <mapping class="core.user.Student"></mapping>
-      <mapping class="core.user.Instructor"></mapping>
+      <mapping class="core.user.Administrator"/>
+      <mapping class="core.user.UserType"/>
+      <mapping class="core.user.Student"/>
+      <mapping class="core.user.Instructor"/>
 
-      <mapping class="core.event.Exam"></mapping>
-      <mapping class="core.event.Course"></mapping>
-      <mapping class="core.event.Utilization"></mapping>
-      <mapping class="core.event.Appointment"></mapping>
-      <mapping class="core.event.Reservation"></mapping>
+      <mapping class="core.event.Exam"/>
+      <mapping class="core.event.Course"/>
+      <mapping class="core.event.Utilization"/>
+      <mapping class="core.event.Appointment"/>
+      <mapping class="core.event.Reservation"/>
 
       <!--<mapping class="core.event.Reservation"></mapping>-->
-      <mapping class="core.event.Course"></mapping>
+      <mapping class="core.event.Course"/>
 
   </session-factory>
 </hibernate-configuration>

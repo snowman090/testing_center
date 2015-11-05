@@ -18,7 +18,7 @@ public class StudentDaoImp implements StudentDao{
     private List<Student> students;
 
     public StudentDaoImp(){
-        students = new ArrayList<Student>();
+        students = new ArrayList<>();
         Student student1 = new Student();
         Student student2 = new Student();
         students.add(student1);
@@ -69,7 +69,7 @@ public class StudentDaoImp implements StudentDao{
         return true;
     }
 
-    //retrive list of students from the database
+    //retrieve list of students from the database
     @Override
     public List<Student> getAllStudents() {
         return students;

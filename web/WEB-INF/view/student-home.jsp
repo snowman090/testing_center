@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -25,9 +27,9 @@
     <div class="container">
         <div class="sidebar">
             <ul class="side-nav">
-                <li><a class="button" href="${path}/ADMINISTRATOR/home"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-                <li><a class="button" href="${path}/student-make-appointment"><i class="fa fa-plus-square"></i>&nbsp;Make Appointment</a></li>
-                <li><a class="button" href="${path}/student-view-appointments"><i class="fa fa-eye"></i>&nbsp;View Appointments</a></li>
+                <li><a class="button" href="ADMINISTRATOR/home"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li><a class="button" href="student-make-appointment"><i class="fa fa-plus-square"></i>&nbsp;Make Appointment</a></li>
+                <li><a class="button" href="student-view-appointments"><i class="fa fa-eye"></i>&nbsp;View Appointments</a></li>
             </ul>
         </div>
         <div class="content">

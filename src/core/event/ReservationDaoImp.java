@@ -39,9 +39,6 @@ public class ReservationDaoImp implements ReservationDao {
         Reservation result = (Reservation)query.uniqueResult();
         session.close();
         return result;
-        //
-
-        //return reservations.get(Integer.parseInt(reservationID));
     }
 
     @Override
@@ -59,7 +56,6 @@ public class ReservationDaoImp implements ReservationDao {
         result = (ArrayList<Reservation>)query.list();
         session.close();
         return result;
-
     }
 
     @Override

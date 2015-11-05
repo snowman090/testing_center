@@ -27,6 +27,7 @@ public class ScheduleController {
                 (LocalDateTime) scheduleParams.get("end_date_time"),
                 (String) scheduleParams.get("instructor_id"),
                 (String) scheduleParams.get("term"),
+                (String) scheduleParams.get("type"),
                 (int) scheduleParams.get("duration")
         );
 

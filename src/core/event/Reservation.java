@@ -55,6 +55,7 @@ public class Reservation {
             LocalDateTime endTime,
             String insId,
             String terms,
+            String types,
             int duration){
         this.setStartDateTime(startTime);
         this.setEndDateTime(endTime);
