@@ -1,4 +1,5 @@
 package core.event;
+
 import core.service.SessionManager;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
@@ -102,7 +103,8 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public boolean updateReservation(Reservation newReservation, String id){// same Id as the old reservation, but we have set the new data in this newone
+    public boolean updateReservation(Reservation newReservation, String id){
+    // same Id as the old reservation, but we have set the new data in this new one
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
