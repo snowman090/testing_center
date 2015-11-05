@@ -1,11 +1,9 @@
 package core.event;
 
-import core.user.Instructor;
-import org.springframework.cglib.core.Local;
-
 import javax.persistence.*;
 import java.time.*;
 import java.util.Date;
+import java.util.Map;
 
 @Entity
 @Table(name="Reservation")
@@ -45,23 +43,26 @@ public class Reservation {
 
     public Reservation(){}
 
-
     /**
      * This constructor is for testing
-     * @param id Reservation Id
-     * @param sTime Start Time
-     * @param eTime End Time
+     * @param startTime Start Time
+     * @param endTime End Time
      * @param insId Instructor Id
      * @param terms Term
      */
-    public Reservation(String id, LocalDateTime sTime, LocalDateTime eTime, String insId, String terms){
-        reservationID = id;
-        this.setStartDateTime(sTime);
-        this.setEndDateTime(eTime);
+    public Reservation(
+            LocalDateTime startTime,
+            LocalDateTime endTime,
+            String insId,
+            String terms,
+            int duration){
+        this.setStartDateTime(startTime);
+        this.setEndDateTime(endTime);
         instructorId = insId;
         this.terms = terms;
         this.status = "Pending";
         this.types = "Course";
+        this.duration = duration;
     }
 
     public String getType() {
@@ -71,6 +72,7 @@ public class Reservation {
     public void setType(String type) {
         this.types = type;
     }
+
     public String getTerms() {
         return terms;
     }
@@ -79,8 +81,6 @@ public class Reservation {
         this.terms = terms;
     }
 
-
-    //---------------------------------------
     public LocalDateTime getStartDateTime() {
         Date ts = startDateTime;
         Instant instant = Instant.ofEpochMilli(ts.getTime());
@@ -102,22 +102,22 @@ public class Reservation {
         Instant instant = endDateTime.atZone(ZoneId.systemDefault()).toInstant();
         this.endDateTime = Date.from(instant);
     }
-    //---------------------------------------
+
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
     public int getDuration() {
         return duration;
     }
 
-
     public void setReservationID(String reservationID) {
         this.reservationID = reservationID;
     }
+
     public String getReservationID() {
         return reservationID;
     }
-
 
     public void setInstructorId(String instructorId) {
         this.instructorId = instructorId;
@@ -127,25 +127,22 @@ public class Reservation {
         return instructorId;
     }
 
-
     public void setStatus(String status) {
         this.status = status;
     }
+
     public String getStatus() {
         return status;
     }
-
-
 
     // Extend functionality
     public LocalDate getStartDate(){
         Instant instant = Instant.ofEpochMilli(startDateTime.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
+
     public LocalDate getEndDate(){
         Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
     }
-
-
 }

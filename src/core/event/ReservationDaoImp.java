@@ -2,12 +2,10 @@ package core.event;
 import core.service.SessionManager;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import test.Log4J;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,12 +27,12 @@ public class ReservationDaoImp implements ReservationDao {
         return reservations;
     }
 
-
     @Override
     public Reservation findByID(String id) {
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM Reservation r WHERE r.reservationID = :reservationID");
+        Query query = session.createQuery
+                ("FROM Reservation r WHERE r.reservationID = :reservationID");
         query.setParameter("reservationID", id);
         tx.commit();
         Reservation result = (Reservation)query.uniqueResult();
@@ -50,7 +48,8 @@ public class ReservationDaoImp implements ReservationDao {
         ArrayList<Reservation> result;
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM Reservation r WHERE r.startDateTime <= :startDate and r.endDateTime >= :endDate");
+        Query query = session.createQuery
+                ("FROM Reservation r WHERE r.startDateTime <= :startDate and r.endDateTime >= :endDate");
 
         query.setParameter("startDate", date);
         query.setParameter("endDate", date);
@@ -67,7 +66,8 @@ public class ReservationDaoImp implements ReservationDao {
         ArrayList<Reservation> result;
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM Reservation r WHERE r.instructorId = :insId");
+        Query query = session.createQuery
+                ("FROM Reservation r WHERE r.instructorId = :insId");
 
         query.setParameter("insId", InstructorID);
         tx.commit();
@@ -77,7 +77,8 @@ public class ReservationDaoImp implements ReservationDao {
     }
 
     @Override
-    public boolean insertReservation(Reservation reservation){//how to know which table we add in
+    public boolean insertReservation(Reservation reservation){
+        //how to know which table we add in
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = null;
         try {
@@ -131,7 +132,8 @@ public class ReservationDaoImp implements ReservationDao {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("delete from Reservation R where R.reservationID = :reservationID");
+            Query query = session.createQuery
+                    ("delete from Reservation R where R.reservationID = :reservationID");
             query.setParameter("reservationID", reservation.getReservationID());
             int ret = query.executeUpdate();// this int return the number of entities updated or deleted
             tx.commit();
@@ -189,8 +191,6 @@ public class ReservationDaoImp implements ReservationDao {
 
             tx.commit();
             result = (String)query.uniqueResult();
-            //System.out.println("CAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMACAONIMA"+result);
-
         }
         catch (HibernateException he){
             if(tx != null){
@@ -253,12 +253,12 @@ public class ReservationDaoImp implements ReservationDao {
         return result;
     }
 
-
-
+    @Override
     public void listAllReservationByInstructorId(String instructorId){
         Session session = SessionManager.getInstance().getOpenSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("FROM Reservation r WHERE r.instructorId = :instructorId");
+        Query query = session.createQuery
+                ("FROM Reservation r WHERE r.instructorId = :instructorId");
         query.setParameter("instructorId", instructorId);
         tx.commit();
         List result = query.list();
@@ -279,6 +279,5 @@ public class ReservationDaoImp implements ReservationDao {
             System.out.println("----------------------------------------------------------------------");
         }
     }
-
 
 }
