@@ -20,7 +20,6 @@ public class Student extends UserType {
 //    @OneToMany(mappedBy = "studentID")
 //    private List<Appointment> appointments;
 
-
 //    private String name;
 //    private int student_Id;
     // Edit by Zeqing Li. We don't need them right now
