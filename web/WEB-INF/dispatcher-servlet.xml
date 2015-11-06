@@ -12,9 +12,11 @@
     </bean>
     <context:component-scan base-package="core"/>
     <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/css/**" location="WEB-INF/view/assets/css/"/>
+    <mvc:annotation-driven/>
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
-            <value>/WEB-INF/view/</value>
+            <value>/WEB-INF/view</value>
         </property>
         <property name="suffix">
             <value>.jsp</value>
