@@ -9,28 +9,27 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Exam")
-public class Exam {// approved request
+public class Exam {
     @Id
     @Column(name = "examId")
     @Basic(optional = false)
     private String examId;
 
     @Column(name = "exam_name" )
-    private String examName;//course or ad hoc
+    private String examName;
 
     @Basic(optional = false)
     @Column(name = "type" )
-    private String type;//"course" or "ad hoc"
+    private String type;
 
     @Basic(optional = false)
     @Column(name = "num_student_need_to_take_exam" )
-    private int numStudentNeed;//
+    private int numStudentNeed;
 
     @Basic(optional = false)
     @Column(name = "num_student_existing_appointment_to_take_exam" )
-    private int numStudentAppointment;//
+    private int numStudentAppointment;
 
-    //@Basic(optional = false)
     @Column(name = "num_student_show_up" )
     private int numStudentShow;//
 
@@ -53,7 +52,7 @@ public class Exam {// approved request
     @Column(name = "course_id")
     private String courseId;
 
-    private double duration;// lasting time
+    private double duration;
 
     public Exam(){}
 

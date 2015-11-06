@@ -3,7 +3,7 @@ package core.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.portlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StudentAppointmentController {
@@ -12,7 +12,6 @@ public class StudentAppointmentController {
             method = RequestMethod.POST, params = "by-instructor")
     public ModelAndView findExamByInstructor() {
         ModelAndView model = new ModelAndView("student-make-appointment");
-
 
         return model;
     }

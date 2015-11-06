@@ -45,7 +45,12 @@
         </form>
         <div>
             <table>
-
+                <tr>
+                    <th>Course</th>
+                    <th>Instructor</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
             </table>
         </div>
     </div>
