@@ -103,7 +103,7 @@ public class Appointment {
                         //check d
                         if ((getStartDateTime().isAfter(exam.getStartDateTime())) &&
                                 (getEndDateTime().isBefore(exam.getEndDateTime()))) {
-                            legalAppointment +=1;
+                            legalAppointment += 1;
                         }
                     }
                 }
@@ -207,18 +207,18 @@ public class Appointment {
     }
 
     // TODO SOME FIELD SHOULD NOT BE CHANGED
-    public boolean update(Appointment appt){
-        if(this.getAppointmentID() != appt.getAppointmentID()){
+    public boolean update(Appointment appointment){
+        if(!this.getAppointmentID().equals(appointment.getAppointmentID())){
             return false;
         }
         else{
-            this.setMadeBy(appt.getMadeBy());
-            this.setExamId(appt.getExamId());
-            this.setStartDateTime(appt.getStartDateTime());
-            this.setEndDateTime(appt.getEndDateTime());
-            this.setStudentId(appt.getStudentId());
-            this.setSeat(appt.getSeat());
-            this.setIsAttend(appt.isAttend());
+            this.setMadeBy(appointment.getMadeBy());
+            this.setExamId(appointment.getExamId());
+            this.setStartDateTime(appointment.getStartDateTime());
+            this.setEndDateTime(appointment.getEndDateTime());
+            this.setStudentId(appointment.getStudentId());
+            this.setSeat(appointment.getSeat());
+            this.setIsAttend(appointment.isAttend());
             return true;
         }
 

@@ -34,9 +34,20 @@
       </ul>
     </div>
     <div class="content">
-        <form class="input-info">
-            
+        <form class="input-info" action="find-exam/by-instructor">
+            <div class="info-column">
+                Search for an exam <input class="input-info" type="text" placeholder="Search here">
+            </div>
+            <div class="info-column">
+                <input class="submit-button" type="submit" name="by-instructor">
+                <input class="submit-button" type="submit" name="by-course">
+            </div>
         </form>
+        <div>
+            <table>
+
+            </table>
+        </div>
     </div>
   </div>
 </div>

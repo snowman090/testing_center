@@ -15,16 +15,12 @@ public class Exam {// approved request
     @Basic(optional = false)
     private String examId;
 
-
     @Column(name = "exam_name" )
     private String examName;//course or ad hoc
 
     @Basic(optional = false)
     @Column(name = "type" )
     private String type;//"course" or "ad hoc"
-
-
-
 
     @Basic(optional = false)
     @Column(name = "num_student_need_to_take_exam" )
@@ -37,8 +33,6 @@ public class Exam {// approved request
     //@Basic(optional = false)
     @Column(name = "num_student_show_up" )
     private int numStudentShow;//
-
-
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="start_date_time")// start time of an exam
@@ -54,47 +48,13 @@ public class Exam {// approved request
     private int attendance;//TODO: should be double type
 
     @Column(name="instructor_id")
-//    @Basic(optional = false)
     private String instructorId;
 
+    @Column(name = "course_id")
+    private String courseId;
+
     private double duration;// lasting time
-    
-    public int getAttendance() {
-        return attendance;
-    }
 
-    public void setAttendance(int attendance) {
-        this.attendance = attendance;
-    }
-
-    public String getInstructorId() {
-        return instructorId;
-    }
-
-    public void setInstructorId(String instructorId) {
-        this.instructorId = instructorId;
-    }
-
-    public void setStartDateTime(Date startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public void setEndDateTime(Date endDateTime) {
-        this.endDateTime = endDateTime;
-    }
-
-    public void setDuration(double duration) {
-        this.duration = duration;
-    }
-
-    public int getNumStudentShow() {
-        return numStudentShow;
-    }
-
-    public void setNumStudentShow(int numStudentShow) {
-        this.numStudentShow = numStudentShow;
-    }
-    
     public Exam(){}
 
     /**
@@ -139,6 +99,41 @@ public class Exam {// approved request
         this.instructorId = instructorId;
     }
 
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
+
+    public String getInstructorId() {
+        return instructorId;
+    }
+
+    public void setInstructorId(String instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public int getNumStudentShow() {
+        return numStudentShow;
+    }
+
+    public void setNumStudentShow(int numStudentShow) {
+        this.numStudentShow = numStudentShow;
+    }
 
     public String getExamId() {
         return examId;
@@ -184,8 +179,6 @@ public class Exam {// approved request
         this.startDateTime = Date.from(instant);
     }
 
-
-
     public LocalDateTime getEndDateTime() {
         Instant instant = Instant.ofEpochMilli(endDateTime.getTime());
         LocalDateTime res = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
@@ -201,6 +194,7 @@ public class Exam {// approved request
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -208,5 +202,13 @@ public class Exam {// approved request
     public double getDuration()
     {
         return (double)ChronoUnit.MINUTES.between(getStartDateTime(), getEndDateTime())/60;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 }
